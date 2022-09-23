@@ -1,0 +1,82 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [{
+      "name": "Attach by Process ID",
+      "processId": "${command:PickProcess}",
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "pwa-node"
+    },
+    {
+      "type": "chrome",
+      "name": "App",
+      "request": "launch",
+      "url": "http://localhost:8500",
+      "webRoot": "${workspaceRoot}",
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${webRoot}/*",
+        "webpack:///src/*": "${webRoot}/*",
+        "webpack:///*": "*",
+        "webpack:///./~/*": "${webRoot}/node_modules/*"
+      },
+      "preLaunchTask": "Start App"
+    },
+    {
+      "type": "chrome",
+      "name": "App (on Ubuntu)",
+      "request": "launch",
+      "url": "http://localhost:8500",
+      "webRoot": "${workspaceRoot}",
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${webRoot}/*",
+        "webpack:///src/*": "${webRoot}/*",
+        "webpack:///*": "*",
+        "webpack:///./~/*": "${webRoot}/node_modules/*"
+      },
+      "preLaunchTask": "Start App",
+      "runtimeExecutable": "/snap/bin/chromium"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Server",
+      "program": "${workspaceFolder}/src/server/index.ts",
+      "outFiles": [
+        "${workspaceFolder}/build/server/server.js"
+      ],
+      "sourceMaps": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Storybook",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run-script",
+        "storybook"
+      ],
+      "noDebug": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Jest (shared repo)",
+      "program": "${workspaceFolder}/../atoll-shared/node_modules/.bin/jest",
+      "args": [
+        "--runInBand"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true,
+      "cwd": "${workspaceFolder}/../atoll-shared/",
+      "windows": {
+        "program": "${workspaceFolder}/../atoll-shared/node_modules/jest/bin/jest",
+      }
+    }
+  ]
+}

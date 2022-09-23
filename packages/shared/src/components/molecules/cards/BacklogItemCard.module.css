@@ -1,0 +1,395 @@
+.backlogItemType {
+    order: 0;
+}
+
+:global(.all-devices):not(:global(.mobile)) .backlogItemCardOuter .checkbox {
+    order: 1;
+}
+
+.backlogItemText {
+    order: 2;
+}
+
+:global(.all-devices):not(:global(.mobile)) .backlogItemCardOuter .backlogItemDetailButton {
+    margin-left: -0.5rem;
+    min-width: 1.7rem;
+    max-width: 1.7rem;
+    order: 4;
+}
+
+.backlogItemEstimate {
+    position: relative;
+    order: 5;
+}
+
+.backlogItemDragButton {
+    order: 6;
+}
+
+:global(.mobile) .backlogItemCardOuter .backlogItemEstimate {
+    order: 2;
+}
+
+:global(.mobile) .backlogItemCardOuter .backlogItemText {
+    order: 3;
+}
+
+.mobileCheckbox {
+    order: 3;
+}
+
+.mobileCheckbox {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.backlogItemCard {
+    display: flex;
+    height: 2rem;
+    background-color: var(--normal-page-color, white);
+}
+
+.backlogItemCard.hidden {
+    display: none;
+}
+
+:global(.mobile) .backlogItemCardOuter .backlogItemCard {
+    height: auto;
+    flex-wrap: wrap;
+}
+
+.backlogItemCard > * {
+    line-height: 1.4rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.backlogItemCard > .mobileCheckbox {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.backlogItemCard.marginBelowItem {
+    margin-bottom: 0.0625rem;
+}
+
+.backlogItemCard.marginBelowItem + .backlogItemCard.marginBelowItem {
+    margin-top: 0;
+}
+
+.backlogItemType {
+    padding-left: 0.3rem; /* TODO: Use constants??? */
+    padding-right: 0.3rem; /* TODO: Use constants??? */
+    display: flex;
+    flex-grow: 0;
+    color: var(--inverted-pen-color, white);
+    background-color: var(--inverted-page-color, black);
+    min-width: 5rem; /* TODO: Use constants/theme?? */
+    align-items: center;
+    user-select: none;
+}
+
+:global(.mobile) .backlogItemCardOuter .backlogItemType {
+    flex-grow: 1;
+}
+
+:global(.mobile) .backlogItemCardOuter .backlogItemText {
+    padding-right: 0;
+}
+
+.backlogItemText,
+:global(.all-devices):not(:global(.mobile)) .backlogItemCardOuter .checkbox,
+:global(.all-devices):not(:global(.mobile)) .backlogItemCardOuter .backlogItemDetailButton,
+:global(.all-devices):not(:global(.mobile)) .backlogItemCardOuter .status {
+    border-top: 0.0625rem solid var(--normal-light-border-color, #ccc); /* TODO: Use constants??? */
+    border-bottom: 0.0625rem solid var(--normal-light-border-color, #ccc); /* TODO: Use constants??? */
+}
+
+.backlogItemText {
+    position: relative;
+    color: var(--normal-pen-color, black);
+    padding-left: 0.25rem; /* TODO: Use constants??? */
+    padding-right: 0.25rem; /* TODO: Use constants??? */
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.backlogItemTextContent {
+    position: relative;
+    top: -0.075rem;
+}
+
+:global(.mobile) .backlogItemTextContent {
+    min-height: 3rem;
+}
+
+.backlogItemSplitText {
+    position: absolute;
+    top: 0;
+    left: 0.25rem;
+    font-size: 0.6rem;
+    line-height: 0.6rem;
+    padding: 0;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: 0.5;
+    user-select: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: calc(100% - 0.5rem);
+}
+
+.backlogItemTextTitleText {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+:global(.mobile) .backlogItemCardOuter .backlogItemTextTitleText {
+    white-space: normal;
+    padding-right: 1.5rem;
+}
+
+:global(.mobile) .backlogItemCardOuter .backlogItemText {
+    margin-left: 0.3rem; /* TODO: Use constants??? */
+    height: 4.15rem;
+    flex-basis: 100%;
+    border-left: 0.0625rem solid var(--normal-light-border-color, #ccc); /* TODO: Use constants??? */
+    border-right: 0.0625rem solid var(--normal-light-border-color, #ccc); /* TODO: Use constants??? */
+}
+
+.backlogItemEstimate {
+    text-align: center;
+    min-width: 2rem; /* TODO: Use constant */
+    background-color: var(--inverted-page-color, black);
+    color: var(--inverted-pen-color, white);
+    user-select: none;
+}
+
+.backlogItemEstimate.splitPartOne {
+    background-color: var(--inverted-page-alt1-color, #666);
+}
+
+:global(.mobile) .backlogItemCardOuter .backlogItemEstimate {
+    flex-grow: 0;
+    padding-right: 0;
+}
+
+.backlogItemIcon {
+    line-height: 0;
+    flex-grow: 0;
+}
+
+.backlogItemIcon svg {
+    width: 1.3rem;
+    height: 1.3rem;
+}
+
+.backlogItemId {
+    padding-left: 0.375rem;
+    flex-grow: 1;
+    text-align: center;
+    cursor: pointer;
+}
+
+:global(.mobile) .backlogItemCardOuter .backlogItemId {
+    flex-grow: 0;
+}
+
+.backlogItemDragButton {
+    width: 2rem;
+    opacity: 0.3;
+    cursor: grab;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+:global(.mobile) .backlogItemCardOuter .backlogItemDragButton {
+    flex-grow: 1;
+}
+
+.backlogItemDragButton svg {
+    width: 1.3rem;
+    height: 1.3rem;
+}
+
+:global(.mobile) .backlogItemCardOuter .backlogItemDetailButton {
+    position: absolute;
+    top: 0.3rem;
+    right: 0;
+}
+
+.backlogItemDetailButton svg {
+    width: 1.3rem;
+    height: 1.3rem;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+}
+
+.backlogItemGap {
+    opacity: 0;
+}
+
+.dragging {
+    position: absolute;
+}
+
+.backlogItemCardDetailMenu {
+    position: absolute;
+    right: 1.2rem;
+    z-index: 1;
+}
+
+:global(.mobile) .backlogItemCardOuter .backlogItemCardDetailMenu {
+    right: 1.2rem;
+    top: 1.95rem;
+}
+
+.backlogItemCardDetailMenu.menuToLeft {
+    right: 3.4rem;
+    top: -0.08rem;
+}
+
+.backlogItemCardDetailMenu > div {
+    position: relative;
+    top: -0.6rem;
+}
+
+.backlogItemCardOuter {
+    position: relative;
+}
+
+.backlogItemPushState {
+    min-width: 0.3rem;
+    width: 0.3rem;
+    padding: 0;
+    margin: 0;
+}
+
+.backlogItemPushState > div {
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='7'><rect x='0' y='0' width='10' height='3' fill='black' /></svg>");
+    mask-repeat: repeat;
+    width: 0.125rem;
+    height: 100%;
+}
+
+.pushStateChanged .backlogItemPushState > div {
+    background-color: #0c0;
+}
+
+.pushStateRemoved {
+    opacity: 0.5;
+}
+
+.pushStateRemoved .backlogItemPushState > div {
+    background-color: #0c0;
+}
+
+.fractionTop,
+.fractionSlash,
+.fractionBottom {
+    position: absolute;
+    font-size: 0.66rem;
+    width: 100%;
+}
+
+.fractionTop {
+    top: 0;
+    left: -0.45rem;
+}
+
+.splitStoryPoints .fractionTop {
+    top: -0.4rem;
+    left: -0.45rem;
+}
+
+.splitTotalPoints .fractionTop {
+    top: -1.6rem;
+    left: -0.8rem;
+}
+
+.fractionSlash {
+    font-size: 1rem;
+}
+
+.splitStoryPoints .fractionSlash {
+    left: -0.11rem;
+    top: -0.25rem;
+}
+
+.splitTotalPoints .fractionSlash {
+    top: -1.5rem;
+    left: -0.5rem;
+}
+
+.fractionBottom {
+    top: 0.66rem;
+    left: 0.45rem;
+}
+
+.splitStoryPoints .fractionBottom {
+    top: 0rem;
+    left: 0.2rem;
+}
+
+.splitTotalPoints .fractionBottom {
+    top: -1.3rem;
+    left: -0.2rem;
+}
+
+.checkbox {
+    padding-top: 0.225rem;
+}
+
+.status {
+    padding: 0;
+    min-width: 2rem;
+    max-width: 2rem;
+    order: 3;
+    overflow: hidden;
+}
+
+:global(.mobile) .backlogItemCardOuter .status {
+    position: absolute;
+    top: 1.45rem;
+    right: -0.2rem;
+}
+
+:global(.all-devices):not(:global(.mobile)) .backlogItemCardOuter .status svg {
+    left: -0.45rem;
+}
+
+.status svg {
+    width: 2.4rem;
+    height: 2.4rem;
+    top: -0.275rem;
+    position: relative;
+    left: -0.25rem;
+}
+
+.splitStoryPoints {
+    position: relative;
+    top: -0.25rem;
+    left: -0.25rem;
+}
+
+.splitBottomWedge {
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+    border-bottom: 1.75rem solid var(--inverted-page-alt1-color, #666); /* theme this color */
+    border-left: 1.7rem solid transparent;
+}
+
+.splitTotalPoints {
+    position: absolute;
+    right: 0.25rem;
+    bottom: -0.25rem;
+    font-size: 0.75rem;
+}

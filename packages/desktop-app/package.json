@@ -1,0 +1,13 @@
+{
+  "name": "@atoll/desktop-app",
+  "version": "0.1.0",
+  "description": "Atoll electron-based desktop app",
+  "main": "index.ts",
+  "devDependencies": {},
+  "scripts": {},
+  "author": {
+    "name": "Kevin Berry",
+    "email": "41717340+51ngul4r1ty@users.noreply.github.com"
+  },
+  "license": "MIT"
+}

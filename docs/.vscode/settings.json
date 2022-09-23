@@ -1,0 +1,18 @@
+{
+  "editor.rulers": [80, 132],
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "node_modules": true
+  },
+  "search.exclude": {
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "coverage-gutters.showGutterCoverage": true,
+  "coverage-gutters.coverageFileNames": ["lcov.info"],
+  "coverage-gutters.lcovname": "lcov.info",
+  "coverage-gutters.coverageReportFileName": "coverage/**/index.html",
+  "coverage-gutters.showLineCoverage": false,
+  "deno.enable": false
+}

@@ -1,0 +1,34 @@
+:global(.os-windows) .topMenuPanel {
+    width: calc(100% - 7rem);
+}
+
+.topMenuPanel {
+    display: flex;
+    border-bottom: 1px solid var(--normal-divider-color, #f4f4f4);
+}
+
+.fillSpaceAvailable {
+    flex-grow: 1;
+}
+
+.electronDragPanel {
+    -webkit-app-region: drag;
+}
+
+.actionButtonPanel {
+    display: flex;
+    align-items: center;
+    padding-right: 0.3rem;
+}
+
+.topMessagePanel {
+    background-color: var(--normal-error-page-color, #900);
+    color: var(--normal-error-pen-color, #fff);
+    font-weight: var(--primary-light-bold-font-weight, 500);
+    padding: 0.2rem 0.3rem;
+    font-size: 0.9rem;
+    position: fixed;
+    width: 100%;
+    z-index: 10000;
+    cursor: pointer;
+}

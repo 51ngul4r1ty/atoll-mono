@@ -1,0 +1,72 @@
+@import "@csstools/normalize.css";
+@import "./variables.css";
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+/* @import-normalize; */
+
+:global(body) {
+    font-family: "Open Sans", Arial, Sans-Serif;
+    font-size: var(--font-size-base);
+    margin: 0;
+    padding: 0;
+    background-color: var(--normal-page-color, white);
+    color: var(--normal-pen-color, black);
+    overflow: hidden;
+}
+
+:global(input) {
+    font-family: "Open Sans", Arial, Sans-Serif;
+    font-size: var(--font-size-base);
+}
+
+.app {
+    /* add top-level style for app here */
+}
+
+.app:global(.os-mac) {
+    top: 1.5rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.appTitleBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 1.5rem;
+    max-height: 1.5rem;
+    display: flex;
+}
+
+.appTitleBarDragArea {
+    flex-grow: 1;
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
+}
+
+.appTitleBarButtons {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.appTitleBar .appTitleBarButtons {
+    position: relative;
+}
+
+.appTitleBarMinimizeButton svg,
+.appTitleBarMaximizeButton svg,
+.appTitleBarCloseButton svg {
+    width: 0.5rem;
+    height: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+:global(.mobile) {
+}
