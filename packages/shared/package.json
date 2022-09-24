@@ -13,6 +13,7 @@
     "build": "echo Node Version && node --version && rollup -c",
     "prepublishOnly": "npm run clean && npm run build && npm run test:unit",
     "clean": "npx --no-install rimraf dist",
+    "storybook": "start-storybook -p 6006",
     "test": "npm run test:tsc && npm run test:unit",
     "test:unit": "jest --env=jsdom --coverage",
     "test:tsc": "tsc --noEmit --project tsconfig.json"
@@ -45,6 +46,12 @@
     "websocket": "1.0.31"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "6.5.12",
+    "@storybook/addon-knobs": "6.4.0",
+    "@storybook/addon-links": "6.5.12",
+    "@storybook/addons": "6.5.12",
+    "@storybook/cli": "6.5.12",
+    "@storybook/react": "6.5.12",
     "@testing-library/react": "10.0.4",
     "@types/history": "4.7.5",
     "@types/i18next": "13.0.0",
@@ -57,8 +64,11 @@
     "@types/react-router-dom": "5.1.5",
     "@types/redux": "3.6.0",
     "@types/url-parse": "1.4.8",
+    "@types/websocket": "1.0.0",
     "autoprefixer": "10.4.11",
     "bs-logger": "0.2.6",
+    "babel-preset-react-app": "10.0.1",
+    "copy-webpack-plugin": "5.1.1",
     "jest": "28.1.3",
     "jest-cli": "28.1.3",
     "jest-css-modules-transform": "4.4.2",
@@ -66,6 +76,7 @@
     "launchdarkly-js-client-sdk": "2.22.1",
     "lodash.memoize": "4.1.2",
     "make-error": "1.3.6",
+    "redux-mock-store": "1.5.4",
     "rollup": "2.79.0",
     "rollup-plugin-image": "1.0.2",
     "rollup-plugin-json": "4.0.0",
@@ -73,6 +84,8 @@
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-postcss": "4.0.2",
     "rollup-plugin-typescript2": "0.34.0",
+    "storybook-addon-root-attribute": "1.0.2",
+    "storybook-dark-mode": "1.1.2",
     "ts-jest": "28.0.8"
   }
 }
