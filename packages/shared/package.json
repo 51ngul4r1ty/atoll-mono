@@ -2,8 +2,15 @@
   "name": "@atoll/shared",
   "version": "0.1.0",
   "description": "Atoll shared library for use with web and electron frontend apps",
-  "main": "index.ts",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
   "scripts": {
+    "build": "echo Node Version && node --version && rollup -c",
     "test": "npm run test:tsc && npm run test:unit",
     "test:unit": "jest --env=jsdom --coverage",
     "test:tsc": "tsc --noEmit --project tsconfig.json"
@@ -48,6 +55,7 @@
     "@types/react-router-dom": "5.1.5",
     "@types/redux": "3.6.0",
     "@types/url-parse": "1.4.8",
+    "autoprefixer": "10.4.11",
     "bs-logger": "0.2.6",
     "jest": "28.1.3",
     "jest-cli": "28.1.3",
@@ -56,6 +64,13 @@
     "launchdarkly-js-client-sdk": "2.22.1",
     "lodash.memoize": "4.1.2",
     "make-error": "1.3.6",
+    "rollup": "2.79.0",
+    "rollup-plugin-image": "1.0.2",
+    "rollup-plugin-json": "4.0.0",
+    "rollup-plugin-jsx": "1.0.3",
+    "rollup-plugin-node-resolve": "5.2.0",
+    "rollup-plugin-postcss": "4.0.2",
+    "rollup-plugin-typescript2": "0.34.0",
     "ts-jest": "28.0.8"
   }
 }
