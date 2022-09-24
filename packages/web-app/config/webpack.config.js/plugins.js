@@ -24,6 +24,9 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
     template: paths.appHtml
 });
 
+const fromPath = "../../node_modules/@atoll/shared/dist/index.es.css";
+const toPath = "shared-bundle.css";
+
 const client = [
     clientOnly() && htmlWebpackPlugin,
     // new webpack.ProgressPlugin(), // make this optional e.g. via `--progress` flag
@@ -36,7 +39,7 @@ const client = [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new ManifestPlugin({ fileName: "manifest.json" }),
     new CopyWebpackPlugin([
-        { from: "./node_modules/@atoll/shared/dist/index.es.css", to: "shared-bundle.css" },
+        { from: fromPath, to: toPath },
         { from: "./src/assets/favicon.png", to: "favicon.png" }
     ])
 ].filter(Boolean);

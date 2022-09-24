@@ -23,7 +23,11 @@ module.exports = {
     ],
     env: {
         test: {
-            plugins: ["@babel/transform-modules-commonjs", "@babel/syntax-dynamic-import", "@babel/plugin-transform-runtime"]
+            plugins: [
+                "@babel/transform-modules-commonjs",
+                "@babel/syntax-dynamic-import",
+                "@babel/plugin-transform-runtime"
+            ]
         }
     }
 };

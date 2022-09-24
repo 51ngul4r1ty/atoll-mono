@@ -6,6 +6,8 @@
   "scripts": {
     "build": "npm run build -ws --if-present",
     "clean-node-modules": "npx rimraf node_modules",
+    "start": "npm run start:web-app",
+    "start:web-app": "npm start -w packages/web-app",
     "test": "npm run test -ws --if-present",
     "test:unit": "npm run test:unit -ws --if-present",
     "test:shared": "npm run test -w packages/shared"

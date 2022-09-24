@@ -23,6 +23,7 @@ module.exports = {
     },
     externals: [
         nodeExternals({
+            modulesDir: "../../node_modules/",
             // we still want imported css from external files to be bundled otherwise 3rd party packages
             // which require us to include their own css would not work properly
             whitelist: /\.css$/
