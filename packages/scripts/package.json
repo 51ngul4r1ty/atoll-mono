@@ -1,0 +1,20 @@
+{
+  "name": "@atoll/scripts",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/51ngul4r1ty/atoll-mono.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/51ngul4r1ty/atoll-mono/issues"
+  },
+  "homepage": "https://github.com/51ngul4r1ty/atoll-mono#readme"
+}

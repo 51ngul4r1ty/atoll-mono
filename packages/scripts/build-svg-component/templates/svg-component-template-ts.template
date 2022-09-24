@@ -1,0 +1,30 @@
+// externals
+import * as React from "react";
+
+// style
+import baseCss from "../../common/base.module.css";
+
+// interfaces/types
+import { StandardInvertibleComponentProps } from "../../common/types";
+
+// utils
+import { getFillAndStrokeClassNames } from "../../common/propUtils";
+import { buildClassName } from "../../../utils/classNameBuilder";
+
+export type <<-NAME->>Props = StandardInvertibleComponentProps;
+
+export const <<-NAME->>: React.FC<<<-NAME->>Props> = (props) => {
+    const { fillClass, strokeClass } = getFillAndStrokeClassNames(
+        props,
+        baseCss.fillInverted,
+        baseCss.fill,
+        baseCss.strokeInverted,
+        baseCss.stroke
+    );
+
+    const <<-CLS-NAME-VAR->> = buildClassName(<<-SVG-ELT1-CLS->>, props.className);
+
+    return (
+        <<-SVG->>
+    );
+};

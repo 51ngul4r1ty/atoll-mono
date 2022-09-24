@@ -18,7 +18,8 @@
   "workspaces": [
     "packages/shared",
     "packages/web-app",
-    "packages/desktop-app"
+    "packages/desktop-app",
+    "packages/scripts"
   ],
   "devDependencies": {
     "prettier": "2.7.1",
