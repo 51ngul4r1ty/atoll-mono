@@ -3,8 +3,41 @@
   "version": "0.1.0",
   "description": "Atoll web app",
   "main": "index.ts",
-  "devDependencies": {},
-  "scripts": {},
+  "dependencies": {
+    "@atoll/shared": "0.63.2",
+    "@flopflip/memory-adapter": "1.6.0",
+    "@flopflip/react-broadcast": "10.1.11",
+    "express-ws": "5.0.2",
+    "find-package-json": "1.2.0",
+    "jsonwebtoken": "8.5.1",
+    "pg": "8.7.3",
+    "sequelize": "6.23.0",
+    "text-encoding-polyfill": "0.6.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.10.1",
+    "@babel/core": "7.10.2",
+    "@babel/generator": "7.10.2",
+    "@babel/preset-env": "7.10.2",
+    "@babel/preset-react": "7.10.1",
+    "@babel/preset-typescript": "7.10.1",
+    "@types/express-ws": "3.0.0",
+    "@types/jest": "25.2.1",
+    "@types/jsonwebtoken": "8.3.9",
+    "@types/node": "13.13.4",
+    "babel-loader": "8.1.0",
+    "babel-plugin-named-asset-import": "0.3.7",
+    "babel-preset-react-app": "9.1.2",
+    "cross-env": "7.0.2",
+    "jest": "25.5.3",
+    "jest-cli": "25.5.3",
+    "regenerator-runtime": "0.13.3"
+  },
+  "scripts": {
+    "test": "npm run test:tsc && npm run test:unit",
+    "test:unit": "npx --no-install cross-env CI=true node scripts/test.js --env=jsdom --coverage",
+    "test:tsc": "tsc --noEmit --project tsconfig.json"
+  },
   "author": {
     "name": "Kevin Berry",
     "email": "41717340+51ngul4r1ty@users.noreply.github.com"

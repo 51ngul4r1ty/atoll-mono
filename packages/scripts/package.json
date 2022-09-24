@@ -4,15 +4,16 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/51ngul4r1ty/atoll-mono.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name": "Kevin Berry",
+    "email": "41717340+51ngul4r1ty@users.noreply.github.com"
+  },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/51ngul4r1ty/atoll-mono/issues"
   },
