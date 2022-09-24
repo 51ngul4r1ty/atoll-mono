@@ -4,7 +4,7 @@
   "description": "Atoll web app",
   "main": "index.ts",
   "dependencies": {
-    "@atoll/shared": "0.63.2",
+    "@atoll/shared": "0.63.3",
     "@flopflip/memory-adapter": "1.6.0",
     "@flopflip/react-broadcast": "10.1.11",
     "axios": "0.26.1",
