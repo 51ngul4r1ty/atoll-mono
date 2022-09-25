@@ -3,10 +3,10 @@
  */
 
 // externals
-import { logDebug, logError } from "api/handlers/utils/serverLogger";
 import { Response } from "express";
 
 // utils
+import { logDebug, logError } from "../handlers/utils/serverLogger";
 import {
     buildBadRequestResponse,
     buildNotFoundResponse,

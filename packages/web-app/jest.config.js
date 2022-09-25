@@ -1,8 +1,14 @@
 const paths = require("./config/paths");
 
 module.exports = {
-    verbose: true,
-    collectCoverageFrom: ["src/**/*.{js,jsx,mjs,ts,tsx}"],
+    roots: ["<rootDir>/src"],
+    testMatch: ["<rootDir>/src/**/*.(spec|test).{js,jsx,mjs,ts,tsx}"],
+    transform: {
+        "^.+\\.tsx?$": "ts-jest",
+        ".+\\.(css|styl|less|sass|scss)$": "jest-css-modules-transform"
+    },
+    // verbose: true,
+    // collectCoverageFrom: ["src/**/*.{js,jsx,mjs,ts,tsx}"],
     coverageReporters: ["lcov", "text-summary"],
     coverageThreshold: {
         global: {
@@ -12,17 +18,16 @@ module.exports = {
             lines: 15.06
         }
     },
-    setupFiles: ["regenerator-runtime/runtime", "<rootDir>/config/polyfills.js"],
-    setupFilesAfterEnv: ["<rootDir>config/jest/setup.js"],
-    testMatch: ["<rootDir>/src/*.test.{js,jsx,mjs,ts,tsx}", "<rootDir>/src/**/*.test.{js,jsx,mjs,ts,tsx}"],
-    testEnvironment: "node",
-    testURL: "http://localhost",
-    transform: {
-        "^.+\\.(js|jsx|mjs|ts|tsx)$": "babel-jest",
-        "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-        "^(?!.*\\.(js|jsx|mjs|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    moduleFileExtensions: ["js", "jsx", "json", "ts", "tsx", "node", "mjs"],
+    globals: {
+        "ts-jest": {
+            diagnostics: true,
+            tsconfig: "tsconfig.json"
+        }
     },
-    transformIgnorePatterns: ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx|mjs)$"],
-    moduleDirectories: paths.resolveModules,
-    moduleFileExtensions: ["js", "json", "jsx", "node", "mjs", "ts", "tsx"]
+    setupFilesAfterEnv: ["<rootDir>config/jest/setup.ts"],
+    testEnvironment: "node",
+    // testURL: "http://localhost",
+    transformIgnorePatterns: ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx|mjs)$"] //,
+    // moduleDirectories: paths.resolveModules
 };

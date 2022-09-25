@@ -11,10 +11,10 @@
   "sideEffects": false,
   "scripts": {
     "build": "echo Node Version && node --version && rollup -c",
-    "prepublishOnly": "npm run clean && npm run build && npm run test:unit",
     "clean": "npx --no-install rimraf dist",
     "gen:react-svg": "deno run --allow-read --allow-write --unstable ../scripts/build-svg-component/index.ts",
     "open:coverage-report": "npx --no-install opener ./coverage/lcov-report/index.html",
+    "prepublishOnly": "npm run clean && npm run build && npm run test:unit",
     "report:coverage": "npm run test:unit && npm run open:coverage-report",
     "storybook": "npm run storybook:build && start-storybook -p 6006",
     "storybook:build": "npm run storybook:build-lib && npm run storybook:build-html",

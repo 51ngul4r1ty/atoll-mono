@@ -19,3 +19,10 @@ sense to start up the electron client app as well as the web app.
 Suffixes:
   * `{target}-pkg:{package-name}` when target executed for specific package.
   * `{target}-all` when target executed for all packages.
+
+Special Targets:
+  * `report` should be used for reports that are generated- if this target is
+    used the operation should be stand-alone (i.e. it should generate the data
+    and open the report for the developer to see).
+  * `open` should be used for scripts that just open an existing document in the
+    appropriate app.
