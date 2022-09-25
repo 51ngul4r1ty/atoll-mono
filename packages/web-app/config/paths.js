@@ -30,7 +30,6 @@ if (process.env.SUPPRESS_CONSOLE_LOGGING !== "true") {
     console.log();
     console.log('**CONFIG FROM `config/paths.js`**');
     console.log();
-    // console.log(`NODE_MODULES PATH = ${nodeModules}`);
     console.log('appHtml    ', paths.appHtml);
     console.log('clientBuild', paths.clientBuild);
     console.log('serverBuild', paths.serverBuild);
