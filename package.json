@@ -4,15 +4,16 @@
   "description": "Atoll's Monorepo using NPM workspaces",
   "main": "index.ts",
   "scripts": {
-    "build": "npm run build -ws --if-present",
-    "build:shared": "npm run build -w packages/shared",
+    "build-all": "npm run build -ws --if-present",
+    "build-pkg:shared": "npm run build -w packages/shared",
     "clean-node-modules": "npx rimraf node_modules",
-    "publish:shared": "npm publish -w packages/shared",
+    "publish-pkg:shared": "npm publish -w packages/shared",
     "start": "npm run start:web-app",
-    "start:web-app": "npm start -w packages/web-app",
-    "test": "npm run test -ws --if-present",
-    "test:unit": "npm run test:unit -ws --if-present",
-    "test:shared": "npm run test -w packages/shared"
+    "start-pkg:web-app": "npm start -w packages/web-app",
+    "test": "npm run test-all",
+    "test-all": "npm run test -ws --if-present",
+    "test-all:unit": "npm run test:unit -ws --if-present",
+    "test-pkg:shared": "npm run test -w packages/shared"
   },
   "author": {
     "name": "Kevin Berry",
@@ -20,10 +21,10 @@
   },
   "license": "MIT",
   "workspaces": [
+    "packages/scripts",
     "packages/shared",
     "packages/web-app",
-    "packages/desktop-app",
-    "packages/scripts"
+    "packages/desktop-app"
   ],
   "devDependencies": {
     "prettier": "2.7.1",
