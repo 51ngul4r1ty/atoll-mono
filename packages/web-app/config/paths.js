@@ -26,21 +26,23 @@ const paths = {
     publicPath: "/static/"
 };
 
-console.log();
-console.log('**CONFIG FROM `config/paths.js`**');
-console.log();
-// console.log(`NODE_MODULES PATH = ${nodeModules}`);
-console.log('appHtml    ', paths.appHtml);
-console.log('clientBuild', paths.clientBuild);
-console.log('serverBuild', paths.serverBuild);
-console.log('dotenv     ', paths.dotenv);
-console.log('src        ', paths.src);
-console.log('srcClient  ', paths.srcClient);
-console.log('srcServer  ', paths.srcServer);
-console.log('types      ', paths.types);
-console.log('i18n       ', paths.i18n);
-console.log('publicPath ', paths.publicPath);
-console.log();
+if (process.env.SUPPRESS_CONSOLE_LOGGING !== "true") {
+    console.log();
+    console.log('**CONFIG FROM `config/paths.js`**');
+    console.log();
+    // console.log(`NODE_MODULES PATH = ${nodeModules}`);
+    console.log('appHtml    ', paths.appHtml);
+    console.log('clientBuild', paths.clientBuild);
+    console.log('serverBuild', paths.serverBuild);
+    console.log('dotenv     ', paths.dotenv);
+    console.log('src        ', paths.src);
+    console.log('srcClient  ', paths.srcClient);
+    console.log('srcServer  ', paths.srcServer);
+    console.log('types      ', paths.types);
+    console.log('i18n       ', paths.i18n);
+    console.log('publicPath ', paths.publicPath);
+    console.log();
+}
 
 paths.resolveModules = [paths.srcClient, paths.srcServer, paths.src, nodeModules];
 
