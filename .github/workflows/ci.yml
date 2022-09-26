@@ -1,0 +1,24 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Node & NPM versions
+        run: |
+          echo Node Version
+          node --version
+          echo
+          echo NPM Version
+          npm --version
+          echo
+      - name: Install NPM packages
+        run: npm ci
+      - name: Build All Packages
+        run: |
+          echo Building...
+          npm run build-all
