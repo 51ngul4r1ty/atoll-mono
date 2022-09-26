@@ -1,4 +1,6 @@
 {
+  "extends": "../../tsconfig.json",
+
   "compilerOptions": {
     "incremental": false,
     "module": "es6",
@@ -18,10 +20,8 @@
     "noEmit": true,
     "strictNullChecks": false,
     "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "paths": {
-      "*": ["client/*", "server/*", "*"]
-    }
+    "noUnusedParameters": false
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [{ "path": "../shared/tsconfig.json" }]
 }
