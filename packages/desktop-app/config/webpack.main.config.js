@@ -10,7 +10,7 @@ const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent")
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 
-const nodeModules = resolveApp('../../node_modules');
+const nodeModules = resolveApp('./node_modules');
 const paths = {
     //    appHtml: resolveApp("config/webpack.config.js/template.html"),
     // clientBuild: resolveApp("build/client"),
@@ -158,7 +158,7 @@ module.exports = {
     },
     externals: [
         nodeExternals({
-            modulesDir: "../../node_modules/",
+            modulesDir: "./node_modules/",
             // we still want imported css from external files to be bundled otherwise 3rd party packages
             // which require us to include their own css would not work properly
             whitelist: /\.css$/

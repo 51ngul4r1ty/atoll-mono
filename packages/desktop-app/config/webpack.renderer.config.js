@@ -126,7 +126,7 @@ const clientLoaders = [
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 
-const nodeModules = resolveApp('../../node_modules');
+const nodeModules = resolveApp('./node_modules');
 
 const paths = {
     appHtml: resolveApp("config/template.html"),
