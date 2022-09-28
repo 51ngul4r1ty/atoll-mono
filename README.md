@@ -105,4 +105,14 @@ Contributor Related
 [PROCESS.md](docs/PROCESS.md) -
   The index document for processes that should be followed.
 
+Package Specific Docs
+---------------------
+
+[PKG_DESKTOP_APP.md](docs/PKG_DESKTOP_APP.md) -
+  Introduction to the Electron desktop spp.  
+
+Wiki
+----
+
+For additional information take a look at the wiki:
 [Github Wiki](https://github.com/51ngul4r1ty/atoll-mono/wiki)

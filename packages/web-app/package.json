@@ -4,10 +4,11 @@
   "description": "Atoll web app",
   "scripts": {
     "build": "npm run build-only && npm run build-deploy",
-    "build-only": "echo Node Version && node --version && npx --no-install cross-env NODE_ENV=production node scripts/build.js",
+    "build-only": "npx --no-install cross-env NODE_ENV=production node scripts/build.js",
     "build-deploy": "node ./scripts/build-deploy.js",
     "build-with-stats": "npx --no-install cross-env SUPPRESS_CONSOLE_LOGGING=true NODE_ENV=production webpack --config config/webpack.config.js/client.prod.js --json > build/client/static/bundle-stats.json",
     "check:prereqs": "ts-node ./scripts/check-prereqs.ts",
+    "clean-node-modules": "npx rimraf node_modules",
     "report:bundle-analysis": "npm run build-with-stats && npm run start:webpack-bundle-analyzer",
     "setup": "npm run check:prereqs && ts-node ./scripts/setup.ts",
     "start": "npm run check:prereqs && npm run start-only",

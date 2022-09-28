@@ -21,3 +21,11 @@ Database Code
    doesn't execute anything outside the current transaction.
 2. Make sure that commit and rollback code occurs in the right places.
 3. Make sure aborted/rollback state is checked when transactions are used.
+
+Monorepo Related
+----------------
+
+Make sure that developers do not add dependencies at the "wrong" level.  For example, even though webpack may prompt to install the
+CLI at the base-level for a new package that's been added, you need
+to install it at the package level (so that a different version can
+be used in each of the packages contained in the monorepo).

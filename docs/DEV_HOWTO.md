@@ -159,3 +159,9 @@ Adding a New Package
 
 To add a new package `@atoll/{new-package-name}` to the monorepo:
   `npm init -w packages/{new-package-name} --scope atoll`
+
+Make sure that the new package has a tsconfig.json file that references any
+dependencies in the monorepo, for example, the desktop app uses `@atoll/shared`
+so it has this entry `"references": [{ "path": "../shared/tsconfig.json" }]`.
+The tsconfig.json file should also have this at the top:
+`  "extends": "../../tsconfig.json",`

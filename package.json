@@ -6,14 +6,22 @@
   "scripts": {
     "build-all": "npm run build -ws --if-present",
     "build-pkg:shared": "npm run build -w packages/shared",
-    "clean-node-modules": "npx rimraf node_modules",
+    "build-pkg:web-app": "npm run build -w packages/web-app",
+    "build-pkg:desktop-app": "npm run build -w packages/desktop-app",
+    "clean-node-modules": "npm run clean-node-modules -ws --if-present && npx rimraf node_modules",
     "publish-pkg:shared": "npm publish -w packages/shared",
-    "start": "npm run start-pkg:web-app",
+    "publish-pkg:desktop-app": "npm run publish -w packages/desktop-app",
+    "start": "npm run start:web-app",
+    "start:web-app": "npm run start-pkg:web-app",
+    "start:desktop-app": "concurrently 'npm run start-pkg:web-app' 'npm run start-pkg:desktop-app'",
     "start-pkg:web-app": "npm start -w packages/web-app",
+    "start-pkg:desktop-app": "npm start -w packages/desktop-app",
     "test": "npm run test-all",
     "test-all": "npm run test -ws --if-present",
     "test-all:unit": "npm run test:unit -ws --if-present",
-    "test-pkg:shared": "npm run test -w packages/shared"
+    "test-pkg:shared": "npm run test -w packages/shared",
+    "test-pkg:web-app": "npm run test -w packages/web-app",
+    "test-pkg:desktop-app": "npm run test -w packages/web-app"
   },
   "author": {
     "name": "Kevin Berry",
@@ -27,6 +35,8 @@
     "packages/desktop-app"
   ],
   "devDependencies": {
+    "concurrently": "7.4.0",
+    "electron": "9.0.5",
     "prettier": "2.7.1",
     "rimraf": "3.0.2",
     "typescript": "4.2.4"

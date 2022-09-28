@@ -26,3 +26,7 @@ Special Targets:
     and open the report for the developer to see).
   * `open` should be used for scripts that just open an existing document in the
     appropriate app.
+  * `start:*` and `start-pkg:*` may seem redundant, but the distinction is:
+    `start:*` starts the app/package with all of its depenedencies.
+    `start-pkg:*` just starts that package- it relies on the developer to start
+      up any other dependencies as needed.
