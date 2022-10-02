@@ -9,13 +9,13 @@ const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent")
 /* webpack plugins */
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ManifestPlugin = require("webpack-manifest-plugin");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const WriteFileWebpackPlugin = require("write-file-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const generateSourceMap = process.env.OMIT_SOURCEMAP !== "true";
+const generateSourceMap = process.env.OMIT_SOURCEMAP === "true" ? false : true;
 
 const babelLoader = {
     test: /\.(js|jsx|ts|tsx|mjs)$/,
@@ -193,8 +193,11 @@ const plugins = {
             __SERVER__: "false",
             __BROWSER__: "true"
         }),
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-        new ManifestPlugin({ fileName: "manifest.json" })
+        new webpack.IgnorePlugin({
+            resourceRegExp: /^\.\/locale$/,
+            contextRegExp: /moment$/,
+        }),
+        new WebpackManifestPlugin({ fileName: "manifest.json" })
     ].filter(Boolean)
 };
 
@@ -210,28 +213,19 @@ const baseConfig = {
     },
     output: {
         path: path.join(paths.build, paths.publicPath),
-        filename: "bundle.js",
+        filename: "[name].js",
         publicPath: paths.publicPath,
         chunkFilename: "[name].[chunkhash:8].chunk.js"
     },
-    // node: {
-    //     // NOTE: Used https://github.com/electron/electron/issues/5107 to resolve
-    //     //            Not allowed to load local resource: file:/// ... /atoll/electron/build/index.html
-    //     __dirname: false,
-    //     __filename: false
-    // },
+    node: {
+        __dirname: false,
+        __filename: false
+    },
     module: {
         rules: clientLoaders
     },
     resolve: { ...resolvers },
     plugins: [...plugins.shared, ...plugins.client],
-    node: {
-        dgram: "empty",
-        fs: "empty",
-        net: "empty",
-        tls: "empty",
-        child_process: "empty"
-    },
     optimization: {
         minimizer: [
             new TerserPlugin({
@@ -272,14 +266,11 @@ const baseConfig = {
                 },
                 // Use multi-process parallel running to improve the build speed
                 // Default number of concurrent runs: os.cpus().length - 1
-                parallel: true,
-                // Enable file caching
-                cache: true,
-                sourceMap: generateSourceMap
+                parallel: true
             })
         ],
-        namedModules: true,
-        noEmitOnErrors: true,
+        moduleIds: "named",
+        emitOnErrors: false,
         splitChunks: {
             cacheGroups: {
                 commons: {
