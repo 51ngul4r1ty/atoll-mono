@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  db:
+    container_name: atoll-postgres
+    image: postgres:12
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 15432:5432
+    volumes:
+      - $HOME/Docker/volumes/postgres/atoll:/var/lib/postgresql/data
+  api:
+    container_name: atoll-web-app-server
+    build:
+      context: ./
+      target: production
+    image: atoll-web-app-server-image
+    depends_on:
+      - db
+    ports:
+      - 18500:8500
+    environment:
+      NODE_ENV: production
+      ATOLL_DATABASE_URL: postgres://atoll:d0ughnutc4t@db:5432/atoll
+      ATOLL_DATABASE_USE_SSL: false
+      ATOLL_AUTH_KEY: x-pr0d-auth-k3y
+      RESOURCE_PORT: 18500
+    links:
+      - db
+volumes:
+  db:
+    driver: local

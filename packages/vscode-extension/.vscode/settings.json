@@ -1,0 +1,22 @@
+{
+    "editor.rulers": [80, 132],
+    "files.exclude": {
+      "packages/": true,
+      "**/.DS_Store": true,
+      "**/.git": true,
+      "build": true,
+      "coverage": true,
+      "dist": true,
+      "node_modules": true
+    },
+    "search.exclude": {},
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "coverage-gutters.showGutterCoverage": true,
+    "coverage-gutters.coverageFileNames": ["lcov.info"],
+    "coverage-gutters.coverageReportFileName": "coverage/**/index.html",
+    "coverage-gutters.showLineCoverage": false,
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "deno.enable": false
+  }
+  

@@ -55,8 +55,9 @@ const serverRenderer: any = () => (req: express.Request & { store: Store }, res:
     const port = getAssetPortOverride();
     let hostAndPort = req.headers.host; // e.g. "192.168.9.1:8500"
     const lastIdx = hostAndPort.lastIndexOf(":");
-    if (lastIdx >= 0 && hostAndPort.length - lastIdx > 5 && port) {
-        hostAndPort += `:${port}`;
+    if (port) {
+        const hostWithoutPort = lastIdx < 0 ? hostAndPort : hostAndPort.substring(0, lastIdx);
+        hostAndPort = `${hostWithoutPort}:${port}`;
     }
     initConfig({ getDocumentLocHref: () => `http://${hostAndPort}${req.url}` });
     //    const apiBaseUrl = getApiBaseUrl();
@@ -83,10 +84,19 @@ const serverRenderer: any = () => (req: express.Request & { store: Store }, res:
 
         const sharedBundleCss = res.locals.assetPath("shared-bundle.css");
         const sharedBundleCssPath = remapAssetPath(sharedBundleCss);
-        const bundleJsPath = remapAssetPath(res.locals.assetPath("bundle.js"));
+        const bundleJsAssetPath = res.locals.assetPath("bundle.js");
+        const bundleJsPath = remapAssetPath(bundleJsAssetPath);
         const idx = bundleJsPath.lastIndexOf("/");
         const basePath = idx < 0 ? bundleJsPath : bundleJsPath.substr(0, idx);
         const favIconPath = `${basePath}/favicon.png`;
+
+        const bundleCssAssetPath = res.locals.assetPath("bundle.css");
+        const remappedCssAssetPath = remapAssetPath(bundleCssAssetPath);
+        const vendorCssAssetPath = res.locals.assetPath("vendor.css");
+        const remappedVendorCssAssetPath = remapAssetPath(vendorCssAssetPath);
+
+        const vendorJsAssetPath = res.locals.assetPath("vendor.js"); 
+        const remappedVendorJsAssetPath = remapAssetPath(vendorJsAssetPath);
 
         return res.send(
             "<!doctype html>" +
@@ -94,10 +104,10 @@ const serverRenderer: any = () => (req: express.Request & { store: Store }, res:
                     <Html
                         css={[
                             sharedBundleCssPath,
-                            remapAssetPath(res.locals.assetPath("bundle.css")),
-                            remapAssetPath(res.locals.assetPath("vendor.css"))
+                            remappedCssAssetPath,
+                            remappedVendorCssAssetPath
                         ]}
-                        scripts={[bundleJsPath, remapAssetPath(res.locals.assetPath("vendor.js"))]}
+                        scripts={[bundleJsPath, remappedVendorJsAssetPath]}
                         favIcon={favIconPath}
                         state={state}
                         language={locale}

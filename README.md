@@ -11,8 +11,8 @@ Project Goal
 The goal of this project is to create a good agile project management tool that
 adheres as closely to scrum best practices as possible.
 
-Getting Started
-===============
+Getting Started (for Contributors)
+==================================
 
 Everyone contributing to this repo should read this document before doing
 anything else: [IMPORTANT.md](docs/IMPORTANT.md)
@@ -41,12 +41,19 @@ Recommendations
 VS Code is the editor of choice for this project (v1.71.2 or newer).
    - Make sure to install the recommended workspace extensions.
 
-Running the App
----------------
+Running the App (using source code)
+-----------------------------------
 
 1. At root level: `npm ci`
-2. Setting up the Database: `npm run setup`
+2. Setting up the Database: `npm run setup-database`
 3. Starting the app: `npm start`
+
+Running the App (using source code + Docker)
+--------------------------------------------
+
+1. At root level: `npm ci`
+2. Build app and create docker image: `npm run docker-pkg:web-app`
+3. Start docker containers using compose: `npm run start-docker:web-app`
 
 Working with the Monorepo
 =========================

@@ -81,11 +81,15 @@ export const remapAssetPath = (url: string) => {
         return url;
     }
     const parsedAssetUrl = urlParse(url);
-    const portToUse = parsedAssetUrl.port || getAssetPortOverride();
+    const assetPortOverride = getAssetPortOverride();
+    const parsedAssetUrlPort = parsedAssetUrl.port;
+    const portToUse = parsedAssetUrlPort || assetPortOverride;
     const portSuffix = portToUse ? `:${portToUse}` : "";
     const protocolPrefix = parsedAssetUrl.protocol ? `${protocolToScheme(parsedAssetUrl.protocol)}:` : "";
-    const baseUrl = `${protocolPrefix}//${getApiHostName()}${portSuffix}/`;
-    const result = combineBaseAndRelativeUrl(baseUrl, parsedAssetUrl.pathname);
+    const apiHostName = getApiHostName();
+    const baseUrl = `${protocolPrefix}//${apiHostName}${portSuffix}/`;
+    const parsedAssetUrlPathName = parsedAssetUrl.pathname;
+    const result = combineBaseAndRelativeUrl(baseUrl, parsedAssetUrlPathName);
     return result;
 };
 
@@ -132,9 +136,32 @@ export const parsePostgresUrl = (url: string): DbConfig => {
     };
 };
 
-export const getDbConfig = (): DbConfig => {
+export const getDbConfig = (verbose?: boolean): DbConfig => {
+    let databaseUrl: string;
+    if (process.env.ATOLL_DATABASE_URL) {
+        databaseUrl = process.env.ATOLL_DATABASE_URL;
+        if (verbose) {
+            console.log("Using ATOLL_DATABASE_URL for database connection string");
+        }
+    } else if (process.env.DATABASE_URL) {
+        if (verbose) {
+            console.log("Using DATABASE_URL for database connection string");
+        }
+        databaseUrl = process.env.DATABASE_URL;
+    }
+    if (verbose) {
+        const dbUrlToShow = databaseUrl || '(default)';
+        console.log(`  Database connection string: ${dbUrlToShow}`);
+    }
     const dbConfigFromUrl = parsePostgresUrl(process.env.ATOLL_DATABASE_URL || process.env.DATABASE_URL);
     const useSsl = process.env.ATOLL_DATABASE_USE_SSL ? process.env.ATOLL_DATABASE_USE_SSL === "true" : true;
+    if (verbose) {
+        if (useSsl) {
+            console.log("  Using SSL");;
+        } else {
+            console.log("  Not using SSL (ATOLL_DATABASE_USE_SSL override)");;
+        }
+    }
     return {
         ...dbConfigFromUrl,
         useSsl

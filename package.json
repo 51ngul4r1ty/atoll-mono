@@ -5,15 +5,23 @@
   "main": "index.ts",
   "scripts": {
     "build-all": "npm run build -ws --if-present",
+    "build-pkg:web-app": "npm run build -w packages/web-app",
     "build-pkg:shared": "npm run build -w packages/shared",
+    "build-pkg:extension": "npm run build -w packages/vscode-extension",
+    "docker-pkg:web-app": "npm run build-pkg:web-app && npm run -w packages/web-app build:docker",
     "clean-node-modules": "npx rimraf node_modules",
+    "package-pkg:extension": "npm run package -w packages/vscode-extension",
     "publish-pkg:shared": "npm publish -w packages/shared",
+    "publish-alpha:shared": "npm run publish-alpha -w packages/shared",
+    "setup-database": "npm run setup -w packages/web-app",
     "start": "npm run start-pkg:web-app",
+    "start-docker:web-app": "npm run -w packages/web-app start:docker",
     "start-pkg:web-app": "npm start -w packages/web-app",
     "test": "npm run test-all",
     "test-all": "npm run test -ws --if-present",
     "test-all:unit": "npm run test:unit -ws --if-present",
-    "test-pkg:shared": "npm run test -w packages/shared"
+    "test-pkg:shared": "npm run test -w packagesnp/shared",
+    "test-pkg:extension": "npm run test -w packages/vscode-extension"
   },
   "author": {
     "name": "Kevin Berry",
@@ -24,7 +32,8 @@
     "packages/scripts",
     "packages/shared",
     "packages/web-app",
-    "packages/desktop-app"
+    "packages/desktop-app",
+    "packages/vscode-extension"
   ],
   "devDependencies": {
     "prettier": "2.7.1",

@@ -4,7 +4,8 @@ import { Sequelize, Options } from "sequelize";
 // libraries
 import { getDbConfig } from "@atoll/shared";
 
-const dbConfig = getDbConfig();
+const verbose = true;
+const dbConfig = getDbConfig(verbose);
 if (!dbConfig) {
     console.error("Unable to retrieve database configuration - set ATOLL_DATABASE_URL for local development");
 }
@@ -12,6 +13,7 @@ if (!dbConfig) {
 const buildOptions = (): Options => {
     const options: Options = {
         host: dbConfig.host,
+        port: dbConfig.port,
         dialect: "postgres",
         dialectOptions: {},
         pool: {

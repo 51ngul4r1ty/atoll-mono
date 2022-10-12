@@ -1,6 +1,6 @@
 {
   "name": "@atoll/shared",
-  "version": "0.63.3",
+  "version": "0.63.5",
   "description": "Atoll shared code that is common to electron desktop client and web app",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -15,6 +15,7 @@
     "gen:react-svg": "deno run --allow-read --allow-write --unstable ../scripts/build-svg-component/index.ts",
     "open:coverage-report": "npx --no-install opener ./coverage/lcov-report/index.html",
     "prepublishOnly": "npm run clean && npm run build && npm run test:unit",
+    "publish-alpha": "npm publish --tag alpha",
     "report:coverage": "npm run test:unit && npm run open:coverage-report",
     "storybook": "npm run storybook:build && start-storybook -p 6006",
     "storybook:build": "npm run storybook:build-lib && npm run storybook:build-html",
