@@ -10,23 +10,12 @@ information can be used to verify that the requirements listed below have been
 met.  If the requirements are not met then there need to be other compelling
 reasons to displace the existing tool.
 
-Yalc
-====
+NPM Workspaces
+==============
 
-`yalc` is an npm module that can be installed globally to easily work with
-multiple npm modules (in particular atoll core and shared repos).  It is also
-included in each atoll related repo as dev dependency.  The `sync` npm script
-can be used in `atoll-shared` to build and publish the latest code for use in
-`atoll-core`.
-
-**Date Chosen**: November 7, 2019
-
-Why It Was Chosen
------------------
-
-* Initially we were using `npm link` but we ran into a number of problems
-  using it.  See [ISSUES_RESOLVED.md]() for more information.
-
+Multiple repos and `yalc` were previously used, but this almost always resulted
+in concurrent PRs to at least two of the repos... so it made no sense to carry
+on this way.
 
 PostgreSQL
 ==========
@@ -40,6 +29,32 @@ use.
 
 **DEPRECATED TOOLS**
 ====================
+
+Yalc
+====
+
+`yalc` is an npm module that can be installed globally to easily work with
+multiple npm modules (in particular atoll core and shared repos).  It is also
+included in each atoll related repo as dev dependency.  The `sync` npm script
+can be used in `atoll-shared` to build and publish the latest code for use in
+`atoll-core`.
+
+**Date Chosen**: November 7, 2019
+
+**Date Deprecated**: October 13, 2022
+
+Why It Was Initially Chosen
+---------------------------
+
+* Initially we were using `npm link` but we ran into a number of problems
+  using it.  See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for more
+  information.
+
+Why It Was Deprecated
+---------------------
+
+* No longer needed because monorepo contains all dependencies in one place.
+
 
 NPM Link Check
 ==============

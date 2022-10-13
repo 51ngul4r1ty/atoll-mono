@@ -105,7 +105,7 @@ Contributor Related
   Github branch policies etc.  
 [GLOSSARY.md](docs/GLOSSARY.md) -
   Glossary specific to this project.  
-[ISSUES_RESOLVED.md](docs/ISSUES_RESOLVED.md) -
+[TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) -
   This may be useful if you're running into problems.  
 [DATA_MODEL.md](docs/dataModel/DATA_MODEL.md) -
   Mapping the requirements to the data model.  
