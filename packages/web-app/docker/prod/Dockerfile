@@ -10,14 +10,14 @@ ENV APP_HOME=/apps/atoll
 WORKDIR ${APP_HOME}
 
 # Copy package.json specific to deployment
-COPY build/deploy-package.json ./package.json
+COPY ../../build/deploy-package.json ./package.json
 
 # Copy server files
-COPY build/server ./build/server
+COPY ../../build/server ./build/server
 
 # Copy client static files to client & server folders
-COPY build/client/static ./build/client/static
-COPY build/client/static ./build/server/static
+COPY ../../build/client/static ./build/client/static
+COPY ../../build/client/static ./build/server/static
 RUN rm -f ./build/client/static/*.js.map
 RUN rm -f ./build/server/static/*.js.map
 RUN rm -f ./build/client/static/*.LICENSE.txt 

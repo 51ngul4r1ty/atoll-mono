@@ -17,8 +17,11 @@ function isDeploySetUp() {
 
 if (!isDeploySetUp()) {
     console.log("");
-    console.log("Info: ATOLL_HEROKU_PATH environment variable is not set up, skipping deployment build.");
+    console.log("Info: ATOLL_HEROKU_PATH environment variable is not set up, skipping heroku deployment build.");
     console.log("");
+    console.log("Performing non-heroku deployment build, building deploy-package.json...");
+    console.log("");
+    buildDeployPackage();
 } else {
     console.log("Performing deployment build");
     console.log("");
