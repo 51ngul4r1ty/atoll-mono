@@ -76,12 +76,11 @@ export const combineBaseAndRelativeUrl = (protocolHostAndPort: string, path: str
     return protocolHostAndPort.endsWith("/") ? `${protocolHostAndPort}${pathToAppend}` : `${protocolHostAndPort}${pathToAppend}`;
 };
 
-export const remapAssetPath = (url: string) => {
+export const remapAssetPath = (url: string, assetPortOverride: number | null) => {
     if (!url) {
         return url;
     }
     const parsedAssetUrl = urlParse(url);
-    const assetPortOverride = getAssetPortOverride();
     const parsedAssetUrlPort = parsedAssetUrl.port;
     const portToUse = parsedAssetUrlPort || assetPortOverride;
     const portSuffix = portToUse ? `:${portToUse}` : "";
@@ -150,16 +149,16 @@ export const getDbConfig = (verbose?: boolean): DbConfig => {
         databaseUrl = process.env.DATABASE_URL;
     }
     if (verbose) {
-        const dbUrlToShow = databaseUrl || '(default)';
+        const dbUrlToShow = databaseUrl || "(default)";
         console.log(`  Database connection string: ${dbUrlToShow}`);
     }
     const dbConfigFromUrl = parsePostgresUrl(process.env.ATOLL_DATABASE_URL || process.env.DATABASE_URL);
     const useSsl = process.env.ATOLL_DATABASE_USE_SSL ? process.env.ATOLL_DATABASE_USE_SSL === "true" : true;
     if (verbose) {
         if (useSsl) {
-            console.log("  Using SSL");;
+            console.log("  Using SSL");
         } else {
-            console.log("  Not using SSL (ATOLL_DATABASE_USE_SSL override)");;
+            console.log("  Not using SSL (ATOLL_DATABASE_USE_SSL override)");
         }
     }
     return {
