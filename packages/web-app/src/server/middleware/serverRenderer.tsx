@@ -54,13 +54,17 @@ const mapAcceptLanguageToLocale = (acceptLanguage: string): Locale => {
 const serverRenderer: any = () => (req: express.Request & { store: Store }, res: express.Response, next: express.NextFunction) => {
     const nginxSourceDomain = req.headers["x-source-domain"] as string | undefined;
     const nginxSourcePort = req.headers["x-source-port"] as string | undefined;
+    let assetPortOverride = getAssetPortOverride();
+
     let hostAndPort = req.headers.host; // e.g. "192.168.9.1:8500"
     if (nginxSourceDomain && nginxSourcePort) {
         hostAndPort = `${nginxSourceDomain}:${nginxSourcePort}`;
+        assetPortOverride = parseInt(nginxSourcePort, 10);
     } else if (nginxSourceDomain) {
         hostAndPort = nginxSourceDomain;
+        assetPortOverride = null;
     } else {
-        const port = getAssetPortOverride();
+        const port = assetPortOverride;
         const lastIdx = hostAndPort.lastIndexOf(":");
         if (port) {
             const hostWithoutPort = lastIdx < 0 ? hostAndPort : hostAndPort.substring(0, lastIdx);
@@ -91,20 +95,20 @@ const serverRenderer: any = () => (req: express.Request & { store: Store }, res:
         const state = JSON.stringify(newState);
 
         const sharedBundleCss = res.locals.assetPath("shared-bundle.css");
-        const sharedBundleCssPath = remapAssetPath(sharedBundleCss);
+        const sharedBundleCssPath = remapAssetPath(sharedBundleCss, assetPortOverride);
         const bundleJsAssetPath = res.locals.assetPath("bundle.js");
-        const bundleJsPath = remapAssetPath(bundleJsAssetPath);
+        const bundleJsPath = remapAssetPath(bundleJsAssetPath, assetPortOverride);
         const idx = bundleJsPath.lastIndexOf("/");
         const basePath = idx < 0 ? bundleJsPath : bundleJsPath.substr(0, idx);
         const favIconPath = `${basePath}/favicon.png`;
 
         const bundleCssAssetPath = res.locals.assetPath("bundle.css");
-        const remappedCssAssetPath = remapAssetPath(bundleCssAssetPath);
+        const remappedCssAssetPath = remapAssetPath(bundleCssAssetPath, assetPortOverride);
         const vendorCssAssetPath = res.locals.assetPath("vendor.css");
-        const remappedVendorCssAssetPath = remapAssetPath(vendorCssAssetPath);
+        const remappedVendorCssAssetPath = remapAssetPath(vendorCssAssetPath, assetPortOverride);
 
         const vendorJsAssetPath = res.locals.assetPath("vendor.js");
-        const remappedVendorJsAssetPath = remapAssetPath(vendorJsAssetPath);
+        const remappedVendorJsAssetPath = remapAssetPath(vendorJsAssetPath, assetPortOverride);
 
         return res.send(
             "<!doctype html>" +
