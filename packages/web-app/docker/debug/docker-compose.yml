@@ -7,10 +7,11 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - PGDATA=/var/lib/postgresql/data/
     ports:
       - 25432:5432
     volumes:
-      - $HOME/Docker/volumes/postgres/atoll-dev:/var/lib/postgresql/data
+      - $HOME/Docker/volumes/postgres/atoll-dev:/var/lib/postgresql/data:rw
   api:
     container_name: atoll-web-app-server-debug
     build:
