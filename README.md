@@ -44,10 +44,26 @@ VS Code is the editor of choice for this project (v1.71.2 or newer).
 Running the App (using source code)
 -----------------------------------
 
-1. At root level: `npm ci`
-2. At root level: `npm run build-all`
-3. Setting up the Database: `npm run setup-database`
-4. Starting the app: `npm start`
+1. Set up dependencies:
+   - at root level: `npm ci`
+2. Build the app:
+   - at root level: `npm run build-all`
+3. Set up environment variables:
+   - set ATOLL_DATABASE_URL to the database connection string.
+   - set ATOLL_DATABASE_USE_SSL to "true".
+   - set ATOLL_AUTH_KEY to something unique for security reasons.
+4. Run the app to create the database structure:
+   - `npm start`
+   - watch the output
+   - if it was successful you'll see:
+     "Database & tables created!"
+   - kill the app.
+5. Finish setting up the database:
+   - at root level: `npm run setup-database`
+   - if it was successful you'll see:
+     "Executed SQL statement to set up test user account successfully."
+6. Run the app to verify that everything is set up correctly:
+   - at root level: `npm start`
 
 Running the App (using source code + Docker)
 --------------------------------------------
