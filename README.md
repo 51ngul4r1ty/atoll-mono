@@ -85,6 +85,9 @@ Running the App (using source code)
      "Executed SQL statement to set up test user account successfully."
 7. Run the app to verify that everything is set up correctly:
    - at root level: `npm start`
+   - console output will have something like
+     `App is running: http://localhost:8500` at the start
+     so you know what URL to use in the browser. 
 
 Running the App (using source code + Docker)
 --------------------------------------------
