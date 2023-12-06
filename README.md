@@ -45,8 +45,9 @@ Running the App (using source code)
 -----------------------------------
 
 1. At root level: `npm ci`
-2. Setting up the Database: `npm run setup-database`
-3. Starting the app: `npm start`
+2. At root level: `npm run build-all`
+3. Setting up the Database: `npm run setup-database`
+4. Starting the app: `npm start`
 
 Running the App (using source code + Docker)
 --------------------------------------------
