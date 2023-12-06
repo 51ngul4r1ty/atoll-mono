@@ -48,7 +48,9 @@ Running the App (using source code)
    - at root level: `npm ci`
 2. Build the app:
    - at root level: `npm run build-all`
-3. Set up PostgreSQL:
+3. Set up PostgreSQL (you can use these steps or do it the way `setup.sql`
+   specifies - one inconsistency is "superuser" so it appears that it isn't
+   actually needed and either "y" or "n" will do):
    - `sudo -u postgres psql`
    - `createuser --interactive`
      - superuser: "n"
@@ -56,7 +58,8 @@ Running the App (using source code)
      - allow to create new roles: "y"
    - `\du` to see the user created
    - `ALTER USER atoll PASSWORD '{pwd}'` (pick a password- you'll use this
-     later as well)
+     later as well - `setup.sql` specifies `lim3atoll` but it is recommended
+     that you change this for security reasons!)
    - `exit` (`\q` should work too)
    - `sudo service postgresql restart`
    - `sudo -u postgres createdb atoll`
@@ -65,7 +68,9 @@ Running the App (using source code)
    - `ALTER DATABASE atoll OWNER TO atoll;`
    - `\p` to see that the command was executed (it will repeat the line above)
    - `\q` to quit
-4. Set up environment variables:
+4. Follow the incomplete steps in `setup.sql` (up to, but not including, the
+   "RUN THE APP" step)
+5. Set up environment variables:
    - set ATOLL_DATABASE_URL to the database connection string
      (it should look something like this replacing "{pwd}" with
       atoll user password: `postgres://atoll:{pwd}@localhost:5432/atoll`)
@@ -73,19 +78,16 @@ Running the App (using source code)
    - set ATOLL_AUTH_KEY to something unique for security reasons
      (come up with an obscure value that doesn't follow a typical pattern-
       you'll lever have to look this up so it can anything at all).
-5. Run the app to create the database structure:
+6. Run the app to create the database structure:
    - `npm start`
    - watch the output
    - if it was successful you'll see:
      "Database & tables created!"
    - kill the app.
-6. Finish setting up the database:
+7. Setting up atoll user in database:
    - at root level: `npm run setup-database`
    - if it was successful you'll see:
      "Executed SQL statement to set up test user account successfully."
-7. Set up Postgres extension needed:
-   - use pgAdmin4 (or psql CLI) and execute this command
-     `CREATE EXTENSION "uuid-ossp";` in `atoll` database.
 8. Run the app to verify that everything is set up correctly:
    - at root level: `npm start`
    - console output will have something like
