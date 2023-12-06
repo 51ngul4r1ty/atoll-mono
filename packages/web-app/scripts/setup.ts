@@ -14,12 +14,21 @@ if (!dbConfig) {
     console.log("Database configuration retrieved successfully.");
 }
 
+let dialectOptions: any = {};
+
+if (dbConfig.useSsl) {
+    dialectOptions.ssl = {
+        require: dbConfig.useSsl,
+        rejectUnauthorized: false
+    }
+} else {
+    dialectOptions.ssl = false;
+}
+
 const buildOptions = () /*: Options*/ => ({
     host: dbConfig.host,
     dialect: "postgres",
-    dialectOptions: {
-        ssl: dbConfig.useSsl
-    },
+    dialectOptions,
     pool: {
         max: 10,
         min: 0,
