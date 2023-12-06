@@ -88,11 +88,15 @@ Running the App (using source code)
    - at root level: `npm run setup-database`
    - if it was successful you'll see:
      "Executed SQL statement to set up test user account successfully."
-8. Run the app to verify that everything is set up correctly:
+8. Set up sample data:
+   - use pgAdmin or psql to execute the script `data.sql`
+9. Run the app to verify that everything is set up correctly:
    - at root level: `npm start`
    - console output will have something like
      `App is running: http://localhost:8500` at the start
-     so you know what URL to use in the browser. 
+     so you know what URL to use in the browser.
+   - the sample script created a user with login `test` and password `atoll`, so
+     you should be able to use those credentials to login
 
 Running the App (using source code + Docker)
 --------------------------------------------
