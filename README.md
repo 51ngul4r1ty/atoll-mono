@@ -83,7 +83,10 @@ Running the App (using source code)
    - at root level: `npm run setup-database`
    - if it was successful you'll see:
      "Executed SQL statement to set up test user account successfully."
-7. Run the app to verify that everything is set up correctly:
+7. Set up Postgres extension needed:
+   - use pgAdmin4 (or psql CLI) and execute this command
+     `CREATE EXTENSION "uuid-ossp";` in `atoll` database.
+8. Run the app to verify that everything is set up correctly:
    - at root level: `npm start`
    - console output will have something like
      `App is running: http://localhost:8500` at the start
