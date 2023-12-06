@@ -49,9 +49,13 @@ Running the App (using source code)
 2. Build the app:
    - at root level: `npm run build-all`
 3. Set up environment variables:
-   - set ATOLL_DATABASE_URL to the database connection string.
+   - set ATOLL_DATABASE_URL to the database connection string
+     (it should look something like this replacing "{pwd}" with
+      atoll user password: `postgres://atoll:{pwd}@localhost:5432/atoll`)
    - set ATOLL_DATABASE_USE_SSL to "true".
-   - set ATOLL_AUTH_KEY to something unique for security reasons.
+   - set ATOLL_AUTH_KEY to something unique for security reasons
+     (come up with an obscure value that doesn't follow a typical pattern-
+      you'll lever have to look this up so it can anything at all).
 4. Run the app to create the database structure:
    - `npm start`
    - watch the output
