@@ -6,7 +6,9 @@ const cryptoLib = require("crypto");
 const sharedLib = require("@atoll/shared");
 
 const { Sequelize } = sequelizeLib;
-const dbConfig = sharedLib.getDbConfig();
+
+const verbose = true;
+const dbConfig = sharedLib.getDbConfig(verbose);
 
 if (!dbConfig) {
     console.error("Unable to retrieve database configuration - set ATOLL_DATABASE_URL for local development");
@@ -14,12 +16,21 @@ if (!dbConfig) {
     console.log("Database configuration retrieved successfully.");
 }
 
+let dialectOptions: any = {};
+
+if (dbConfig.useSsl) {
+    dialectOptions.ssl = {
+        require: dbConfig.useSsl,
+        rejectUnauthorized: false
+    }
+} else {
+    dialectOptions.ssl = false;
+}
+
 const buildOptions = () /*: Options*/ => ({
     host: dbConfig.host,
     dialect: "postgres",
-    dialectOptions: {
-        ssl: dbConfig.useSsl
-    },
+    dialectOptions,
     pool: {
         max: 10,
         min: 0,
@@ -88,7 +99,7 @@ const sql = `
 `;
 
 console.log(
-    `Executing query to create new user.  You should see a successful message below- if you don't then something has gone wrong.`
+    `Executing query to create new test user.  You should see a successful message below- if you don't then something has gone wrong.`
 );
 
 const result = sequelize
