@@ -52,3 +52,30 @@ worked on.  The workflow in and out of the blocked state can follow a few paths:
 1. Not Started --> Blocked --> In Progress
 2. Not Started --> Blocked --> Not Started
 3. In Progress --> Blocked --> In Progress
+
+
+Estimates
+---------
+
+There are a few fields that are involved and this can be confusing:
+- `points`
+- `estimate`
+- `storyEstimate`
+- `unallocatedPoints`
+
+**Estimate**
+
+The "Backlog Item" entity represents a Product Backlog Item (PBI).  For a PBI
+the `estimate` field is the total story point estimate for the
+
+See `Splitting vs Continuing a Story` in [./DATA_MODEL.md](./DATA_MODEL.md) for
+information on splitting vs continuing stories.
+
+Also see `Continuing Stories` in [CONTINUING_STORIES.md](../requirements/CONTINUING_STORIES.md)
+
+Continuing stories (through a concept known as "backlog item parts") will
+most likely result in changing estimates.
+
+**Points**
+
+In Scrum backlog items have estimates in "story points".   
