@@ -4,11 +4,7 @@ const fsExtra = require("fs-extra");
 
 var inputPath = path.resolve("./package.json");
 var outputPath = path.resolve("./build/deploy-package.json");
-var textByLine = fs
-    .readFileSync(inputPath)
-    .toString()
-    .replace(/\r/g, "")
-    .split("\n");
+var textByLine = fs.readFileSync(inputPath).toString().replace(/\r/g, "").split("\n");
 var newLines = [];
 
 const INDENT_SPACING = 2;
@@ -63,11 +59,17 @@ function buildDeployPackage() {
 
     const allText = newLines.join("\r\n");
 
-    fs.writeFileSync(outputPath, allText, (err) => {
-        if (err) {
+    try {
+        fs.writeFileSync(outputPath, allText);
+        console.log(`  ("${outputPath}" file built)`);
+        console.log();
+    } catch (err) {
+        if (err && err.message) {
+            console.error(`${err.message} occured writing ./build/deploy-package.json`);
+        } else {
             console.error(`${err} occured writing ./build/deploy-package.json`);
         }
-    });
+    }
 }
 
 function createDeployLaunchJson(deployFolder) {
