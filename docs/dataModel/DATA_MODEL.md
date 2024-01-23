@@ -4,6 +4,15 @@ General
 * Handling version of all entities (preserve all old versions).
 * Support undo and redo.
 
+> NOTE #1: If you're looking for the data model implementation in code, you can
+> look in the `web-app` package folder in this monorepo under
+> `srv/server/dataaccess/models`.
+
+> NOTE #2: If you're looking for the data model in diagram form, you can find
+> that in the `web-app` package folder in this monorepo under
+> `src/database/erd` - [https://dbdiagram.io/](https://dbdiagram.io/) can be
+> used to render the diagram from the "source" files in this folder.
+
 Versioning
 ----------
 
@@ -66,7 +75,7 @@ Although both of these are referred to as splitting a story a distinction needs 
 It is possible that a story is not be completed in a sprint.  In that case it will need to span multiple sprints so that it can be
 continued.  Also, if the team recognizes that a story can be done in multiple parts then it can be split.  These are not the same
 thing and should be treated differently:
-- any part of a story (i.e. a task) can be allocated to a sprint individually (2+ sprints containing same story)
+- any part of a story (i.e. a task) can be allocated to a sprint individually (2+ sprints containing same story) - although this will be achieved by associating individual tasks with "backlog item parts".
 - multiple stories can relate to an originating story (there's an inherent hierachy)
 
 For example,
@@ -90,7 +99,9 @@ For example,
   - The stories will be allocated new numbers "s-3", "s-4", "s-5" etc.
   - The user is given 2 options when doing this:
     1. Remove the original story to avoid confusion because none of the individual
-       stories represent the full work defined in the original.
+       stories represent the full work defined in the original.  The original
+       story may have been part of an epic and if so all of the split stories
+       would also be part of the same epic.
     2. Convert the original story to an epic and it will then contain the stories as
        its children.  This isn't typically how it should be done: epics should be planned
        first (intentionally) and they should be broken down into stories after that.
