@@ -342,7 +342,7 @@ export const backlogItemPutHandler = async (req: Request, res: Response) => {
     try {
         transaction = await sequelize.transaction({ isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE });
         const backlogItem = await BacklogItemDataModel.findOne({
-            where: { id: bodyItemId },
+            where: { id: queryParamItemId },
             transaction
         });
         if (!backlogItem) {
@@ -352,11 +352,36 @@ export const backlogItemPutHandler = async (req: Request, res: Response) => {
             }
             respondWithNotFound(res, `Unable to find backlogitem to update with ID ${req.body.id}`);
         } else {
+            const requestApiBacklogItem = req.body as ApiBacklogItem;
             const originalApiBacklogItem = mapDbToApiBacklogItem(backlogItem);
+            const estimateDelta = (requestApiBacklogItem.estimate || 0) - (originalApiBacklogItem.estimate || 0);
             const updateBacklogItemResult = getUpdatedBacklogItemWhenStatusChanges(originalApiBacklogItem, req.body);
-            const newDataItem = updateBacklogItemResult.changed ? backlogItem : updateBacklogItemResult.backlogItem;
+            const newDataItem = updateBacklogItemResult.changed ? originalApiBacklogItem : updateBacklogItemResult.backlogItem;
+            if (estimateDelta !== 0) {
+                const backlogItemParts: BacklogItemPartDataModel[] = await BacklogItemPartDataModel.findAll({
+                    where: { backlogitemId: queryParamItemId },
+                    transaction
+                });
+                const backlogItemPartIds = backlogItemParts.map((backlogItemPart) => backlogItemPart.id);
+                if (backlogItemPartIds.length === 0) {
+                    throw new Error(`Unable to update backlog item "${queryParamItemId}" estimate, no matching parts found`);
+                } else if (backlogItemPartIds.length > 1) {
+                    throw new Error(
+                        `Unable to update backlog item "${queryParamItemId}" estimate, ${backlogItemPartIds.length} matching parts found`
+                    );
+                } else {
+                    const backlogItemPart = backlogItemParts[0];
+                    const newPartDataItem = mapDbToApiBacklogItemPart(backlogItemPart);
+                    newPartDataItem.points = requestApiBacklogItem.estimate;
+                    await backlogItemPart.update(newPartDataItem, { transaction });
+                }
+                newDataItem.unallocatedPoints = requestApiBacklogItem.estimate;
+            }
             await backlogItem.update(newDataItem, { transaction });
-            await handleResponseAndCommit(originalApiBacklogItem, backlogItem, res, transaction);
+            const responseBacklogItem = mapApiItemToBacklogItem(backlogItem);
+            responseBacklogItem.storyEstimate = responseBacklogItem.estimate; // just updated the story estimate
+            responseBacklogItem.unallocatedPoints = responseBacklogItem.estimate; // all are in backlog
+            await handleResponseAndCommit(originalApiBacklogItem, responseBacklogItem, res, transaction);
         }
     } catch (err) {
         const errLogContext = logger.warn(`handling error "${err}"`, [functionTag], logContext);

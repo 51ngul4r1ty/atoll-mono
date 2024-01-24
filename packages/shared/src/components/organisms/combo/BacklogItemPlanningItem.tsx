@@ -62,6 +62,7 @@ const InternalBacklogItemPlanningItem: React.FC<BacklogItemPlanningItemProps> = 
             css.backlogItemUserStoryFormRow,
             props.suppressTopPadding ? null : css.embeddedBacklogItemUserStoryFormRow
         );
+        const allowEstimateEdit = !props.totalParts || props.totalParts === 1;
         return (
             <>
                 <SimpleDivider key={`divider-unsaved-form-${props.instanceId}`} />
@@ -71,6 +72,7 @@ const InternalBacklogItemPlanningItem: React.FC<BacklogItemPlanningItemProps> = 
                     acceptedAt={props.acceptedAt}
                     className={classNameToUse}
                     editing
+                    allowEstimateEdit={allowEstimateEdit}
                     estimate={props.estimate}
                     externalId={props.externalId}
                     finishedAt={props.finishedAt}

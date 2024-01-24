@@ -28,6 +28,7 @@ export type BacklogItemDetailFormStateProps = BacklogItemInstanceEditableFields 
     acceptanceCriteria: string;
     acceptedAt: Date | null;
     estimate: number | null;
+    allowEstimateEdit?: boolean;
     externalId: string;
     finishedAt: Date | null;
     friendlyId: string;
@@ -159,7 +160,7 @@ export class BacklogItemDetailForm extends Component<BacklogItemDetailFormProps>
                 labelText="Estimate"
                 size={3}
                 inputValue={estimateValue}
-                disabled={this.props.saving}
+                disabled={this.props.saving || !this.props.allowEstimateEdit}
                 onChange={(value) => {
                     const valueToUse = value.trim();
                     const estimate = valueToUse ? parseFloat(valueToUse) : null;

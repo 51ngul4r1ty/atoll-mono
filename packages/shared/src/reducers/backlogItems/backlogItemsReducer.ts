@@ -260,6 +260,9 @@ export const backlogItemsReducer = (
                 const changed = updateItemById(draft, backlogItemId, (item) => {
                     item.editing = false;
                     item.saving = false;
+                    item.estimate = actionTyped.payload.response.data.item.estimate;
+                    item.storyEstimate = actionTyped.payload.response.data.item.storyEstimate;
+                    item.unallocatedPoints = actionTyped.payload.response.data.item.unallocatedPoints;
                 });
                 if (changed) {
                     rebuildAllItems(draft);
