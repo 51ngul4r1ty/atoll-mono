@@ -26,6 +26,7 @@ import {
 
 export interface BacklogItemViewStateProps {
     acceptanceCriteria: string;
+    notes: string;
     acceptedAt: Date | null;
     backlogItemDisplayId: string;
     editMode: EditMode;
@@ -84,6 +85,7 @@ export const BacklogItemView: React.FC<BacklogItemViewProps> = (props) => {
                 storyPhrase={props.storyPhrase}
                 reasonPhrase={props.reasonPhrase}
                 acceptanceCriteria={props.acceptanceCriteria}
+                notes={props.notes}
                 startedAt={props.startedAt}
                 finishedAt={props.finishedAt}
                 acceptedAt={props.acceptedAt}

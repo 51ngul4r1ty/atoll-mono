@@ -69,6 +69,9 @@ Fields for `backlogitem`
 * `acceptanceCriteria` - Markdown data that contains the acceptance criteria for
   a story or the repo steps of an issue.  This is an optional field that will be
   populated with `null` if not provided.
+* `notes` - Markdown data that contains the notes for a story or the repo steps
+  of an issue.  This is an optional field that will be populated with `null` if
+  not provided.
 * `rolePhrase` - For example, `As a devops engineer` or
   `As a developer using VS Code`.
 * `storyPhrase` - For example, `I can deploy to Heroku` or `I can login`.

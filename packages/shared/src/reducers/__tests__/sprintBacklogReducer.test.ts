@@ -225,6 +225,7 @@ describe("Sprint Backlog Reducer", () => {
             const backlogItem: BacklogItemInSprint = {
                 id: backlogItemId,
                 acceptanceCriteria: null,
+                notes: null,
                 acceptedAt: null,
                 createdAt: new Date(2020, 0, 1),
                 estimate: null,

@@ -3,6 +3,7 @@ import { ApiBacklogItem, ApiBacklogItemPart } from "../types/apiModelTypes";
 
 export const cloneApiBacklogItem = (apiItem: ApiBacklogItem): ApiBacklogItem => ({
     acceptanceCriteria: apiItem.acceptanceCriteria,
+    notes: apiItem.notes,
     acceptedAt: apiItem.acceptedAt,
     createdAt: apiItem.createdAt,
     estimate: apiItem.estimate,

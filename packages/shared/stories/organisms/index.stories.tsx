@@ -238,6 +238,7 @@ storiesOf("Organisms/Panels/SprintPlanningPanel", module).add("SprintPlanningPan
                                 externalId: "gh-123",
                                 finishedAt: null,
                                 friendlyId: "",
+                                notes: "",
                                 partIndex: number("partIndex", 1),
                                 partPercentage: 0.5,
                                 projectId: "",

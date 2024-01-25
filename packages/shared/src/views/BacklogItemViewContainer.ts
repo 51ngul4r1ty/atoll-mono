@@ -29,6 +29,7 @@ export interface BacklogItemViewContainerOwnProps {
 const mapStateToProps = (state: StateTree, ownProps: BacklogItemViewContainerOwnProps): BacklogItemViewStateProps => {
     const result: BacklogItemViewStateProps = {
         acceptanceCriteria: backlogItemSelectors.getCurrentBacklogItemAcceptanceCriteria(state),
+        notes: backlogItemSelectors.getCurrentBacklogItemNotes(state),
         acceptedAt: backlogItemSelectors.getCurrentBacklogItemAcceptedAt(state),
         backlogItemDisplayId: ownProps.match.params.backlogItemDisplayId,
         editMode: appSelectors.getAppEditMode(state),

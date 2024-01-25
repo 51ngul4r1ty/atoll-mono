@@ -83,6 +83,7 @@ export type ApiBacklogItem = StandardItem &
 
         /* new fields */
         acceptanceCriteria: string | null;
+        notes: string | null;
         estimate: number | null;
         storyEstimate: number | null;
         externalId: string | null;
@@ -115,6 +116,7 @@ export type ApiBacklogItemWithParts = ApiBacklogItem & {
 
     /* from ApiBacklogItem */
     acceptanceCriteria: string | null;
+    notes: string | null;
     estimate: number | null;
     externalId: string | null;
     friendlyId: string | null;

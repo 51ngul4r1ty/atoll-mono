@@ -118,3 +118,6 @@ rename constraint "backlogitemrank_nextbacklogitemId_fkey" TO "productbacklogite
 
 alter table productbacklogitem
 rename constraint "backlogitemrank_pkey" TO "productbacklogitem_pkey";
+
+-- v0.65.0
+alter table backlogitem add column "notes" text;
