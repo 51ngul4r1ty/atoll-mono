@@ -378,10 +378,10 @@ export const backlogItemPutHandler = async (req: Request, res: Response) => {
                 newDataItem.unallocatedPoints = requestApiBacklogItem.estimate;
             }
             await backlogItem.update(newDataItem, { transaction });
-            const responseBacklogItem = mapApiItemToBacklogItem(backlogItem);
-            responseBacklogItem.storyEstimate = responseBacklogItem.estimate; // just updated the story estimate
-            responseBacklogItem.unallocatedPoints = responseBacklogItem.estimate; // all are in backlog
-            await handleResponseAndCommit(originalApiBacklogItem, responseBacklogItem, res, transaction);
+            const responseApiBacklogItem = mapDbToApiBacklogItem(backlogItem);
+            responseApiBacklogItem.storyEstimate = responseApiBacklogItem.estimate; // just updated the story estimate
+            responseApiBacklogItem.unallocatedPoints = responseApiBacklogItem.estimate; // all are in backlog
+            await handleResponseAndCommit(originalApiBacklogItem, responseApiBacklogItem, res, transaction);
         }
     } catch (err) {
         const errLogContext = logger.warn(`handling error "${err}"`, [functionTag], logContext);
@@ -556,15 +556,15 @@ export const backlogItemJoinUnallocatedPartsPostHandler = async (req: Request, r
 
 const handleResponseAndCommit = async (
     originalApiBacklogItem: ApiBacklogItem,
-    backlogItem: BacklogItemDataModel,
+    apiBacklogItem: ApiBacklogItem,
     res: Response,
     transaction: Transaction
 ): Promise<void> => {
     let sprintStats: ApiSprintStats;
-    const originalBacklogItem = mapApiItemToBacklogItem(originalApiBacklogItem);
+    // const originalBacklogItem = mapApiItemToBacklogItem(originalApiBacklogItem);
     if (transaction) {
         await transaction.commit();
         transaction = null;
     }
-    respondWithItem(res, backlogItem, originalBacklogItem, sprintStats ? { sprintStats } : undefined);
+    respondWithItem(res, apiBacklogItem, originalApiBacklogItem, sprintStats ? { sprintStats } : undefined);
 };
