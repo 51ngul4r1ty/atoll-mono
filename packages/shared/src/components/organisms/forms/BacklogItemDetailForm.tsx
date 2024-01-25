@@ -26,6 +26,7 @@ export type BacklogItemDetailFormStateProps = BacklogItemInstanceEditableFields 
     storyPhrase: string;
     reasonPhrase: string | null;
     acceptanceCriteria: string;
+    notes: string;
     acceptedAt: Date | null;
     estimate: number | null;
     allowEstimateEdit?: boolean;
@@ -112,6 +113,7 @@ export class BacklogItemDetailForm extends Component<BacklogItemDetailFormProps>
             reasonPhrase: this.props.reasonPhrase,
             type: this.props.type,
             acceptanceCriteria: this.props.acceptanceCriteria,
+            notes: this.props.notes,
             startedAt: this.props.startedAt,
             finishedAt: this.props.finishedAt,
             acceptedAt: this.props.acceptedAt,

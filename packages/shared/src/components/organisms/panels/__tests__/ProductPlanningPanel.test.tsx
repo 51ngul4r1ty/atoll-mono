@@ -99,6 +99,7 @@ const buildCommonItem = (
     saved: boolean = true
 ): BacklogItemWithSource => ({
     acceptanceCriteria: "",
+    notes: "",
     createdAt: timeNow(),
     estimate,
     externalId: buildExternalId(source, itemNumber),

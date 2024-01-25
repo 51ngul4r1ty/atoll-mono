@@ -19,6 +19,7 @@ export class BacklogItemDataModel extends Model {
     public type!: string;
     public status!: string | null;
     public acceptanceCriteria!: string | null;
+    public notes!: string | null;
     public startedAt!: Date | null;
     public finishedAt!: Date | null;
     public acceptedAt!: Date | null;
@@ -79,6 +80,10 @@ BacklogItemDataModel.init(
             allowNull: true
         },
         acceptanceCriteria: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        notes: {
             type: DataTypes.TEXT,
             allowNull: true
         },

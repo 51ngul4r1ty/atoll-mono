@@ -116,6 +116,7 @@ export const mapDbSprintBacklogWithNestedToApiBacklogItemInSprint = (dbItem: any
     const backlogitem = backlogitempart?.backlogitem?.dataValues;
     const result: ApiBacklogItemInSprint = {
         acceptanceCriteria: backlogitem.acceptanceCriteria,
+        notes: backlogitem.notes,
         acceptedAt: backlogitem.acceptedAt,
         createdAt: backlogitem.createdAt,
         displayindex: sprintBacklogWithItems.displayindex,
@@ -163,6 +164,7 @@ export const mapDbBacklogPartsWithSprintItemsToApiBacklogItemInSprint = (dbItem:
     const sprintbacklogitem = partsWithSprintItems?.sprintbacklogitems?.[0]?.dataValues;
     const result: ApiBacklogItemInSprint = {
         acceptanceCriteria: backlogitem.acceptanceCriteria,
+        notes: backlogitem.notes,
         acceptedAt: backlogitem.acceptedAt,
         createdAt: backlogitem.createdAt,
         displayindex: sprintbacklogitem.displayindex,

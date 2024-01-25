@@ -10,6 +10,7 @@ Table backlogitem as BI {
     "projectId" varchar(32)
     status char(1)
     "acceptanceCriteria" text
+    "notes" text
     "startedAt" timestamp
     "finishedAt" timestamp
     "acceptedAt" timestamp

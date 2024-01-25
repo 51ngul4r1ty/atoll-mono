@@ -5,6 +5,7 @@ import type { SprintModel } from "../types/sprintTypes";
 
 export const convertToBacklogItemModel = (backlogItem: BacklogItem): BacklogItemModel => ({
     acceptanceCriteria: backlogItem.acceptanceCriteria,
+    notes: backlogItem.notes,
     acceptedAt: backlogItem.acceptedAt,
     createdAt: backlogItem.createdAt,
     estimate: backlogItem.estimate,

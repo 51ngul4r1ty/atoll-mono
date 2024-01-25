@@ -9,6 +9,7 @@ import { mapApiStatusToBacklogItem, mapBacklogItemStatusToApi } from "./statusMa
 
 export const mapApiItemToBacklogItem = (apiItem: ApiBacklogItem): BacklogItem => ({
     acceptanceCriteria: apiItem.acceptanceCriteria,
+    notes: apiItem.notes,
     acceptedAt: isoDateStringToDate(apiItem.acceptedAt),
     createdAt: isoDateStringToDate(apiItem.createdAt),
     estimate: apiItem.estimate,
@@ -56,6 +57,7 @@ export const mapApiItemToBacklogItemInSprint = (apiItem: ApiBacklogItemInSprint)
 
 export const mapBacklogItemToApiItem = (item: BacklogItem): ApiBacklogItem => ({
     acceptanceCriteria: item.acceptanceCriteria,
+    notes: item.notes,
     createdAt: dateToIsoDateString(item.createdAt),
     acceptedAt: dateToIsoDateString(item.acceptedAt),
     estimate: item.estimate,

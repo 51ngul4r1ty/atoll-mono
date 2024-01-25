@@ -164,6 +164,11 @@ export const getCurrentBacklogItemAcceptanceCriteria = createSelector(
     (backlogItems: BacklogItemsState): string => backlogItems.currentItem?.acceptanceCriteria
 );
 
+export const getCurrentBacklogItemNotes = createSelector(
+    [backlogItems],
+    (backlogItems: BacklogItemsState): string => backlogItems.currentItem?.notes
+);
+
 export const getCurrentBacklogItemStartedAt = createSelector(
     [backlogItems],
     (backlogItems: BacklogItemsState): Date | null => backlogItems.currentItem?.startedAt

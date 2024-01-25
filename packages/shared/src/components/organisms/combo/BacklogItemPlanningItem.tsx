@@ -69,6 +69,7 @@ const InternalBacklogItemPlanningItem: React.FC<BacklogItemPlanningItemProps> = 
                 <BacklogItemDetailForm
                     key={`unsaved-form-${props.instanceId}`}
                     acceptanceCriteria={props.acceptanceCriteria}
+                    notes={props.notes}
                     acceptedAt={props.acceptedAt}
                     className={classNameToUse}
                     editing

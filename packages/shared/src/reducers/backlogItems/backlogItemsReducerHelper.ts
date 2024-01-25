@@ -49,6 +49,7 @@ export const addSourceToPushedItem = (item: Partial<PushBacklogItemModel>, sourc
 
 export const mapPushedToBacklogItem = (pushedItem: Partial<PushBacklogItemModel>): BacklogItemWithSource => ({
     acceptanceCriteria: pushedItem.acceptanceCriteria,
+    notes: pushedItem.notes,
     acceptedAt: pushedItem.acceptedAt,
     createdAt: pushedItem.createdAt,
     estimate: pushedItem.estimate,
@@ -161,6 +162,7 @@ export const updateItemFieldsInAllItems = (draft: Draft<BacklogItemsState>, back
 
 export const updateBacklogItemFields = (backlogItem: BacklogItem, payload: BacklogItemEditableFields) => {
     backlogItem.acceptanceCriteria = payload.acceptanceCriteria;
+    backlogItem.notes = payload.notes;
     backlogItem.estimate = payload.estimate;
     backlogItem.externalId = payload.externalId;
     backlogItem.friendlyId = payload.friendlyId;

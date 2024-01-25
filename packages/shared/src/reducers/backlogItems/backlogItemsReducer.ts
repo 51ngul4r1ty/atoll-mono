@@ -514,6 +514,7 @@ export const backlogItemsReducer = (
                 }));
                 draft.currentItem = {
                     acceptanceCriteria: backlogItem.acceptanceCriteria,
+                    notes: backlogItem.notes,
                     createdAt: isoDateStringToDate(backlogItem.createdAt),
                     editing: false,
                     estimate: backlogItem.estimate,
@@ -547,6 +548,7 @@ export const backlogItemsReducer = (
                 draft.currentItem = resetItem;
                 const item: BacklogItemInstanceEditableFields = {
                     acceptanceCriteria: resetItem.acceptanceCriteria,
+                    notes: resetItem.notes,
                     estimate: resetItem.estimate,
                     externalId: resetItem.externalId,
                     friendlyId: resetItem.friendlyId,

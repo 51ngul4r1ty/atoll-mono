@@ -21,6 +21,7 @@ const buildApiBacklogItem = (): ApiBacklogItem => {
         storyPhrase: "I can chill on the couch",
         reasonPhrase: "because automation does my job for me",
         acceptanceCriteria: "* Not real acceptance criteria",
+        notes: "* Not real notes",
         acceptedAt: null, // "2020-12-27T19:00:00Z"
         estimate: 5,
         externalId: "ext-123",

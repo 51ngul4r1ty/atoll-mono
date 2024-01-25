@@ -81,6 +81,7 @@ export const BacklogItemFullDetailForm: React.FC<BacklogItemFullDetailFormProps>
     const placeholderText = props.type === "issue" ? issuePlaceholder : storyPlaceholder;
     const prevData: BacklogItemEditableFields = {
         acceptanceCriteria: props.acceptanceCriteria,
+        notes: props.notes,
         estimate: props.estimate,
         externalId: props.externalId,
         friendlyId: props.friendlyId,
@@ -184,6 +185,19 @@ export const BacklogItemFullDetailForm: React.FC<BacklogItemFullDetailFormProps>
             }}
         />
     );
+    const notesInput = (
+        <StandardTextArea
+            inputId="notesId"
+            labelText="Notes"
+            readOnly={isReadOnly}
+            renderMarkdown={isReadOnly}
+            inputValue={props.notes}
+            rows={3}
+            onChange={(value) => {
+                handleDataUpdate({ ...prevData, notes: value });
+            }}
+        />
+    );
     const dateStartedInput = (
         <DateTimeInput
             inputId="startedAtId"
@@ -273,6 +287,7 @@ export const BacklogItemFullDetailForm: React.FC<BacklogItemFullDetailFormProps>
                 {dateReleasedInput}
             </div>
             <div className={css.formRow}>{acceptanceCriteriaInput}</div>
+            <div className={css.formRow}>{notesInput}</div>
             {actionButtonPanelElts}
         </>
     );

@@ -8,6 +8,7 @@ export type BacklogItemType = "story" | "issue";
 
 export interface BacklogItemModel extends BaseModelItem {
     acceptanceCriteria: string | null;
+    notes: string | null;
     acceptedAt: Date | null;
     createdAt: Date;
     estimate: number | null;

@@ -13,6 +13,7 @@ export interface BacklogItemEditableFields extends StoryPhrases {
 
     /* new in this interface */
     acceptanceCriteria: string;
+    notes: string;
     acceptedAt: Date | null;
     estimate: number | null;
     externalId: string;
