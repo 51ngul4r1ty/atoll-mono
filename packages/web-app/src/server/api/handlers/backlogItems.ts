@@ -561,7 +561,6 @@ const handleResponseAndCommit = async (
     transaction: Transaction
 ): Promise<void> => {
     let sprintStats: ApiSprintStats;
-    // const originalBacklogItem = mapApiItemToBacklogItem(originalApiBacklogItem);
     if (transaction) {
         await transaction.commit();
         transaction = null;
