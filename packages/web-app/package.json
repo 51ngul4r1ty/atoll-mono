@@ -1,6 +1,6 @@
 {
   "name": "@atoll/web-app",
-  "version": "0.64.0",
+  "version": "0.64.1",
   "description": "Atoll web app",
   "scripts": {
     "build": "npm run build-only && npm run build-deploy",
