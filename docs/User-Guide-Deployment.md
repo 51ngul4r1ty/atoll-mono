@@ -4,6 +4,10 @@ How to Install Atoll
 Heroku
 ------
 
+Historically, Atoll used to be deployed on a free Heroku instance.  However,
+the free Postgres tier (10000 row limit) was removed and it is no longer used.
+That said, you can still deploy Atoll to Heroku using these same instructions.
+
 * Set up Heroku CLI
   - replace `{app-name}` with your heroku app name in this URL:  
     https://dashboard.heroku.com/apps/{app-name}/deploy/heroku-git

@@ -2,7 +2,7 @@ Overview
 ========
 
 This document contains only test related code standards, please refer to
-[CODE_STANDARDS.md](CODE_STANDARDS.md) for more code standards.
+[Code Standards](Code-Standards.md) for more code standards.
 
 Reasoning
 =========

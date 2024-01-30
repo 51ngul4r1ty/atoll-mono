@@ -2,10 +2,10 @@ Overview
 ========
 
 This document contains only naming conventions, please refer to
-[CODE_STANDARDS.md](CODE_STANDARDS.md) for more code standards.
+[Code Standards](Code-Standards.md) for more code standards.
 
 Also, this document is intended specifically for code, so please take a look at
-[OTHER_STANDARDS_NAMING.md](OTHER_STANDARDS_NAMING.md) for other naming
+[Naming Standards](Other-Standards-Naming.md) for other naming
 conventions (for example, npm script names).
 
 General Naming

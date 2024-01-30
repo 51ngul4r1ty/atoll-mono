@@ -4,8 +4,12 @@ Overview
 This project was set up using a combination of Manuel Bieh's template, Create
 React App and other references mentioned in this doc.
 
-The [HISTORY_SETUP.md](HISTORY_SETUP.md) document contains further detailed
+The [History Setup](History-Setup.md) document contains further detailed
 steps performed.
+
+The [Log](Log.md) document contains miscellaneous information that would
+clutter this file, but may still have some relevance, so you can also look
+there for additional historical info.
 
 Chronological History
 =====================

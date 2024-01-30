@@ -68,10 +68,10 @@ There are a few fields that are involved and this can be confusing:
 The "Backlog Item" entity represents a Product Backlog Item (PBI).  For a PBI
 the `estimate` field is the total story point estimate for the
 
-See `Splitting vs Continuing a Story` in [./DATA_MODEL.md](./DATA_MODEL.md) for
+See `Splitting vs Continuing a Story` in [Data Model](./Data-Model.md) for
 information on splitting vs continuing stories.
 
-Also see `Continuing Stories` in [CONTINUING_STORIES.md](../requirements/CONTINUING_STORIES.md)
+Also see `Continuing Stories` in [Continuing Stories](../requirements/Continuing-Stories.md)
 
 Continuing stories (through a concept known as "backlog item parts") will
 most likely result in changing estimates.

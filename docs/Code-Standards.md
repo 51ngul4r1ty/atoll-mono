@@ -2,14 +2,14 @@ Overview
 ========
 
 This document contains everything except:
-1) naming conventions, please refer to [CODE_STANDARDS_NAMING.md](
-    CODE_STANDARDS_NAMING.md) for these details.
-2) test code standards, please refer to [CODE_STANDARDS_TESTS.md](
-    CODE_STANDARDS_TESTS.md) for these details.
-3) specialized patterns, please refer to [CODE_STANDARDS_PATTERNS.md](
-    CODE_STANDARDS_PATTERNS.md) for these details.
-4) markdown-specific guidelines can be found in [CODE_STANDARDS_MARKDOWN.md](
-    CODE_STANDARDS_MARKDOWN.md).
+1) naming conventions, please refer to [Naming Standards](
+    Code-Standards-Naming.md) for these details.
+2) test code standards, please refer to [Test Code Standards](
+    Code-Standards-Tests.md) for these details.
+3) specialized patterns, please refer to [Patterns](
+    Code-Standards-Patterns.md) for these details.
+4) markdown-specific guidelines can be found in [Markdown Code Standards](
+    Code-Standards-Markdown.md).
 
 File Purpose Comments
 =====================

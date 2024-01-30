@@ -26,7 +26,7 @@ As soon as the `Uncaught Invariant Violation: Invalid hook call` originating in
 
 **Resolution**
 
-* Stopped using `npm link` and instead used `yalc` (see [TOOLS.md]() for
+* Stopped using `npm link` and instead used `yalc` (see [Tools](./Tools.md) for
    details).
 
 
