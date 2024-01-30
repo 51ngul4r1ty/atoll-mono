@@ -12,8 +12,7 @@ import {
     formatNumber,
     getValidStatuses,
     isValidStatus,
-    logger,
-    mapApiItemToBacklogItem
+    logger
 } from "@atoll/shared";
 
 // data access
