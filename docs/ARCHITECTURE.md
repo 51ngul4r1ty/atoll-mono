@@ -47,7 +47,7 @@ Use of HATEOAS
 The API reponses include links and there's an index resource (`/api/v1/`) that provides named
 links so that a consuming app (or developer) can discover resource links dynamically.
 
-For more information see [ARCHITECTURE_HATEOAS.md](ARCHITECTURE_HATEOAS.md).
+For more information see [HATEOAS](Architecture-HATEOAS.md).
 
 CSS
 ===

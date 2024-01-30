@@ -1,7 +1,7 @@
 Backlog Item Parts
 ==================
 
-See [DATA_MODEL_BACKLOG_ITEMS.md](./DATA_MODEL_BACKLOG_ITEMS.md) for story/issue definition.  This document defines how backlog items
+See [Data Model Backlog Items](./Data-Model-Backlog-Items.md) for story/issue definition.  This document defines how backlog items
 are split.
 
 Overview

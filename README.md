@@ -15,14 +15,14 @@ Getting Started (for Contributors)
 ==================================
 
 Everyone contributing to this repo should read this document before doing
-anything else: [IMPORTANT.md](docs/IMPORTANT.md)
+anything else: [Important](docs/Important.md)
 
 For specialized instructions (to save you time trying to do various things):
-[DEV_HOWTO.md](docs/DEV_HOWTO.md)
+[Dev HowTo](docs/Dev-HowTo.md)
 
 Many code standards and conventions can be picked up from existing patterns in
 the code but it is advisable to use this resource as well:
-[CODE_STANDARDS.md](docs/CODE_STANDARDS.md)
+[Code Standards](docs/Code-Standards.md)
 
 Requirements
 ------------
@@ -129,37 +129,37 @@ Document Index
 End Users
 ---------
 
-[USER_GUIDE.md](docs/USER_GUIDE.md) -
+[User Guide](docs/User-Guide.md) -
   An entrypoint for end users of Atoll.
 
 Contributor Related
 -------------------
 
-[CODE_STANDARDS.md](docs/CODE_STANDARDS.md) -
+[Code Standards](docs/Code-Standards.md) -
   Read this!  
-[CONVENTIONS.md](docs/CONVENTIONS.md) -
+[Conventions](docs/Conventions.md) -
   Important naming conventions information.  
-[ARCHITECTURE.md](docs/ARCHITECTURE.md) -
+[Architecture](docs/Architecture.md) -
   Architecture related info  
-[CODE_ARCHITECTURE.md](docs/CODE_ARCHITECTURE.md) -
+[Code Architecture](docs/Code-Architecture.md) -
   Code-level architecture related info  
-[DEV_HOWTO.md](docs/DEV_HOWTO.md) -
+[Dev HowTo](docs/Dev-HowTo.md) -
   Contains details for how to implement things.  
-[DEPENDENCIES.md](docs/DEPENDENCIES.md) -
+[Dependencies](docs/Dependencies.md) -
   Detailed information about the npm packages used.  
-[SCRIPTS.md](docs/SCRIPTS.md) -
+[Scripts](docs/Scripts.md) -
   Detailed information about the build & npm scripts.  
-[HISTORY.md](docs/HISTORY.md) -
+[History](docs/History.md) -
   The past history of this project.  
-[POLICIES.md](docs/POLICIES.md) -
+[Policies](docs/Policies.md) -
   Github branch policies etc.  
-[GLOSSARY.md](docs/GLOSSARY.md) -
+[Glossary](docs/Glossary.md) -
   Glossary specific to this project.  
-[TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) -
+[Troubleshooting](docs/Troubleshooting.md) -
   This may be useful if you're running into problems.  
-[DATA_MODEL.md](docs/dataModel/DATA_MODEL.md) -
+[Data Model](docs/dataModel/Data-Model.md) -
   Mapping the requirements to the data model.  
-[PROCESS.md](docs/PROCESS.md) -
+[Process](docs/Process.md) -
   The index document for processes that should be followed.
 
 [Github Wiki](https://github.com/51ngul4r1ty/atoll-mono/wiki)
