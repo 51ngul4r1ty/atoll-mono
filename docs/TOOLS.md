@@ -47,7 +47,7 @@ Why It Was Initially Chosen
 ---------------------------
 
 * Initially we were using `npm link` but we ran into a number of problems
-  using it.  See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for more
+  using it.  See [Troubleshooting](./Troubleshooting.md) for more
   information.
 
 Why It Was Deprecated

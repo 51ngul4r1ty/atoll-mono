@@ -2,7 +2,7 @@ Overview
 ========
 
 This is reserved for conventions used outside the code itself, for anything
-related to naming standards see [CODE_STANDARDS.md](/docs/CODE_STANDARDS.md)
+related to naming standards see [Code Standards](/docs/Code-Standards.md)
 
 Branch Naming
 -------------
@@ -34,7 +34,7 @@ UI/UX Design
 ------------
 
 The UI/UX design principles are based on the concept of Atomic Design.
-See [CODE_STANDARDS.md](/docs/CODE_STANDARDS.md) for more info.
+See [Code Standards](/docs/Code-Standards.md) for more info.
 
 Icon Format
 -----------
