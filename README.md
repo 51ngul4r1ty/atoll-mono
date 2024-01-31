@@ -38,6 +38,7 @@ Requirements
      (Windows 10 / Mac OS X)
    `https://computingforgeeks.com/install-postgresql-12-on-ubuntu/`
      (Ubuntu with links to other distros)
+4. VSCE v2.15.0 (for building VSIX file for VS Code extension)
 
 Recommendations
 ---------------
