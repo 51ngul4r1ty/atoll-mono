@@ -13,3 +13,5 @@ vsc-extension-quickstart.md
 **/*.ts
 .DS_Store
 node_modules
+../../**
+../**
