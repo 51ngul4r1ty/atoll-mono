@@ -8,6 +8,7 @@
     "build-pkg:web-app": "npm run build -w packages/web-app",
     "build-pkg:shared": "npm run build -w packages/shared",
     "build-pkg:extension": "npm run build -w packages/vscode-extension",
+    "dist-pkg:extension": "npm run build-vsix -w packages/vscode-extension",
     "check-prereqs-pkg:web-app": "npm run check:prereqs -w packages/web-app",
     "docker-pkg:web-app": "npm run build-pkg:web-app && npm run -w packages/web-app build:docker",
     "clean-node-modules": "npx rimraf node_modules",

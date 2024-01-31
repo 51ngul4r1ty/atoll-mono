@@ -24,6 +24,10 @@ Many code standards and conventions can be picked up from existing patterns in
 the code but it is advisable to use this resource as well:
 [Code Standards](docs/Code-Standards.md)
 
+If you're looking for specific "Getting Started" instructions for any of the
+sub-projects in this monorepo (like the VS Code extension) then look at those
+specific README.md files.
+
 Requirements
 ------------
 
@@ -34,6 +38,7 @@ Requirements
      (Windows 10 / Mac OS X)
    `https://computingforgeeks.com/install-postgresql-12-on-ubuntu/`
      (Ubuntu with links to other distros)
+4. VSCE v2.15.0 (for building VSIX file for VS Code extension)
 
 Recommendations
 ---------------
@@ -111,6 +116,10 @@ Working with the Monorepo
 Adding Dependencies
 -------------------
 
+This monorepo uses npm workspaces.  If you're unfamiliar with using workspaces
+we recommend you read the npm documentation first.  Some tips are provided
+below, but it is best that you understand how they work fully.
+
 Please make sure to add the dependency at the right level.
 
 You have 2 choices:
@@ -122,6 +131,9 @@ You have 2 choices:
   For example, `npm i websocket@1.0.31 -w packages/shared`
 
 In general, if you're not sure, you should pick option 2.
+
+If you wish to refresh packages for a specific workspace you can use something
+like: `npm i -w=packages/vscode-extension`
 
 Document Index
 ==============
