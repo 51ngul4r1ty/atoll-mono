@@ -1,6 +1,10 @@
 {
     "folders": [
         {
+            "name": "(root)",
+            "path": "."
+        },
+        {
             "name": "web-app",
             "path": "packages/web-app"
         },
@@ -9,15 +13,18 @@
             "path": "packages/vscode-extension"
         },
         {
+            "path": "packages/client-sdk"
+        },
+        {
+            "path": "packages/rich-types"
+        },
+        {
             "name": "shared",
             "path": "packages/shared"
         },
         {
             "name": "scripts",
             "path": "packages/scripts"
-        },
-        {
-            "path": "."
         }
     ],
     "settings": {

@@ -4,9 +4,9 @@ import * as vscode from "vscode";
 const outputChannel = vscode.window.createOutputChannel("Atoll");
 
 export enum MessageStyle {
-    OutputChannel = 1,
-    MessageOnly = 2,
-    OutputChannelAndMessage = 3
+    OutputChannel = 1, // shows as "console log" style message only
+    MessageOnly = 2, // shows as "toast" style notification only
+    OutputChannelAndMessage = 3 // console log & toast
 }
 
 function log(message: string) {
@@ -14,7 +14,9 @@ function log(message: string) {
 }
 
 function logCommon(level: string, message: string, messageStyle: MessageStyle) {
-    log(`${level.toUpperCase()} - ${message}`);
+    if (messageStyle === MessageStyle.OutputChannel || messageStyle === MessageStyle.OutputChannelAndMessage) {
+        log(`${level.toUpperCase()} - ${message}`);
+    }
     if (messageStyle === MessageStyle.MessageOnly || messageStyle === MessageStyle.OutputChannelAndMessage) {
         switch (level) {
             case "info": {

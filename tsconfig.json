@@ -1,12 +1,14 @@
 {
-    "extends": "./tsconfig.build.json",
-    "compilerOptions": {
-        "baseUrl": "./packages",
-        "paths": {
-            "@atoll/shared": ["shared/src"],
-            "@atoll/desktop-app": ["desktop-app/src"],
-            "@atoll/web-app": ["web-app/src"],
-            "@atoll/*": ["*/src"]
-        }
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "baseUrl": "./packages",
+    "paths": {
+      "@atoll/shared": ["shared/src"],
+      "@atoll/desktop-app": ["desktop-app/src"],
+      "@atoll/web-app": ["web-app/src"],
+      "@atoll/client-sdk": ["client-sdk/src"],
+      "@atoll/rich-types": ["rich-types/src"],
+      "@atoll/*": ["*/src"]
     }
+  }
 }
