@@ -6,7 +6,7 @@
     "target": "ES2020",
     "lib": ["ES2020"],
     "sourceMap": true,
-    "rootDir": "src",
+    // "rootDir": "src",
     "typeRoots": ["./node_modules/@types"],
     "strict": true /* enable all strict type-checking options */
     /* Additional Checks */
@@ -14,7 +14,11 @@
     // "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
     // "noUnusedParameters": true,  /* Report errors on unused parameters. */
   },
-
+  "include": ["src"],
   "exclude": ["./scripts"],
-  "references": [{ "path": "../shared/tsconfig.json" }]
+  "references": [
+    { "path": "../shared/tsconfig.json" },
+    { "path": "../rich-types/tsconfig.json" },
+    { "path": "../client-sdk/tsconfig.json" }
+  ]
 }
