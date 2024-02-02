@@ -10,7 +10,7 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "echo Node Version && node --version && rollup -c",
+    "build": "echo Node Version && node --version && rollup -c --bundleConfigAsCjs",
     "clean": "npx --no-install rimraf dist",
     "gen:react-svg": "deno run --allow-read --allow-write --unstable ../scripts/build-svg-component/index.ts",
     "open:coverage-report": "npx --no-install opener ./coverage/lcov-report/index.html",
@@ -90,16 +90,7 @@
     "make-error": "1.3.6",
     "opener": "1.5.2",
     "redux-mock-store": "1.5.4",
-    "rollup": "2.79.0",
-    "rollup-plugin-image": "1.0.2",
-    "rollup-plugin-json": "4.0.0",
-    "rollup-plugin-jsx": "1.0.3",
-    "rollup-plugin-node-resolve": "5.2.0",
-    "rollup-plugin-postcss": "4.0.2",
-    "rollup-plugin-typescript2": "0.34.0",
     "storybook-addon-root-attribute": "1.0.2",
-    "storybook-dark-mode": "1.1.2",
-    "ts-jest": "28.0.8",
-    "ts-node": "10.9.1"
+    "storybook-dark-mode": "1.1.2"
   }
 }

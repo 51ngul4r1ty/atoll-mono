@@ -39,6 +39,7 @@ Requirements
    `https://computingforgeeks.com/install-postgresql-12-on-ubuntu/`
      (Ubuntu with links to other distros)
 4. VSCE v2.15.0 (for building VSIX file for VS Code extension)
+5. Rimraf - `npm i -g rimraf` (any version should be fine, but v5.0.5 was used)
 
 Recommendations
 ---------------

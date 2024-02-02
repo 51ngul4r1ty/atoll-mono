@@ -24,7 +24,7 @@
     "dist-pkg:extension": "npm run build-pkgs:shared && npm run build-pkg:extension && npm run build-vsix -w packages/vscode-extension",
     "check-prereqs-pkg:web-app": "npm run check:prereqs -w packages/web-app",
     "docker-pkg:web-app": "npm run build-pkg:web-app && npm run -w packages/web-app build:docker",
-    "clean-node-modules": "npx rimraf node_modules",
+    "clean-node-modules": "rimraf node_modules",
     "package-pkg:extension": "npm run package -w packages/vscode-extension",
     "publish-pkg:shared": "npm publish -w packages/shared",
     "publish-alpha:shared": "npm run publish-alpha -w packages/shared",
@@ -58,6 +58,15 @@
   "devDependencies": {
     "prettier": "2.7.1",
     "rimraf": "3.0.2",
-    "typescript": "4.6.4"
+    "rollup": "4.9.6",
+    "rollup-plugin-image": "1.0.2",
+    "rollup-plugin-json": "4.0.0",
+    "rollup-plugin-jsx": "1.0.3",
+    "rollup-plugin-node-resolve": "5.2.0",
+    "rollup-plugin-postcss": "4.0.2",
+    "rollup-plugin-typescript2": "0.36.0",
+    "ts-jest": "28.0.8",
+    "ts-node": "10.9.1",
+    "typescript": "5.3.3"
   }
 }
