@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
+    "rootDir": ".",
     "baseUrl": "./packages",
     "paths": {
       "@atoll/shared": ["shared/src"],
