@@ -25,6 +25,12 @@
         {
             "name": "scripts",
             "path": "packages/scripts"
+        },
+        {
+            "path": "packages/api-types"
+        },
+        {
+            "path": "packages/rest-fetch"
         }
     ],
     "settings": {

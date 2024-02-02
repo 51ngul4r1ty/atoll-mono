@@ -1,7 +1,7 @@
 {
-  "name": "@atoll/rich-types",
-  "version": "0.1.1",
-  "description": "Atoll consuming code shared types",
+  "name": "@atoll/api-types",
+  "version": "1.0.0",
+  "description": "Atoll REST API shared types",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -15,9 +15,9 @@
   },
   "scripts": {
     "transpile": "tsc",
-    "build": "rollup -c",
+    "build": "rollup -c --bundleConfigAsCjs",
     "prepublishOnly": "npm run clean && npm run build && npm run test",
-    "watch": "rollup -cw",
+    "watch": "rollup -cw --bundleConfigAsCjs",
     "clean": "npx --no-install rimraf dist",
     "clean:node-modules": "rimraf node_modules",
     "test": "tsc --noEmit --project tsconfig.json"
@@ -28,11 +28,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "rimraf": "3.0.2",
-    "rollup": "2.71.1",
-    "rollup-plugin-json": "4.0.0",
-    "rollup-plugin-node-resolve": "5.2.0",
-    "rollup-plugin-typescript2": "0.31.2",
-    "typescript": "4.6.4"
+    "autoprefixer": "10.4.5"
   }
 }
