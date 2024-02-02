@@ -44,7 +44,7 @@ export class RestApiFetch<ST = any, FT = string> {
         this.format = options?.format ?? REST_API_FETCH_OPTIONS_DEFAULT.format;
         this.defaultHeaders = {};
     }
-    public onAuthFailure: AsyncAuthFailureHandler;
+    public onAuthFailure: AsyncAuthFailureHandler | undefined = undefined;
     private async handleAuthFailure(): Promise<boolean> {
         if (this.onAuthFailure) {
             return await this.onAuthFailure();
@@ -118,7 +118,7 @@ export class RestApiFetch<ST = any, FT = string> {
         }
         return null;
     }
-    private mapStringToError(error: string): RestApiFetchError {
+    private mapStringToError(error: string | null): RestApiFetchError {
         return {
             message: error,
             status: StatusCodes.INTERNAL_SERVER_ERROR,

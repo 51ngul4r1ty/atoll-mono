@@ -10,7 +10,7 @@ import {
 } from "./restApiFetchEnums";
 
 export type RestApiFetchError<T = any> = {
-    message: string;
+    message: string | null;
     status: number;
     errorType: RestApiFetchErrorType;
     errorSubType: RestApiFetchErrorSubType;
