@@ -72,9 +72,5 @@
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
   },
 
-  "references": [
-    { "path": "../api-types/tsconfig.json" },
-    { "path": "../rest-fetch/tsconfig.json" },
-    { "path": "../rich-types/tsconfig.json" }
-  ]
+  "references": [{ "path": "../api-types/tsconfig.json" }]
 }

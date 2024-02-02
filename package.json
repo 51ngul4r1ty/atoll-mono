@@ -18,8 +18,10 @@
     "build-pkg:extension": "npm run build -w packages/vscode-extension",
     "build-pkg:rich-types": "npm run build -w packages/rich-types",
     "build-pkg:client-sdk": "npm run build -w packages/client-sdk",
-    "build-all-pkgs:shared": "npm run build-pkg:rich-types && npm run build-pkg:client-sdk && npm run build-pkg:shared",
-    "dist-pkg:extension": "npm run build-all-pkgs:shared && npm run build-pkg:extension && npm run build-vsix -w packages/vscode-extension",
+    "build-pkg:rest-fetch": "npm run build -w packages/rest-fetch",
+    "build-pkg:api-types": "npm run build -w packages/api-types",
+    "build-pkgs:shared": "npm run build-pkg:api-types && npm run build-pkg:rest-fetch && npm run build-pkg:rich-types && npm run build-pkg:client-sdk && npm run build-pkg:shared",
+    "dist-pkg:extension": "npm run build-pkgs:shared && npm run build-pkg:extension && npm run build-vsix -w packages/vscode-extension",
     "check-prereqs-pkg:web-app": "npm run check:prereqs -w packages/web-app",
     "docker-pkg:web-app": "npm run build-pkg:web-app && npm run -w packages/web-app build:docker",
     "clean-node-modules": "npx rimraf node_modules",
@@ -43,8 +45,10 @@
   },
   "license": "MIT",
   "workspaces": [
+    "packages/api-types",
     "packages/client-sdk",
     "packages/desktop-app",
+    "packages/rest-fetch",
     "packages/rich-types",
     "packages/scripts",
     "packages/shared",
@@ -54,6 +58,6 @@
   "devDependencies": {
     "prettier": "2.7.1",
     "rimraf": "3.0.2",
-    "typescript": "4.2.4"
+    "typescript": "4.6.4"
   }
 }

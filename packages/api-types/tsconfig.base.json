@@ -1,6 +1,4 @@
 {
-  "extends": "../../tsconfig.json",
-
   "compilerOptions": {
     /* Basic Options */
     "incremental": true,
@@ -70,11 +68,5 @@
     /* Experimental Options */
     // "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
-  },
-
-  "references": [
-    { "path": "../api-types/tsconfig.json" },
-    { "path": "../rest-fetch/tsconfig.json" },
-    { "path": "../rich-types/tsconfig.json" }
-  ]
+  }
 }

@@ -76,12 +76,15 @@ export class AtollClient {
     private fetchAuthTokenUsingRefreshToken = async (
         refreshTokenUri: string
     ): Promise<{ authToken: string; refreshToken: string }> => {
+        this.notificationHandler?.("fetchAuthTokenUsingRefreshToken (refresh token)", "debug");
         const result = await restApi.execAction<AuthServerResponse>(
             refreshTokenUri,
             { refreshToken: this.refreshToken },
             { skipRetryOnAuthFailure: true }
         );
+        this.notificationHandler?.("fetchAuthTokenUsingRefreshToken (result)", "debug");
         const { authToken, refreshToken } = result.data.item;
+        this.notificationHandler?.("fetchAuthTokenUsingRefreshToken (got auth token)", "debug");
         this.refreshToken = refreshToken;
         restApi.setDefaultHeader("Authorization", `Bearer  ${authToken}`);
         return {
