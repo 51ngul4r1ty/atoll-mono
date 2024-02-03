@@ -1,6 +1,6 @@
 {
   "name": "@atoll/web-app",
-  "version": "0.65.0",
+  "version": "0.66.0",
   "description": "Atoll web app",
   "scripts": {
     "build": "npm run build-only && npm run build-deploy",
@@ -32,7 +32,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@atoll/shared": "0.64.0",
+    "@atoll/shared": "0.66.0",
     "@flopflip/memory-adapter": "1.6.0",
     "@flopflip/react-broadcast": "10.1.11",
     "axios": "0.26.1",

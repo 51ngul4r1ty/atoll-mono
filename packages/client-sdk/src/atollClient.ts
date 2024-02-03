@@ -58,6 +58,7 @@ export class AtollClient {
     };
     private onAuthFailureNotification = async (refreshTokenUri: string): Promise<void> => {
         if (this.notificationHandler) {
+            debugger;
             await this.notificationHandler("Re-connecting to Atoll Server...", "info");
         }
     };

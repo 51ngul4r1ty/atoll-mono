@@ -1,10 +1,10 @@
 {
   "name": "@atoll/rich-types",
-  "version": "0.1.1",
+  "version": "1.1.1",
   "description": "Atoll consuming code shared types",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/src/types/index.d.ts",
   "files": [
     "dist"
   ],
@@ -18,7 +18,8 @@
     "build": "rollup -c",
     "prepublishOnly": "npm run clean && npm run build && npm run test",
     "watch": "rollup -cw",
-    "clean": "npx --no-install rimraf dist",
+    "clean": "npm run clean:dist",
+    "clean:dist": "rimraf dist",
     "clean:node-modules": "rimraf node_modules",
     "test": "tsc --noEmit --project tsconfig.json"
   },

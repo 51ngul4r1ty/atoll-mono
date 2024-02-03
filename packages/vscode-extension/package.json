@@ -1,6 +1,6 @@
 {
   "name": "atoll-extension",
-  "version": "0.4.2",
+  "version": "0.66.0",
   "description": "Use Atoll from within VS Code",
   "author": "Kevin Berry",
   "repository": {
@@ -72,8 +72,8 @@
     "webpack-cli": "4.9.2"
   },
   "dependencies": {
-    "@atoll/client-sdk": "1.0.0",
-    "@atoll/rich-types": "0.1.1",
+    "@atoll/client-sdk": "1.1.1",
+    "@atoll/rich-types": "1.1.1",
     "axios": "0.27.2"
   },
   "license": "ISC",
