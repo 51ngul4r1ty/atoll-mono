@@ -38,6 +38,7 @@
     "start": "npm run check-prereqs-pkg:web-app && npm run build-all && npm run start-only-pkg:web-app",
     "start-docker:web-app": "npm run -w packages/web-app start:docker",
     "start-pkg:web-app": "npm start -w packages/web-app",
+    "start-pkg:extension": "npm run build-pkgs:extension && npm run start-only:extension",
     "start-only-pkg:web-app": "npm run start-only -w packages/web-app",
     "test": "npm run test-all",
     "test-all": "npm run test -ws --if-present",
