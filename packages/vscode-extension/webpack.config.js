@@ -31,6 +31,11 @@ const extensionConfig = {
         rules: [
             {
                 test: /\.ts$/,
+                enforce: "pre",
+                use: ["source-map-loader"]
+            },
+            {
+                test: /\.ts$/,
                 exclude: /node_modules/,
                 use: [
                     {
@@ -40,7 +45,7 @@ const extensionConfig = {
             }
         ]
     },
-    devtool: "nosources-source-map",
+    devtool: "inline-cheap-module-source-map",
     infrastructureLogging: {
         level: "log" // enables logging required for problem matchers
     }

@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
+    "rootDir": ".",
     "baseUrl": "./packages",
     "paths": {
       "@atoll/shared": ["shared/src"],
@@ -8,6 +9,8 @@
       "@atoll/web-app": ["web-app/src"],
       "@atoll/client-sdk": ["client-sdk/src"],
       "@atoll/rich-types": ["rich-types/src"],
+      "@atoll/api-types": ["api-types/src"],
+      "@atoll/rest-fetch": ["rest-fetch/src"],
       "@atoll/*": ["*/src"]
     }
   }

@@ -6,10 +6,11 @@
     "**/.git": true,
     "build": true,
     "coverage": true,
-    "dist": true,
     "node_modules": true
   },
-  "search.exclude": {},
+  "search.exclude": {
+    "dist": true
+  },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "coverage-gutters.showGutterCoverage": true,

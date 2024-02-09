@@ -1,6 +1,6 @@
 {
   "name": "@atoll/web-app",
-  "version": "0.65.0",
+  "version": "0.66.0",
   "description": "Atoll web app",
   "scripts": {
     "build": "npm run build-only && npm run build-deploy",
@@ -16,6 +16,7 @@
     "build-deploy": "node ./scripts/build-deploy.js",
     "build-with-stats": "npx --no-install cross-env SUPPRESS_CONSOLE_LOGGING=true NODE_ENV=production webpack --config config/webpack.config.js/client.prod.js --json > build/client/static/bundle-stats.json",
     "check:prereqs": "ts-node ./scripts/check-prereqs.ts",
+    "clean:node-modules": "rimraf node_modules",
     "report:bundle-analysis": "npm run build-with-stats && npm run start:webpack-bundle-analyzer",
     "setup": "npm run check:prereqs && ts-node ./scripts/setup.ts",
     "start": "npm run check:prereqs && npm run start-only",
@@ -31,7 +32,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@atoll/shared": "0.64.0",
+    "@atoll/shared": "0.66.0",
     "@flopflip/memory-adapter": "1.6.0",
     "@flopflip/react-broadcast": "10.1.11",
     "axios": "0.26.1",
