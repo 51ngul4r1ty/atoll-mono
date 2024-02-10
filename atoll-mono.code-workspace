@@ -28,6 +28,9 @@
         },
         {
             "path": "packages/api-types"
+        },
+        {
+            "path": "packages/rest-fetch"
         }
     ],
     "settings": {
@@ -50,12 +53,7 @@
         "coverage-gutters.showLineCoverage": false,
         "typescript.tsdk": "node_modules\\typescript\\lib",
         "deno.enable": false,
-        "jest.disabledWorkspaceFolders": [
-            "vscode-extension",
-            "shared",
-            "scripts",
-            "rich-types"
-        ]
+        "jest.disabledWorkspaceFolders": ["vscode-extension", "shared", "scripts", "rich-types", "api-types"]
     },
     "extensions": {
         "recommendations": ["bierner.markdown-checkbox"]

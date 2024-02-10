@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
       - name: Node & NPM versions
         run: |
           echo Node Version
@@ -26,10 +26,18 @@ jobs:
           echo
       - name: Install NPM packages
         run: npm ci -ws
+      - name: Build API Types Package
+        run: |
+          echo Building...
+          npm run build-pkg:api-types
       - name: Build Rich Types Package
         run: |
           echo Building...
           npm run build-pkg:rich-types
+      - name: Build Rest Fetch Package
+        run: |
+          echo Building...
+          npm run build-pkg:rest-fetch
       - name: Build Client SDK
         run: |
           echo Building...
