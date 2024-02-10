@@ -25,6 +25,9 @@
         {
             "name": "scripts",
             "path": "packages/scripts"
+        },
+        {
+            "path": "packages/api-types"
         }
     ],
     "settings": {

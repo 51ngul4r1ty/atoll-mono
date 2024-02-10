@@ -45,6 +45,7 @@
     "test": "npm run build-tests && npm run build && npm run lint && npm run test-only",
     "test-only": "node ./out/test/runTest.js",
     "build-tests": "tsc --version && tsc -p . --outDir out",
+    "clean:node-modules": "rimraf node_modules",
     "clean:vsix": "npx --no-install rimraf ./dist-vsix/",
     "build-vsix": "npm run clean:vsix && npm run build-vsix:pre-build && npm run build && npm run build-vsix:vsce",
     "build-vsix:pre-build": "npx --no-install ts-node ./scripts/prebuild-vsix.ts",
@@ -71,7 +72,6 @@
   },
   "dependencies": {
     "@atoll/client-sdk": "1.0.0",
-    "@atoll/rich-types": "0.1.1",
     "axios": "0.27.2"
   },
   "license": "ISC",

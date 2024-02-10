@@ -32,7 +32,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@atoll/shared": "0.64.0",
     "@flopflip/memory-adapter": "1.6.0",
     "@flopflip/react-broadcast": "10.1.11",
     "axios": "0.26.1",
