@@ -38,6 +38,12 @@
             "script": "storybook",
             "isBackground": true,
             "problemMatcher": []
+        },
+        {
+            "label": "Build VS Code Extension",
+            "type": "npm",
+            "script": "build-pkgs:extension",
+            "problemMatcher": []
         }
     ]
 }
