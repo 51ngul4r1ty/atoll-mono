@@ -26,7 +26,27 @@ jobs:
           echo
       - name: Install NPM packages
         run: npm ci -ws
-      - name: Build All Packages
+      - name: Build Rich Types Package
+        run: |
+          echo Building...
+          npm run build-pkg:rich-types
+      - name: Build Rich Types Package
+        run: |
+          echo Building...
+          npm run build-pkg:rich-types
+      - name: Build Client SDK
+        run: |
+          echo Building...
+          npm run build-pkg:client-sdk
+      - name: Build Shared Package
         run: |
           echo Building...
           npm run build-pkg:shared
+      - name: Build VS Code Extension
+        run: |
+          echo Building...
+          npm run build-pkg:vscode-extension
+      - name: Build Web App
+        run: |
+          echo Building...
+          npm run build-pkg:web-app
