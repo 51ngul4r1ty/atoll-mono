@@ -54,7 +54,8 @@
             "vscode-extension",
             "shared",
             "scripts",
-            "rich-types"
+            "rich-types",
+            "api-types"
         ]
     },
     "extensions": {
