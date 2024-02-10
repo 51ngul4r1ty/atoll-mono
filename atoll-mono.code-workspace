@@ -46,7 +46,13 @@
         "coverage-gutters.coverageReportFileName": "coverage/**/index.html",
         "coverage-gutters.showLineCoverage": false,
         "typescript.tsdk": "node_modules\\typescript\\lib",
-        "deno.enable": false
+        "deno.enable": false,
+        "jest.disabledWorkspaceFolders": [
+            "vscode-extension",
+            "shared",
+            "scripts",
+            "rich-types"
+        ]
     },
     "extensions": {
         "recommendations": ["bierner.markdown-checkbox"]
