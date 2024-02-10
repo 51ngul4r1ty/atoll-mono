@@ -30,10 +30,6 @@ jobs:
         run: |
           echo Building...
           npm run build-pkg:rich-types
-      - name: Build Rich Types Package
-        run: |
-          echo Building...
-          npm run build-pkg:rich-types
       - name: Build Client SDK
         run: |
           echo Building...
