@@ -29,4 +29,4 @@ jobs:
       - name: Build All Packages
         run: |
           echo Building...
-          npm run build-all
+          npm run build-pkg:shared
