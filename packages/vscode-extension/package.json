@@ -71,7 +71,6 @@
   },
   "dependencies": {
     "@atoll/client-sdk": "1.0.0",
-    "@atoll/rich-types": "0.1.1",
     "axios": "0.27.2"
   },
   "license": "ISC",
