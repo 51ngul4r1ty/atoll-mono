@@ -17,7 +17,6 @@
   "include": ["src"],
   "exclude": ["./scripts"],
   "references": [
-    { "path": "../shared/tsconfig.json" },
     { "path": "../rich-types/tsconfig.json" },
     { "path": "../client-sdk/tsconfig.json" }
   ]
