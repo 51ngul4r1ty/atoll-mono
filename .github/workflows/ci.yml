@@ -45,7 +45,7 @@ jobs:
       - name: Build VS Code Extension
         run: |
           echo Building...
-          npm run build-pkg:vscode-extension
+          npm run build-pkg:extension
       - name: Build Web App
         run: |
           echo Building...
