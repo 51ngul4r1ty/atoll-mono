@@ -31,8 +31,8 @@ specific README.md files.
 Requirements
 ------------
 
-1. Node v16.14.2
-2. NPM v8.15.0
+1. Node v18.19.0
+2. NPM v10.2.3
 3. PostgreSQL 12.2 for storing data:
    `https://www.enterprisedb.com/downloads/postgres-postgresql-downloads`
      (Windows 10 / Mac OS X)

@@ -9,7 +9,7 @@
       "processId": "${command:PickProcess}",
       "request": "attach",
       "skipFiles": ["<node_internals>/**"],
-      "type": "pwa-node"
+      "type": "node"
     },
     {
       "name": "App",
@@ -75,6 +75,16 @@
       "type": "docker",
       "request": "launch",
       "platform": "node"
+    },
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/packages/vscode-extension",
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-extension"],
+      "outFiles": ["${workspaceFolder}/packages/vscode-extension/dist/*.js"],
+      "sourceMaps": true,
+      "preLaunchTask": "Build VS Code Extension"
     }
   ]
 }
