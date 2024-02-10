@@ -5,9 +5,17 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
 
     steps:
       - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
       - name: Node & NPM versions
         run: |
           echo Node Version
@@ -17,8 +25,24 @@ jobs:
           npm --version
           echo
       - name: Install NPM packages
-        run: npm ci
-      - name: Build All Packages
+        run: npm ci -ws
+      - name: Build Rich Types Package
         run: |
           echo Building...
-          npm run build-all
+          npm run build-pkg:rich-types
+      - name: Build Client SDK
+        run: |
+          echo Building...
+          npm run build-pkg:client-sdk
+      - name: Build Shared Package
+        run: |
+          echo Building...
+          npm run build-pkg:shared
+      - name: Build VS Code Extension
+        run: |
+          echo Building...
+          npm run build-pkg:extension
+      - name: Build Web App
+        run: |
+          echo Building...
+          npm run build-pkg:web-app
