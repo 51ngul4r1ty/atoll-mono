@@ -1,6 +1,6 @@
 {
   "name": "@atoll/shared",
-  "version": "0.65.0",
+  "version": "0.66.0",
   "description": "Atoll shared code that is common to electron desktop client and web app",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -81,7 +81,6 @@
     "@types/websocket": "1.0.0",
     "autoprefixer": "10.4.11",
     "bs-logger": "0.2.6",
-    "babel-preset-react-app": "10.0.1",
     "copy-webpack-plugin": "5.1.1",
     "cpx": "1.5.0",
     "jest": "28.1.3",
