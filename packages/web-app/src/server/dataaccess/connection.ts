@@ -10,7 +10,7 @@ if (!dbConfig) {
     console.error("Unable to retrieve database configuration - set ATOLL_DATABASE_URL for local development");
 }
 
-const portNumberFromStringOrNumberr = (val: string | number | undefined | null): number | undefined | null => {
+const portNumberFromStringOrNumber = (val: string | number | undefined | null): number | undefined | null => {
     if (val === "") {
         return undefined;
     }
@@ -29,7 +29,7 @@ const portNumberFromStringOrNumberr = (val: string | number | undefined | null):
 const buildOptions = (): Options => {
     const options: Options = {
         host: dbConfig.host,
-        port: portNumberFromStringOrNumberr(dbConfig.port),
+        port: portNumberFromStringOrNumber(dbConfig.port),
         dialect: "postgres",
         dialectOptions: {},
         pool: {
