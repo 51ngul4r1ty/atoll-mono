@@ -1,4 +1,4 @@
-import urlParse from "url-parse";
+const urlParse = require("url-parse");
 
 let historyInstance: any;
 

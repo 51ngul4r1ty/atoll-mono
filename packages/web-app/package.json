@@ -64,7 +64,6 @@
     "reselect": "4.0.0",
     "sequelize": "6.23.0",
     "text-encoding-polyfill": "0.6.7",
-    "url-parse": "1.5.10",
     "uuid": "8.3.2",
     "websocket": "1.0.34",
     "ws": "8.5.0"
