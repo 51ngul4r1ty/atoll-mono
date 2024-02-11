@@ -21,8 +21,9 @@
     "build-pkg:shared": "npm run build -w packages/shared",
     "build-pkg:web-app": "npm run build -w packages/web-app",
     "build-pkgs:client-sdk": "npm run build-pkg:api-types && npm run build-pkg:rich-types && npm run build-pkg:rest-fetch && npm run build-pkg:client-sdk",
-    "build-pkgs:extension": "npm run build-pkg:rich-types && npm run build-pkgs:client-sdk && npm run build-pkg:extension",
+    "build-pkgs:extension": "npm run build-pkgs:client-sdk && npm run build-pkg:extension",
     "build-pkgs:web-app": "npm run build-pkg:shared && npm run build-pkg:web-app",
+    "build-pkgs:all": "npm run build-pkgs:extension && npm run build-pkgs:web-app",
     "dist-pkg:extension": "npm run build-pkgs:client-sdk && npm run build-pkg:extension && npm run build-vsix -w packages/vscode-extension",
     "check-prereqs-pkg:web-app": "npm run check:prereqs -w packages/web-app",
     "docker-pkg:web-app": "npm run build-pkg:web-app && npm run -w packages/web-app build:docker",
@@ -62,7 +63,13 @@
   ],
   "devDependencies": {
     "prettier": "3.2.5",
-    "rimraf": "3.0.2",
+    "rollup": "2.79.0",
+    "rollup-plugin-image": "1.0.2",
+    "rollup-plugin-json": "4.0.0",
+    "rollup-plugin-jsx": "1.0.3",
+    "rollup-plugin-node-resolve": "5.2.0",
+    "rollup-plugin-postcss": "4.0.2",
+    "rollup-plugin-typescript2": "0.36.0",
     "typescript": "4.6.4"
   }
 }
