@@ -23,7 +23,6 @@ import {
     handleUnexpectedErrorResponse,
     start
 } from "./utils/handlerContext";
-import { respondWithObj } from "api/utils/responder";
 
 export const userPreferencesGetHandler = async function (req: Request, res: Response) {
     const packageJson = findPackageJson(__dirname);

@@ -32,7 +32,7 @@ import {
     rollbackWithMessageAndStatus,
     start
 } from "./utils/handlerContext";
-import { buildResponseWithItem, isRestApiCollectionResult, isRestApiItemResult } from "api/utils/responseBuilder";
+import { buildResponseWithItem, isRestApiCollectionResult, isRestApiItemResult } from "../utils/responseBuilder";
 
 export const sprintsGetHandler = async (req: Request, res) => {
     const params = getParamsFromRequest(req);
