@@ -1,23 +1,23 @@
 // externals
 import * as vscode from "vscode";
 
-const outputChannel = vscode.window.createOutputChannel("Atoll");
+const atollOutputChannel = vscode.window.createOutputChannel("Atoll");
 
 export enum MessageStyle {
-    OutputChannel = 1, // shows as "console log" style message only
-    MessageOnly = 2, // shows as "toast" style notification only
-    OutputChannelAndMessage = 3 // console log & toast
+    outputChannel = 1, // shows as "console log" style message only
+    messageOnly = 2, // shows as "toast" style notification only
+    outputChannelAndMessage = 3 // console log & toast
 }
 
 function log(message: string) {
-    outputChannel.appendLine(message);
+    atollOutputChannel.appendLine(message);
 }
 
 function logCommon(level: string, message: string, messageStyle: MessageStyle) {
-    if (messageStyle === MessageStyle.OutputChannel || messageStyle === MessageStyle.OutputChannelAndMessage) {
+    if (messageStyle === MessageStyle.outputChannel || messageStyle === MessageStyle.outputChannelAndMessage) {
         log(`${level.toUpperCase()} - ${message}`);
     }
-    if (messageStyle === MessageStyle.MessageOnly || messageStyle === MessageStyle.OutputChannelAndMessage) {
+    if (messageStyle === MessageStyle.messageOnly || messageStyle === MessageStyle.outputChannelAndMessage) {
         switch (level) {
             case "info": {
                 vscode.window.showInformationMessage(message);
@@ -39,18 +39,18 @@ function logCommon(level: string, message: string, messageStyle: MessageStyle) {
     }
 }
 
-export function logDebug(message: string, messageStyle: MessageStyle = MessageStyle.OutputChannel) {
+export function logDebug(message: string, messageStyle: MessageStyle = MessageStyle.outputChannel) {
     logCommon("debug", message, messageStyle);
 }
 
-export function logInfo(message: string, messageStyle: MessageStyle = MessageStyle.OutputChannel) {
+export function logInfo(message: string, messageStyle: MessageStyle = MessageStyle.outputChannel) {
     logCommon("info", message, messageStyle);
 }
 
-export function logWarning(message: string, messageStyle: MessageStyle = MessageStyle.OutputChannel) {
+export function logWarning(message: string, messageStyle: MessageStyle = MessageStyle.outputChannel) {
     logCommon("warning", message, messageStyle);
 }
 
-export function logError(message: string, messageStyle: MessageStyle = MessageStyle.OutputChannel) {
+export function logError(message: string, messageStyle: MessageStyle = MessageStyle.outputChannel) {
     logCommon("error", message, messageStyle);
 }

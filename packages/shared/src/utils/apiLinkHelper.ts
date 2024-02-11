@@ -3,7 +3,7 @@
  */
 
 // externals
-import urlParse from "url-parse";
+const urlParse = require("url-parse");
 
 // interfaces/types
 import type { Link } from "../types/apiModelTypes";

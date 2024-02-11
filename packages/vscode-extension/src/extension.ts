@@ -33,7 +33,7 @@ async function reconnectToAtoll() {
     try {
         const result = await atollClient.reconnect(state.atollServerUrl || "", notificationBridge.handleNotification);
         if (result) {
-            logInfo(`Unable to set up with refresh token: ${result}`, MessageStyle.OutputChannelAndMessage);
+            logInfo(`Unable to set up with refresh token: ${result}`, MessageStyle.outputChannelAndMessage);
         }
     } catch (err) {
         logError(`Catch triggered: ${err}`);
@@ -104,7 +104,7 @@ async function initialActivation(context: vscode.ExtensionContext) {
         // NOTE: This is intentionally done directly with window.showErrorMessage just in case there's
         //   a problem with `logError` related code - it is essential that the user sees this.
         vscode.window.showErrorMessage("Unable to activate Atoll (see output log for details)");
-        logError(`Unable to activate Atoll: ${err}`, MessageStyle.OutputChannel);
+        logError(`Unable to activate Atoll: ${err}`, MessageStyle.outputChannel);
     }
 }
 

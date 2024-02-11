@@ -36,19 +36,11 @@
     "axios": "0.27.2"
   },
   "devDependencies": {
-    "@babel/core": "7.17.10",
-    "@babel/preset-env": "7.17.10",
-    "@babel/preset-typescript": "7.16.7",
     "@types/jest": "27.5.0",
     "autoprefixer": "10.4.5",
     "axios": "0.27.2",
     "jest-cli": "28.1.0",
     "jest-environment-jsdom": "28.1.0",
-    "rimraf": "3.0.2",
-    "rollup": "2.71.1",
-    "rollup-plugin-json": "4.0.0",
-    "rollup-plugin-node-resolve": "5.2.0",
-    "rollup-plugin-typescript2": "0.36.0",
     "ts-node": "10.7.0"
   },
   "dependencies": {
