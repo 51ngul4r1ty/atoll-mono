@@ -51,9 +51,11 @@ export const InnerProjectPickerMenu: React.FC<InnerProjectPickerMenuProps> = (pr
     });
     const className = buildClassName(css.projectPickerMenu, props.className);
     return (
-        <ItemMenuPanel className={className} caretPosition={ItemMenuPanelCaretPosition.BottomLeft} loading={props.loading}>
-            {buttons}
-        </ItemMenuPanel>
+        <div className={css.projectPickerMenuContainer}>
+            <ItemMenuPanel className={className} caretPosition={ItemMenuPanelCaretPosition.BottomLeft} loading={props.loading}>
+                {buttons}
+            </ItemMenuPanel>
+        </div>
     );
 };
 

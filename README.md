@@ -16,31 +16,6 @@ Getting Started (for Contributors)
 
 See [Contributing Guide](./CONTRIBUTING.md) for detais.
 
-Working with the Monorepo
-=========================
-
-Adding Dependencies
--------------------
-
-This monorepo uses npm workspaces.  If you're unfamiliar with using workspaces
-we recommend you read the npm documentation first.  Some tips are provided
-below, but it is best that you understand how they work fully.
-
-Please make sure to add the dependency at the right level.
-
-You have 2 choices:
-1. install it globally so that all packages can use that dependency (bear in
-  mind that they will use the exact same version when it is global).  
-  For example, `npm i prettier@latest -D`
-2. install it at the workspace package level so that individual packages can
-  either use a different version or not use it at all.  
-  For example, `npm i websocket@1.0.31 -w packages/shared`
-
-In general, if you're not sure, you should pick option 2.
-
-If you wish to refresh packages for a specific workspace you can use something
-like: `npm i -w=packages/vscode-extension`
-
 Document Index
 ==============
 
