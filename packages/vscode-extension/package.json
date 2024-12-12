@@ -1,6 +1,6 @@
 {
   "name": "atoll-extension",
-  "version": "0.4.2",
+  "version": "0.66.0",
   "description": "Use Atoll from within VS Code",
   "author": "Kevin Berry",
   "repository": {

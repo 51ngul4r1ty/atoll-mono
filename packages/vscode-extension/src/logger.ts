@@ -1,7 +1,7 @@
 // externals
 import * as vscode from "vscode";
 
-const outputChannel = vscode.window.createOutputChannel("Atoll");
+const atollOutputChannel = vscode.window.createOutputChannel("Atoll");
 
 export enum MessageStyle {
     OutputChannel = 1, // shows as "console log" style message only
@@ -10,7 +10,7 @@ export enum MessageStyle {
 }
 
 function log(message: string) {
-    outputChannel.appendLine(message);
+    atollOutputChannel.appendLine(message);
 }
 
 function logCommon(level: string, message: string, messageStyle: MessageStyle) {

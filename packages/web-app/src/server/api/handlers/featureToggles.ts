@@ -6,7 +6,7 @@ import { respondWithNotImplemented, respondWithObj } from "../utils/responder";
 
 // consts/enums
 import { FEATURE_TOGGLE_LIST } from "../../api/data/featureToggles";
-import { buildResponseWithItem } from "api/utils/responseBuilder";
+import { buildResponseWithItem } from "../utils/responseBuilder";
 
 export const featureTogglesHandler = function (req: Request, res: Response) {
     const userId = req.params.userId || "";
