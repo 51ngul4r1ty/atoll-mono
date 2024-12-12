@@ -8,19 +8,19 @@ import { logDebug, logError, logInfo, logWarning, MessageStyle } from "./logger"
 export const handleNotification = async (message: string, level: string) => {
     switch (level) {
         case "debug": {
-            logDebug(message, MessageStyle.outputChannel);
+            logDebug(message, MessageStyle.OutputChannel);
             break;
         }
         case "info": {
-            logInfo(message, MessageStyle.outputChannelAndMessage);
+            logInfo(message, MessageStyle.OutputChannelAndMessage);
             break;
         }
         case "warn": {
-            logWarning(message, MessageStyle.outputChannelAndMessage);
+            logWarning(message, MessageStyle.OutputChannelAndMessage);
             break;
         }
         case "error": {
-            logError(message, MessageStyle.outputChannelAndMessage);
+            logError(message, MessageStyle.OutputChannelAndMessage);
             break;
         }
         default: {

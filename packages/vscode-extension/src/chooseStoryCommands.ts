@@ -39,12 +39,12 @@ export async function chooseStory(context: ExtensionContext) {
         );
         return;
     }
-    logInfo("Fetching data for current sprint from Atoll server...", MessageStyle.outputChannelAndMessage);
+    logInfo("Fetching data for current sprint from Atoll server...", MessageStyle.OutputChannelAndMessage);
     const currentSprint = await atollClient.fetchSprintByUri(currentSprintUri);
     if (currentSprint === null) {
         logInfo(
             "The last sprint is complete and there is no new sprint in the Atoll database for this project!",
-            MessageStyle.outputChannelAndMessage
+            MessageStyle.OutputChannelAndMessage
         );
         return;
     }
@@ -52,18 +52,18 @@ export async function chooseStory(context: ExtensionContext) {
     if (backlogItemsRelativeUri === null) {
         logInfo(
             "No link is available in current sprint for sprint backlog items - this is unexpected!  Contact support.",
-            MessageStyle.outputChannelAndMessage
+            MessageStyle.OutputChannelAndMessage
         );
         return;
     }
-    logInfo("Fetching data for sprint backlog items from Atoll server...", MessageStyle.outputChannelAndMessage);
+    logInfo("Fetching data for sprint backlog items from Atoll server...", MessageStyle.OutputChannelAndMessage);
     const backlogItemsUri = atollClient.buildFullUri(backlogItemsRelativeUri);
     const sprintBacklogItems = await atollClient.fetchSprintBacklogItemsByUri(backlogItemsUri);
 
     if (sprintBacklogItems === null || sprintBacklogItems.length === 0) {
         logInfo(
             "There are no sprint backlog items available - please add sprint backlog items first!",
-            MessageStyle.outputChannelAndMessage
+            MessageStyle.OutputChannelAndMessage
         );
         return;
     }
@@ -77,14 +77,14 @@ export async function chooseStory(context: ExtensionContext) {
     };
     const backlogItemName = await window.showQuickPick(backlogItemsSorted, quickPickOptions);
     if (!backlogItemName) {
-        logWarning("Aborted backlog item selection.", MessageStyle.outputChannelAndMessage);
+        logWarning("Aborted backlog item selection.", MessageStyle.OutputChannelAndMessage);
         return;
     }
     const matchingSBIs = sprintBacklogItems.filter((backlogItem) => buildUniqueBacklogItemName(backlogItem) === backlogItemName);
     if (matchingSBIs.length !== 1) {
         logError(
             `Only expected a single backlog item match, but ${matchingSBIs.length} were found!`,
-            MessageStyle.outputChannelAndMessage
+            MessageStyle.OutputChannelAndMessage
         );
         return;
     }
@@ -119,5 +119,5 @@ export async function chooseStory(context: ExtensionContext) {
     }
     await state.saveSettings(context);
 
-    logInfo(`Backlog item "${id} - ${matchingSBI.storyPhrase}" selected.`, MessageStyle.outputChannelAndMessage);
+    logInfo(`Backlog item "${id} - ${matchingSBI.storyPhrase}" selected.`, MessageStyle.OutputChannelAndMessage);
 }
