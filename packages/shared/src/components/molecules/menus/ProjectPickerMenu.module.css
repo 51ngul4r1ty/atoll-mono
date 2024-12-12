@@ -1,3 +1,8 @@
 .projectPickerMenu {
     width: 13rem;
 }
+
+.projectPickerMenuContainer {
+    position: absolute;
+    bottom: 0;
+}
