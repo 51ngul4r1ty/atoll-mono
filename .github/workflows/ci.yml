@@ -24,8 +24,10 @@ jobs:
           echo NPM Version
           npm --version
           echo
-      - name: Install NPM packages
+      - name: Install NPM packages (workspace)
         run: npm ci -ws
+      - name: Install NPM packages (root)
+        run: npm ci
       - name: Build API Types Package
         run: |
           echo Building...
