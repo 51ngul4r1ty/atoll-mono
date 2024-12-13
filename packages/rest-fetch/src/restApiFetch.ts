@@ -172,7 +172,6 @@ export class RestApiFetch<ST = any, FT = string> {
         throw this.buildFromCaughtError(errorTyped);
     }
     private async handleErrorAndRetry<T>(error: any, options: ResourceRequestOptions, apiCall: () => T): Promise<T> {
-        debugger;
         const errorTyped = this.fixAxiosError(error);
         if (options.skipRetryOnAuthFailure || errorTyped.status !== 401) {
             this.handleError(error);
