@@ -1,3 +1,12 @@
+/*
+    Purpose: This is for use in the components and should only contain VERY
+      common CSS that's used in a lot of them.  This is not the file for CSS
+      that's "global" in nature but used in a small subset of files.  At
+      present there isn't a file for that purpose but the guidance is that you
+      should try to create components to encapsulate the common style rather
+      than making the styles "global".
+*/
+
 .fill {
     fill: var(--normal-pen-color, black);
 }

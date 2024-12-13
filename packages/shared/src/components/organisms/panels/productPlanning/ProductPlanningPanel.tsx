@@ -16,6 +16,7 @@ import {
     buildDividerKey
 } from "../../../molecules/cards/BacklogItemCard";
 import { SimpleDivider } from "../../../atoms/dividers/SimpleDivider";
+import { NoContentMessage } from "../../../atoms/text/NoContentMessage";
 
 // consts/enums
 import { EditMode } from "../../../common/componentEnums";
@@ -567,6 +568,9 @@ export const InnerProductPlanningPanel: React.FC<ProductPlanningPanelProps> = (p
         }
         return null;
     };
+    if (renderElts.length === 0) {
+        renderElts.push(<NoContentMessage>The product backlog is empty. To add content click the Edit button!</NoContentMessage>);
+    }
     return (
         <div
             ref={ref}
