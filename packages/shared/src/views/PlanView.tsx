@@ -10,6 +10,7 @@ import { SprintPlanningPanel } from "../components/organisms/panels/sprintPlanni
 import { SmartSpinner } from "../components/molecules/unique/smartSpinner/SmartSpinner";
 import { BottomPanelContainer } from "../containers/BottomPanelContainer";
 import { ContentPanel } from "../components/organisms/panels/ContentPanel";
+import { NoContentMessage } from "../components/atoms/text/NoContentMessage";
 
 // contexts
 import { AppContext } from "../contexts/appContextUtil";
@@ -232,7 +233,7 @@ export class PlanView extends React.Component<PlanViewProps, {}> {
         } else if (hasContent || this.props.editMode === EditMode.Edit) {
             pageContent = pageContentsElts;
         } else {
-            pageContent = <div className={css.noContentMsg}>This project is empty. To add content click the Edit button!</div>;
+            pageContent = <NoContentMessage>This project is empty. To add content click the Edit button!</NoContentMessage>;
         }
         return (
             <>
