@@ -11,6 +11,9 @@ import { getProductBacklogItems } from "../../selectors/productBacklogItemSelect
 import { ProductBacklogItem } from "../../reducers/productBacklogItemsReducer";
 import { AvailableProductBacklogItem, removeAvailableItem } from "./availableItemsUtils";
 
+// utils
+import { getUniquePropertyValues } from "../../utils/arrayUtils";
+
 export interface LinkCountObj {
     [id: string]: { linkCount: number; inPrevList: boolean; inNextList: boolean };
 }
@@ -32,6 +35,7 @@ const handleNewList = (
         let itemFound = itemsFound[0];
         let busy = true;
         let orphanedEnd = true;
+        let linkSplitOverProjects = false;
         while (busy) {
             removeAvailableItem(availableItems, itemFound);
             lastItemAdded = {
@@ -48,9 +52,15 @@ const handleNewList = (
             } else {
                 const nextItemsFound = availableItems.filter((item) => item.backlogItemId === itemFound.nextBacklogItemId);
                 itemFound = nextItemsFound[0];
+                if (!itemFound) {
+                    busy = false;
+                    linkSplitOverProjects = true;
+                }
             }
         }
-        if (orphanedEnd) {
+        if (linkSplitOverProjects) {
+            lastItemAdded.itemType = RankItemType.FinalLinkWithoutEnd;
+        } else if (orphanedEnd) {
             lastItemAdded.itemType = RankItemType.OrphanedListEnd;
         } else {
             lastItemAdded.itemType = RankItemType.ListEnd;
@@ -220,13 +230,14 @@ export const findCircularRefs = (allRanks: ProductBacklogItem[]) => {
     };
 };
 
-export const buildGroups = (state: StateTree) => {
+export const buildGroupsForProjectId = (state: StateTree, projectId?: string) => {
     const buildNewGroups = () => {
         const groups: ProductBacklogItemGroup[] = [];
         return groups;
     };
     const groups = buildNewGroups();
-    const ranks = getProductBacklogItems(state);
+    const allRanks = getProductBacklogItems(state);
+    const ranks = projectId ? allRanks.filter((rank) => rank.projectId === projectId) : allRanks;
     const circularRefResult = findCircularRefs(ranks);
     if (circularRefResult.hasIssues) {
         throw new Error(circularRefResult.message);
@@ -263,4 +274,25 @@ export const buildGroups = (state: StateTree) => {
         handleNewGroup(groups, availableItems, firstItem, linkCountObj);
     }
     return groups;
+};
+
+export const buildGroups = (state: StateTree) => {
+    return buildGroupsForProjectId(state);
+};
+
+export const buildGroupsByProjectId = (state: StateTree): Record<string, ProductBacklogItemGroup[]> => {
+    const projectIdList = buildProjectIdList(state);
+    const result = projectIdList.reduce(
+        (acc: Record<string, ProductBacklogItemGroup[]>, projectId: string) => {
+            acc[projectId] = buildGroupsForProjectId(state, projectId);
+            return acc;
+        },
+        {} as Record<string, ProductBacklogItemGroup[]>
+    );
+    return result;
+};
+
+export const buildProjectIdList = (state: StateTree): string[] => {
+    const ranks = getProductBacklogItems(state);
+    return getUniquePropertyValues(ranks, "projectId");
 };

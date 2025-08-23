@@ -14,18 +14,20 @@ import { StateTree } from "../../reducers/rootReducer";
 
 // actions
 import { apiGetProductBacklogItems } from "../../actions/apiProductBacklogItems";
-import { buildGroups } from "./productBacklogItemViewUtils";
+
+// utils
+import { buildGroupsByProjectId } from "./productBacklogItemViewUtils";
 
 const mapStateToProps = (state: StateTree): ProductBacklogItemViewStateProps => {
-    let groups = [];
+    let groupsByProjectId = {};
     let error = undefined;
     try {
-        groups = buildGroups(state);
+        groupsByProjectId = buildGroupsByProjectId(state);
     } catch (err) {
         error = err;
     }
     const result: ProductBacklogItemViewStateProps = {
-        groups,
+        groupsByProjectId,
         error
     };
     return result;
