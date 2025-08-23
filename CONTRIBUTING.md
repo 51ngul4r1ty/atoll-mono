@@ -18,7 +18,7 @@ specific README.md files.
 Requirements
 ------------
 
-1. Node v18.19.0 (see `Running the App (using source code)` below)
+1. Node v18.20.5 (see `Running the App (using source code)` below)
 2. NPM v10.2.3
 3. PostgreSQL 16.3 for storing data:
    `https://www.enterprisedb.com/downloads/postgres-postgresql-downloads`
@@ -40,7 +40,9 @@ Running the App (using source code)
    have that installed or an equivalent method (use .nvmrc to see actual
    supported version).
 2. Set up dependencies:
-   - at root level: `npm ci`
+   - at root level: `npm ci`  
+     >**NOTE**: If you use VS Code "Terminal" you may start out in a project
+       subfolder (like `web-app`), so make sure you're in the root folder!
 3. Build the app:
    - at root level: `npm run build-all`
 4. Set up PostgreSQL (you can use these steps or do it the way `setup.sql`
@@ -134,3 +136,25 @@ In general, if you're not sure, you should pick option 2.
 
 If you wish to refresh packages for a specific workspace you can use something
 like: `npm i -w=packages/vscode-extension`
+
+Rules About PRs
+===============
+
+Small PRs
+---------
+
+Always ensure that your PR contains only the changes needed to implement the
+task described for the issue or story.  This achieves the following:  
+1. Smaller PRs allow reviewers to focus on the actual changes so that they don't
+   miss potential issues- this is the most important thing.
+2. Looking back on changes historically makes it easier to reason about.
+
+It may actually be necessary to go back and refine a PR after the fact.
+
+Each PR Must Have a Work Item
+-----------------------------
+
+This is important because it allows us to measure progress.  The work items
+can be analyzed and we can get useful information from them.  For example, if
+we find that we're spending a lot of time bug fixing in a particular package
+that can highlight that there are issues in that part of the code.
