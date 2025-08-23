@@ -83,7 +83,9 @@ Responsive Design
 =================
 
 To allow the app to be used on various devices the Atoll project leverages
-global CSS classes that include:
+global scope CSS classes that include:
 1. "mobile" when a phone is detected.
 2. "os-*" classes are used to customize the UI for the Electron desktop
    cient app.
+
+> **NOTE**: You can see examples of this in App.module.css.
