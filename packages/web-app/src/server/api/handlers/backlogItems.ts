@@ -409,6 +409,8 @@ export const backlogItemsReorderPostHandler = async (req: Request, res: Response
     }
     let transaction: Transaction;
     try {
+        // Example: A -> B -> C -> D -> E -> F
+        //   dragging B to F as a new location
         let rolledBack = false;
         transaction = await sequelize.transaction({ isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE });
 
@@ -420,10 +422,21 @@ export const backlogItemsReorderPostHandler = async (req: Request, res: Response
             where: { backlogitemId: sourceItemId }
         });
         const oldNextItemId = (sourceItemNextLink as any).dataValues.nextbacklogitemId;
+        console.log(`    DEBUGGING: oldNextItemId=${oldNextItemId}`);
         const sourceItemPrevLinkId = (sourceItemPrevLink as any).dataValues.backlogitemId;
+        console.log(`    DEBUGGING: sourceItemPrevLinkId=${sourceItemPrevLinkId}`);
         if (sourceItemPrevLinkId === oldNextItemId) {
             throw new Error(`sourceItemPrevLink with ${sourceItemPrevLinkId} linked to self!`);
         }
+        console.log();
+        console.log(
+            `    DEBUGGING: 01 - unlinking source item ${sourceItemId} ("B") from old location ${sourceItemPrevLinkId} ("A"),`
+        );
+        console.log(
+            `       so item before it will link to the item after it (A -> B -> C now becomes A -> C with B -> C still in database)`
+        );
+        console.log(`       ("C" is ${oldNextItemId})`);
+        console.log();
         await sourceItemPrevLink.update({ nextbacklogitemId: oldNextItemId }, { transaction });
 
         // 2. Re-link source item in new location
@@ -439,6 +452,16 @@ export const backlogItemsReorderPostHandler = async (req: Request, res: Response
         if (sourceItemNextLinkId === targetItemId) {
             throw new Error(`sourceItemNextLink with ${sourceItemNextLinkId} linked to self (which was target item)!`);
         }
+        // TODO: Working on what this does - text is currently WRONG
+        // console.log();
+        // console.log(
+        //     `    DEBUGGING: 02 - re-linking source item ${sourceItemId} ("B") to point to new next item ${targetItemId} ("F"),`
+        // );
+        // console.log(
+        //     `       so item before it will link to the item after it (A -> B -> C now becomes A -> C with B -> C still in database)`
+        // );
+        // console.log(`       ("C" is ${oldNextItemId})`);
+        // console.log();
         await sourceItemNextLink.update({ nextbacklogitemId: targetItemId }, { transaction });
 
         if (!rolledBack) {
