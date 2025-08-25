@@ -417,52 +417,66 @@ export const backlogItemsReorderPostHandler = async (req: Request, res: Response
         // 1. Unlink source item from old location
         const sourceItemPrevLink = await ProductBacklogItemDataModel.findOne({
             where: { nextbacklogitemId: sourceItemId }
-        });
+        }); // (A->B)
         const sourceItemNextLink = await ProductBacklogItemDataModel.findOne({
             where: { backlogitemId: sourceItemId }
-        });
-        const oldNextItemId = (sourceItemNextLink as any).dataValues.nextbacklogitemId;
+        }); // (B->C)
+        const oldNextItemId = (sourceItemNextLink as any).dataValues.nextbacklogitemId; // C
         console.log(`    DEBUGGING: oldNextItemId=${oldNextItemId}`);
-        const sourceItemPrevLinkId = (sourceItemPrevLink as any).dataValues.backlogitemId;
+        const sourceItemPrevLinkId = (sourceItemPrevLink as any).dataValues.backlogitemId; // A
         console.log(`    DEBUGGING: sourceItemPrevLinkId=${sourceItemPrevLinkId}`);
         if (sourceItemPrevLinkId === oldNextItemId) {
+            // A = C? (no)
             throw new Error(`sourceItemPrevLink with ${sourceItemPrevLinkId} linked to self!`);
         }
         console.log();
+        console.log(`---- RE-ORDERING SOURCE ITEM "B" TO TARGET ITEM "F" ----`);
+        console.log("     FOR EXAMPLE: A -> [B] -> C -> D -> E -> [F]");
+        console.log("     END RESULT:  A ->  C  -> D -> E -> F ->  A"); // TODO: This may be wrong, for it to go after F???
+        console.log();
+
         console.log(
-            `    DEBUGGING: 01 - unlinking source item ${sourceItemId} ("B") from old location ${sourceItemPrevLinkId} ("A"),`
+            `    DEBUGGING: 1 - unlinking source item ${sourceItemId} ("B") from old location ${sourceItemPrevLinkId} ("A"),`
         );
         console.log(
             `       so item before it will link to the item after it (A -> B -> C now becomes A -> C with B -> C still in database)`
         );
         console.log(`       ("C" is ${oldNextItemId})`);
         console.log();
-        await sourceItemPrevLink.update({ nextbacklogitemId: oldNextItemId }, { transaction });
+        await sourceItemPrevLink.update({ nextbacklogitemId: oldNextItemId }, { transaction }); // (A->B) becomes (A->C)
 
         // 2. Re-link source item in new location
         const targetItemPrevLink = await ProductBacklogItemDataModel.findOne({
             where: { nextbacklogitemId: targetItemId }
-        });
-        const targetItemPrevLinkId = (targetItemPrevLink as any).dataValues.backlogitemId;
+        }); // (E->F)
+        const targetItemPrevLinkId = (targetItemPrevLink as any).dataValues.backlogitemId; // E
         if (targetItemPrevLinkId === sourceItemId) {
+            // E = B? (no)
             throw new Error(`targetItemPrevLink with ${targetItemPrevLinkId} linked to self (which was source item)!`);
         }
-        await targetItemPrevLink.update({ nextbacklogitemId: sourceItemId }, { transaction });
-        const sourceItemNextLinkId = (sourceItemNextLink as any).dataValues.backlogitemId;
+        console.log();
+        console.log(
+            `    DEBUGGING: 2 - re-linking source item ${sourceItemId} ("B") to point to new next item ${targetItemId} ("F");`
+        );
+        console.log(`               After the two parts: (a) (E->F) becomes (E->B)`);
+        console.log(`                                    (b) (B->C) becomes (B->F)`);
+        console.log(`                           overall: E->F becomes E->B->F`);
+        console.log(`    DEBUGGING: 2(a) executing now ("F" is ${targetItemId})`);
+        console.log();
+        await targetItemPrevLink.update({ nextbacklogitemId: sourceItemId }, { transaction }); // (E->F) becomes (E->B)
+        const sourceItemNextLinkId = (sourceItemNextLink as any).dataValues.backlogitemId; // B
         if (sourceItemNextLinkId === targetItemId) {
+            // B = F? (no)
             throw new Error(`sourceItemNextLink with ${sourceItemNextLinkId} linked to self (which was target item)!`);
         }
-        // TODO: Working on what this does - text is currently WRONG
-        // console.log();
-        // console.log(
-        //     `    DEBUGGING: 02 - re-linking source item ${sourceItemId} ("B") to point to new next item ${targetItemId} ("F"),`
-        // );
-        // console.log(
-        //     `       so item before it will link to the item after it (A -> B -> C now becomes A -> C with B -> C still in database)`
-        // );
-        // console.log(`       ("C" is ${oldNextItemId})`);
-        // console.log();
-        await sourceItemNextLink.update({ nextbacklogitemId: targetItemId }, { transaction });
+        console.log();
+        console.log(`    DEBUGGING: 2(b) executing now ("B" is ${sourceItemId} and "F" is ${targetItemId})`);
+        console.log();
+        await sourceItemNextLink.update({ nextbacklogitemId: targetItemId }, { transaction }); // (B->C) becomes (B->F)
+        console.log(`    END RESULT: ${targetItemPrevLinkId} -> ${sourceItemId} -> ${targetItemId}.`);
+
+        console.log();
+        console.log(`---- RE-ORDERED SOURCE ITEM "B" TO TARGET ITEM "F" ----`);
 
         if (!rolledBack) {
             await transaction.commit();
