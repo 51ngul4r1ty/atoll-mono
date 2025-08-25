@@ -104,6 +104,14 @@ Running the App (using source code)
    - the sample script created a user with login `test` and password `atoll`, so
      you should be able to use those credentials to login
 
+Permission Issues
+-----------------
+
+If you see permission issues like "permission denied for table usersettings" or
+something like that it may be necessary to run this SQL command in the "atoll"
+database:
+`GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO atoll;`
+
 Running the App (using source code + Docker)
 --------------------------------------------
 
