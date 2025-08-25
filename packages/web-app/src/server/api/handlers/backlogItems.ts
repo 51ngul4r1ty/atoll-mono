@@ -397,8 +397,8 @@ export const backlogItemPutHandler = async (req: Request, res: Response) => {
 };
 
 export const backlogItemsReorderPostHandler = async (req: Request, res: Response) => {
-    const sourceItemId = req.body.sourceItemId;
-    const targetItemId = req.body.targetItemId;
+    const sourceItemId = req.body.sourceItemId; // e28cbfc055584553bd94e326e2779e51
+    const targetItemId = req.body.targetItemId; // null
     if (!sourceItemId) {
         respondWithFailedValidation(res, "sourceItemId must have a value");
         return;
@@ -415,12 +415,13 @@ export const backlogItemsReorderPostHandler = async (req: Request, res: Response
         transaction = await sequelize.transaction({ isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE });
 
         // 1. Unlink source item from old location
-        const sourceItemPrevLink = await ProductBacklogItemDataModel.findOne({
-            where: { nextbacklogitemId: sourceItemId }
-        }); // (A->B)
         const sourceItemNextLink = await ProductBacklogItemDataModel.findOne({
             where: { backlogitemId: sourceItemId }
         }); // (B->C)
+        const projectId = (sourceItemNextLink as any).dataValues.projectId;
+        const sourceItemPrevLink = await ProductBacklogItemDataModel.findOne({
+            where: { nextbacklogitemId: sourceItemId, projectId }
+        }); // (A->B)
         const oldNextItemId = (sourceItemNextLink as any).dataValues.nextbacklogitemId; // C
         console.log(`    DEBUGGING: oldNextItemId=${oldNextItemId}`);
         const sourceItemPrevLinkId = (sourceItemPrevLink as any).dataValues.backlogitemId; // A
@@ -447,9 +448,9 @@ export const backlogItemsReorderPostHandler = async (req: Request, res: Response
 
         // 2. Re-link source item in new location
         const targetItemPrevLink = await ProductBacklogItemDataModel.findOne({
-            where: { nextbacklogitemId: targetItemId }
+            where: { nextbacklogitemId: targetItemId, projectId }
         }); // (E->F)
-        const targetItemPrevLinkId = (targetItemPrevLink as any).dataValues.backlogitemId; // E
+        const targetItemPrevLinkId = (targetItemPrevLink as any).dataValues.backlogitemId; // E = 593c79573be64eb5ac1f99f22add1f9b
         if (targetItemPrevLinkId === sourceItemId) {
             // E = B? (no)
             throw new Error(`targetItemPrevLink with ${targetItemPrevLinkId} linked to self (which was source item)!`);
