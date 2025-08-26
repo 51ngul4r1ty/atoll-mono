@@ -46,8 +46,9 @@
     "test": "npm run test-all",
     "test-all": "npm run test -ws --if-present",
     "test-all:unit": "npm run test:unit -ws --if-present",
-    "test-pkg:shared": "npm run test -w packagesnp/shared",
-    "test-pkg:extension": "npm run test -w packages/vscode-extension"
+    "test-pkg:shared": "npm run test -w packages/shared",
+    "test-pkg:extension": "npm run test -w packages/vscode-extension",
+    "test-pkg:web-app": "npm run test -w packages/web-app"
   },
   "author": {
     "name": "Kevin Berry",

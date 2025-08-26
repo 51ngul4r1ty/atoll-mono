@@ -53,7 +53,8 @@
         "coverage-gutters.showLineCoverage": false,
         "typescript.tsdk": "node_modules\\typescript\\lib",
         "deno.enable": false,
-        "jest.disabledWorkspaceFolders": ["vscode-extension", "shared", "scripts", "rich-types", "api-types"]
+        "jest.disabledWorkspaceFolders": ["vscode-extension", "shared", "scripts", "rich-types", "api-types"],
+        "jestrunner.jestPath": "${workspaceFolder:web-app}/../../../node_modules/jest/bin/jest.js"
     },
     "extensions": {
         "recommendations": ["bierner.markdown-checkbox"]
