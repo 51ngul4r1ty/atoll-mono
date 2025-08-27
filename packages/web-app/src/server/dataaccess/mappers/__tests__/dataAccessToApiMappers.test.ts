@@ -47,7 +47,7 @@ describe("Data Object To API Mappers", () => {
         });
     });
     describe("mapDbToApiBacklogItem", () => {
-        it("should map a sample backlog item correctly", () => {
+        it("should map a sample backlog item to api model correctly", () => {
             // arrange
             const shellDbItem = {
                 id: "fake-id",

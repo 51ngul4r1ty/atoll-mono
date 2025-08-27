@@ -413,11 +413,12 @@ export const backlogItemsReorderPostHandler = async (req: Request, res: Response
         transaction = await sequelize.transaction({ isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE });
 
         // 1. Unlink source item from old location
-        const sourceItemPrevLink = await ProductBacklogItemDataModel.findOne({
-            where: { nextbacklogitemId: sourceItemId }
-        });
         const sourceItemNextLink = await ProductBacklogItemDataModel.findOne({
             where: { backlogitemId: sourceItemId }
+        });
+        const projectId = (sourceItemNextLink as any).dataValues.projectId;
+        const sourceItemPrevLink = await ProductBacklogItemDataModel.findOne({
+            where: { nextbacklogitemId: sourceItemId, projectId }
         });
         const oldNextItemId = (sourceItemNextLink as any).dataValues.nextbacklogitemId;
         const sourceItemPrevLinkId = (sourceItemPrevLink as any).dataValues.backlogitemId;
@@ -428,7 +429,7 @@ export const backlogItemsReorderPostHandler = async (req: Request, res: Response
 
         // 2. Re-link source item in new location
         const targetItemPrevLink = await ProductBacklogItemDataModel.findOne({
-            where: { nextbacklogitemId: targetItemId }
+            where: { nextbacklogitemId: targetItemId, projectId }
         });
         const targetItemPrevLinkId = (targetItemPrevLink as any).dataValues.backlogitemId;
         if (targetItemPrevLinkId === sourceItemId) {

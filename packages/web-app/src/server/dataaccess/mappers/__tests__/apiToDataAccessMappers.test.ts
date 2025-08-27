@@ -14,7 +14,7 @@ import { ApiBacklogItem, ApiBacklogItemPart } from "@atoll/shared";
 
 describe("API To Data Object Mappers", () => {
     describe("mapApiToDbBacklogItem", () => {
-        it("should map a sample backlog item correctly", () => {
+        it("should map a sample backlog item to db model correctly", () => {
             // arrange
             const apiItem: ApiBacklogItem = {
                 id: "fake-id",
@@ -49,7 +49,7 @@ describe("API To Data Object Mappers", () => {
             // assert
             const shellDbItem = {
                 acceptanceCriteria: "* successfully test this mapping function",
-                notes: "* successfully test notes db mapping",
+                notes: "* successfully test notes mapping",
                 acceptedAt: new Date("2022-04-06T14:45:15.767Z"),
                 createdAt: new Date("2022-04-02T09:59:01.000Z"),
                 estimate: 13,
