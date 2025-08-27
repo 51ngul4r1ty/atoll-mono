@@ -11,9 +11,6 @@ export class MockDatabase {
     getCollectionItem = <T>(collectionName: string, fieldName: string, fieldValue: string): any => {
         const itemValue = this.getCollectionItemValueByValues(collectionName, { [fieldName]: fieldValue });
         return itemValue;
-        // const collectionItems: CollectionEntry[] = this.collections[collectionName];
-        // const matchingItems = collectionItems.filter((item) => item[fieldName] === fieldValue);
-        // return matchingItems[0]?.value;
     };
     getCollectionItemValueByValues = (collectionName: string, values: Record<string, any>): any | undefined => {
         const items: CollectionEntry[] = this.getCollectionItemsByValues(collectionName, values);
