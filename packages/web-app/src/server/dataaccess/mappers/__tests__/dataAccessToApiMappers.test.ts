@@ -90,7 +90,7 @@ describe("Data Object To API Mappers", () => {
                 type: "story",
                 status: "R",
                 acceptanceCriteria: "* successfully test this mapping function",
-                notes: "* successfully test notes mapping again and again",
+                notes: "* successfully test notes mapping again",
                 startedAt: "2022-04-04T14:15:39.446Z",
                 finishedAt: "2022-04-06T12:39:23.223Z",
                 acceptedAt: "2022-04-06T14:45:15.767Z",
