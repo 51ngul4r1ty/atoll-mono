@@ -100,6 +100,7 @@ export const sprintBacklogItemPartsPostHandler = async (req: Request, res: Respo
 
                 addedBacklogItemPart = mapDbToApiBacklogItemPart(backlogItemPart);
                 const addToNextSprintResult = await addBacklogItemPartToNextSprint(
+                    dbSprint.projectId,
                     addedBacklogItemPart.backlogitemId,
                     addedBacklogItemPart.id,
                     isoDateStringToDate(dbSprint.startdate),

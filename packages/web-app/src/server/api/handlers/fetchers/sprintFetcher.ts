@@ -6,12 +6,7 @@ import { FindOptions, Op, Transaction } from "sequelize";
 import { ApiBacklogItemPart, ApiSprint, isoDateStringToDate, Link } from "@atoll/shared";
 
 // consts/enums
-import {
-    BACKLOG_ITEM_PART_RESOURCE_NAME,
-    BACKLOG_ITEM_RESOURCE_NAME,
-    SPRINT_BACKLOG_CHILD_RESOURCE_NAME,
-    SPRINT_RESOURCE_NAME
-} from "../../../resourceNames";
+import { BACKLOG_ITEM_PART_RESOURCE_NAME, SPRINT_BACKLOG_CHILD_RESOURCE_NAME, SPRINT_RESOURCE_NAME } from "../../../resourceNames";
 
 // data access
 import {
@@ -109,7 +104,7 @@ export const fetchSprint = async (sprintId: string, transaction?: Transaction): 
             };
         }
         const sprintItem = mapDbToApiSprint(sprint);
-        const nextSprint = await fetchNextSprint(isoDateStringToDate(sprintItem.startdate), transaction);
+        const nextSprint = await fetchNextSprint(sprintItem.projectId, isoDateStringToDate(sprintItem.startdate), transaction);
         const links: Link[] = buildSprintLinks(sprintItem);
         if (nextSprint) {
             const nextSprintItem = mapDbToApiSprint(nextSprint);
@@ -126,7 +121,14 @@ export const fetchSprint = async (sprintId: string, transaction?: Transaction): 
     }
 };
 
-export const fetchNextSprint = async (currentSprintStartDate: Date, transaction?: Transaction): Promise<SprintDataModel | null> => {
+export const fetchNextSprint = async (
+    projectId: string | null,
+    currentSprintStartDate: Date,
+    transaction?: Transaction
+): Promise<SprintDataModel | null> => {
+    if (!projectId) {
+        throw new Error("fetchNextSprint called without providing projectId!");
+    }
     if (!currentSprintStartDate) {
         throw new Error("fetchNextSprint called without providing currentSprintStartDate!");
     }
@@ -135,7 +137,8 @@ export const fetchNextSprint = async (currentSprintStartDate: Date, transaction?
     }
     const options: FindOptions = {
         where: {
-            startdate: { [Op.gte]: currentSprintStartDate }
+            startdate: { [Op.gte]: currentSprintStartDate },
+            projectId: { [Op.eq]: projectId }
         },
         order: [["startdate", "ASC"]],
         limit: 2

@@ -122,12 +122,13 @@ export interface AddBacklogItemPartToNextSprintResult {
 }
 
 export const addBacklogItemPartToNextSprint = async (
+    currentProjectId: string,
     backlogitemId: string,
     backlogitempartId: string,
     currentSprintStartDate: Date,
     transaction?: Transaction
 ): Promise<AddBacklogItemPartToNextSprintResult> => {
-    const nextSprint = await fetchNextSprint(currentSprintStartDate, transaction);
+    const nextSprint = await fetchNextSprint(currentProjectId, currentSprintStartDate, transaction);
     const nextSprintId = nextSprint.id;
     const backlogItemParts = await fetchSprintBacklogItemsPartByItemId(nextSprintId, backlogitemId, transaction);
     if (backlogItemParts.length > 0) {
