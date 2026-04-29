@@ -12,7 +12,8 @@ import {
     ApiSprintBacklogItem,
     ApiUserSettings,
     ApiBacklogItemWithParts,
-    cloneWithNested
+    cloneWithNested,
+    ApiMilestone
 } from "@atoll/shared";
 
 // utils
@@ -250,5 +251,32 @@ export const mapDbToApiProject = (dbItem: any): ApiProject => {
     const dataValueFieldsOnly = cloneWithoutNested(dbItem.dataValues);
     return {
         ...dataValueFieldsOnly
+    };
+};
+
+export const mapDbToApiMilestone = (dbItem: any): ApiMilestone => {
+    if (!dbItem) {
+        return dbItem;
+    }
+    const dataValueFieldsOnly = cloneWithoutNested(dbItem.dataValues);
+    return {
+        ...dataValueFieldsOnly
+    };
+};
+
+export const mapDbToApiBacklogItemMilestone = (dbItem: any): ApiMilestone => {
+    if (!dbItem) {
+        return dbItem;
+    }
+    const dataValueFieldsOnly = cloneWithoutNested(dbItem.dataValues);
+    const backlogItemOnly = mapDbToApiBacklogItem(dbItem.dataValues?.backlogitem);
+    const milestoneItemOnly = mapDbToApiMilestone(dbItem.dataValues?.milestone);
+    return {
+        ...dataValueFieldsOnly,
+        backlogitem: {
+            friendlyId: backlogItemOnly.friendlyId,
+            externalId: backlogItemOnly.externalId
+        },
+        milestone: milestoneItemOnly
     };
 };

@@ -393,3 +393,9 @@
     bottom: -0.25rem;
     font-size: 0.75rem;
 }
+
+.milestonePill {
+    position: absolute;
+    right: 0;
+    top: 0;
+}

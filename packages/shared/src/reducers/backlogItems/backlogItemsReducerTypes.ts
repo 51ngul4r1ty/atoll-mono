@@ -45,6 +45,10 @@ export interface SaveableBacklogItem extends EditableBacklogItem {
     saved?: boolean;
 }
 
+export interface SaveableProductBacklogItem extends SaveableBacklogItem {
+    milestoneText?: string | null;
+}
+
 export interface SaveableBacklogItemInSprint extends BacklogItemInSprint, SaveableBacklogItem {}
 
 export interface ItemWithSource {
@@ -52,14 +56,8 @@ export interface ItemWithSource {
     pushState?: PushState;
 }
 
-export interface BacklogItemWithSource extends SaveableBacklogItem, ItemWithSource {
-    /* from ItemWithSource */
-    source: Source;
-    pushState?: PushState;
-}
+export interface BacklogItemWithSource extends SaveableBacklogItem, ItemWithSource {}
 
-export interface BacklogItemInSprintWithSource extends SaveableBacklogItemInSprint, ItemWithSource {
-    /* from ItemWithSource */
-    source: Source;
-    pushState?: PushState;
-}
+export interface ProductBacklogItemWithSource extends SaveableProductBacklogItem, ItemWithSource {}
+
+export interface BacklogItemInSprintWithSource extends SaveableBacklogItemInSprint, ItemWithSource {}

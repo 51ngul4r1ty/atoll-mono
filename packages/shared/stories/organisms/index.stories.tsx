@@ -144,7 +144,8 @@ const allItems: BacklogItemWithSource[] = [
         type: "story",
         saved: true,
         source: Source.Loaded,
-        pushState: PushState.Changed
+        pushState: PushState.Changed,
+        milestoneText: "Test Milestone"
     },
     {
         createdAt: undefined,

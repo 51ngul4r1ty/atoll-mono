@@ -93,6 +93,11 @@ export type ApiBacklogItem = StandardItem &
         type: BacklogItemType;
     };
 
+export type ApiMilestone = StandardItem & {
+    name: string;
+    backlogItemIds: string[];
+};
+
 export type ApiBacklogItemWithParts = ApiBacklogItem & {
     /* from BaseItem */
     id: uuid | null;

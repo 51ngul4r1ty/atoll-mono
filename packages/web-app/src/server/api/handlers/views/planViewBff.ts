@@ -20,6 +20,7 @@ import {
 } from "../../utils/responseBuilder";
 import { combineMessages, combineStatuses } from "../../utils/resultAggregator";
 import { fetchSprints } from "../fetchers/sprintFetcher";
+import { fetchMilestonesWithBacklogItems } from "../fetchers/milestoneFetcher";
 import { fetchSprintBacklogItemsWithLinks } from "../fetchers/sprintBacklogItemFetcher";
 import { getLoggedInAppUserId } from "../../utils/authUtils";
 import { getUserPreferences } from "../fetchers/userPreferencesFetcher";
@@ -31,11 +32,14 @@ export const planViewBffGetHandler = async (req: Request, res: Response) => {
         const userPreferencesResult = await getUserPreferences("--self--", () => getLoggedInAppUserId(req));
         const selectedProjectId = (userPreferencesResult as UserPreferencesItemResult).data.item.settings.selectedProject;
 
-        const [projectResult, backlogItemsResult, sprintsResult] = await Promise.all([
+        const [projectResult, backlogItemsResult, sprintsResult, milestonesResult] = await Promise.all([
             fetchProject(selectedProjectId),
             fetchBacklogItems(selectedProjectId),
-            fetchSprints(selectedProjectId)
+            fetchSprints(selectedProjectId),
+            fetchMilestonesWithBacklogItems(selectedProjectId)
         ]);
+        let milestoneSuccessResult = milestonesResult as RestApiCollectionResult<any>;
+        let milestones = milestoneSuccessResult.data ? milestoneSuccessResult.data?.items : [];
         const sprintsSuccessResult = sprintsResult as RestApiCollectionResult<any>;
         let sprints = sprintsSuccessResult.data ? sprintsSuccessResult.data?.items : [];
         const archivedSprints = sprints.filter((sprint) => sprint.archived === true);
@@ -83,6 +87,7 @@ export const planViewBffGetHandler = async (req: Request, res: Response) => {
             res.json(
                 buildResponseWithData({
                     backlogItems: backlogItemsResult.data?.items,
+                    milestones,
                     sprints,
                     sprintBacklogItems: sprintBacklogItemsResult?.data?.items || [],
                     userPreferences: (userPreferencesResult as UserPreferencesItemResult).data?.item,

@@ -3,6 +3,8 @@ export * from "./models/BacklogItemDataModel";
 export * from "./models/BacklogItemPartDataModel";
 export * from "./models/ProductBacklogItemDataModel";
 export * from "./models/BacklogItemTagDataModel";
+export * from "./models/BacklogItemMilestoneDataModel";
+export * from "./models/MilestoneDataModel";
 export * from "./models/CounterDataModel";
 export * from "./models/ProjectDataModel";
 export * from "./models/ProjectSettingsDataModel";

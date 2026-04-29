@@ -22,7 +22,7 @@ import { NoContentMessage } from "../../../atoms/text/NoContentMessage";
 import { EditMode } from "../../../common/componentEnums";
 import { buildClassName } from "../../../../utils/classNameBuilder";
 import { useDispatch } from "react-redux";
-import { SaveableBacklogItem } from "../../../../reducers/backlogItems/backlogItemsReducerTypes";
+import { SaveableProductBacklogItem } from "../../../../reducers/backlogItems/backlogItemsReducerTypes";
 import { Source } from "../../../../reducers/enums";
 
 // actions
@@ -73,7 +73,7 @@ import { productBacklogItemMenuBuilder } from "../../../common/itemMenuBuilders"
 
 export const buildDragBacklogItemElt = (
     editMode: EditMode,
-    item: SaveableBacklogItem,
+    item: SaveableProductBacklogItem,
     renderMobile: boolean,
     offsetTop: number,
     width: any
@@ -106,6 +106,7 @@ export const buildDragBacklogItemElt = (
             titleText={item.storyPhrase}
             totalParts={item.totalParts}
             unallocatedParts={item.unallocatedParts}
+            milestonePillText={item.milestoneText}
             width={width}
         />
     );
@@ -507,6 +508,7 @@ export const InnerProductPlanningPanel: React.FC<ProductPlanningPanelProps> = (p
                         titleText={null}
                         totalParts={item.totalParts}
                         unallocatedParts={item.unallocatedParts}
+                        milestonePillText={item.milestoneText}
                         onDetailClick={() => {
                             dispatch(backlogItemDetailClick(item.id, props.strictMode));
                         }}

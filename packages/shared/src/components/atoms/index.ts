@@ -1,5 +1,6 @@
 export * from "./dividers";
 export * from "./icons";
+export { Pill } from "./info";
 export * from "./inputs";
 export * from "./panels";
 export * from "./tabs";

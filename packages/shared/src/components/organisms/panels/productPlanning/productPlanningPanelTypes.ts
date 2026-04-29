@@ -2,7 +2,7 @@
 import { WithTranslation } from "react-i18next";
 
 // interfaces/types
-import type { BacklogItemWithSource } from "../../../../reducers/backlogItems/backlogItemsReducerTypes";
+import type { ProductBacklogItemWithSource } from "../../../../reducers/backlogItems/backlogItemsReducerTypes";
 import type { StoryPhrases } from "../../../../types/storyTypes";
 
 // consts/enums
@@ -20,7 +20,7 @@ export interface PlanningPanelBacklogItem extends StoryPhrases {
 }
 
 export interface BacklogItemPlanningPanelStateProps {
-    allItems: BacklogItemWithSource[];
+    allItems: ProductBacklogItemWithSource[];
     busyJoiningUnallocatedParts: boolean;
     busySplittingStory: boolean;
     className?: string;
