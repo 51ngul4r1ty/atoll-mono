@@ -15,5 +15,11 @@
 }
 
 :global(.mobile) .pill {
-    /* Add any specialized mobile styling here */
+    position: absolute;
+    right: 2rem;
+    top: auto;
+    max-width: 2.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

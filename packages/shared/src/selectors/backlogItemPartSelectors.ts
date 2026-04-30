@@ -6,7 +6,7 @@ import type { BacklogItemsState } from "../reducers/backlogItems/backlogItemsRed
 // utils
 import { createSelector } from "reselect";
 import { backlogItems } from "./backlogItemSelectors";
-import { getBacklogItemPartById as reducerGetBacklogItemPartById } from "../reducers/backlogItems/backlogItemsReducerHelper";
+import { getBacklogItemPartById as reducerGetBacklogItemPartById } from "../reducers/backlogItems/helpers/backlogItemsReducerHelper";
 
 export type BacklogItemPartForSplitForm = BacklogItemPart & {
     allocatedSprintId: string | null;

@@ -286,6 +286,7 @@ export const InnerBacklogItemCard: React.FC<InnerBacklogItemCardProps> = (props)
                             <DragIcon invertColors />
                         </div>
                     ) : null}
+                    {!props.isDraggable && props.renderMobile ? milestonePillElts : null}
                 </div>
                 {!props.renderMobile ? checkboxToSelect : null}
                 <div className={css.backlogItemText}>
@@ -298,7 +299,7 @@ export const InnerBacklogItemCard: React.FC<InnerBacklogItemCardProps> = (props)
                         </div>
                         {props.renderMobile ? statusIconElts : null}
                         {props.renderMobile ? editDetailButton : null}
-                        {milestonePillElts}
+                        {props.renderMobile ? null : milestonePillElts}
                     </div>
                     {isSplitBacklogItem ? splitTextElts : null}
                 </div>
