@@ -3,7 +3,7 @@ import * as React from "react";
 import { useDispatch } from "react-redux";
 
 // interfaces/types
-import type { BacklogItemWithSource } from "../../../reducers/backlogItems/backlogItemsReducerTypes";
+import type { BacklogItemWithSource, ProductBacklogItemWithSource } from "../../../reducers/backlogItems/backlogItemsReducerTypes";
 import type { ItemMenuEventHandlers } from "../../molecules/menus/menuBuilderTypes";
 
 // consts/enums
@@ -38,7 +38,7 @@ import { buildBacklogDisplayId } from "../../../utils/backlogItemHelper";
 import { productBacklogItemMenuBuilder } from "../../common/itemMenuBuilders";
 import { computeProductBacklogItemEstimate } from "../panels/productPlanning/productPlanningPanelUtils";
 
-export interface BacklogItemPlanningItemStateProps extends BacklogItemWithSource {
+export interface BacklogItemPlanningItemStateProps extends ProductBacklogItemWithSource {
     busyJoiningUnallocatedParts: boolean;
     busySplittingStory: boolean;
     saving: boolean;
@@ -150,6 +150,7 @@ const InternalBacklogItemPlanningItem: React.FC<BacklogItemPlanningItemProps> = 
                     storyEstimate={props.storyEstimate}
                     titleText={props.storyPhrase}
                     totalParts={props.totalParts}
+                    milestonePillText={props.milestoneText}
                     unallocatedParts={props.unallocatedParts}
                     onDetailClick={() => {
                         dispatch(backlogItemDetailClick(props.id, props.strictMode));

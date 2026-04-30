@@ -1,0 +1,25 @@
+.pill {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: lowercase;
+    background-color: #482;
+    padding: 0.03rem 0.8rem 0.07rem 0.8rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    color: #8f4;
+    text-align: center;
+}
+
+.invalidPillContent {
+    color: #f00;
+}
+
+:global(.mobile) .pill {
+    position: absolute;
+    right: 2rem;
+    top: auto;
+    max-width: 2.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

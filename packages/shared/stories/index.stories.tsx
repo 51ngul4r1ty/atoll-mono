@@ -8,7 +8,7 @@ import { withKnobs, text } from "@storybook/addon-knobs";
 import { withRootAttribute } from "storybook-addon-root-attribute";
 
 // components
-import { Checkbox, SimpleText, Spinner, SpinnerShapePentagon, StandardInput, TabStrip } from "../dist/index.es";
+import { Checkbox, Pill, SimpleText, Spinner, SpinnerShapePentagon, StandardInput, TabStrip } from "../dist/index.es";
 
 addDecorator(withRootAttribute);
 addDecorator(withKnobs({ escapeHTML: false }));
@@ -100,5 +100,11 @@ const spinnerIcon = <SpinnerShapePentagon className="spinner-shape" />;
 storiesOf("Atoms/Unique/Spinner", module).add("Spinner", () => (
     <div>
         <Spinner icon={spinnerIcon} />
+    </div>
+));
+
+storiesOf("Atoms/Info/Pill", module).add("Pill", () => (
+    <div>
+        <Pill>{text("children", "Basic Pill")}</Pill>
     </div>
 ));

@@ -8,7 +8,9 @@
       "name": "Attach by Process ID",
       "processId": "${command:PickProcess}",
       "request": "attach",
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "type": "node"
     },
     {
@@ -44,16 +46,31 @@
       "name": "Server",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/src/server/index.ts",
-      "outFiles": ["${workspaceFolder}/build/server/server.js"],
-      "sourceMaps": true
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ts-node",
+      "runtimeArgs": [
+        "--files",
+        "--project",
+        "${workspaceFolder}/packages/web-app/tsconfig.json",
+        "--compiler-options",
+        "{\"module\":\"commonjs\"}"
+      ],
+      "program": "${workspaceFolder}/packages/web-app/src/server/index.ts",
+      "outFiles": [
+        "${workspaceFolder}/packages/web-app/build/server/server.js"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": null,
+      "cwd": "${workspaceFolder}/packages/web-app"
     },
     {
       "name": "Storybook",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run-script", "storybook"],
+      "runtimeArgs": [
+        "run-script",
+        "storybook"
+      ],
       "noDebug": true
     },
     {
@@ -61,7 +78,9 @@
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/../atoll-shared/node_modules/.bin/jest",
-      "args": ["--runInBand"],
+      "args": [
+        "--runInBand"
+      ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "disableOptimisticBPs": true,
@@ -81,8 +100,12 @@
       "type": "extensionHost",
       "request": "launch",
       "cwd": "${workspaceFolder}/packages/vscode-extension",
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-extension"],
-      "outFiles": ["${workspaceFolder}/packages/vscode-extension/dist/*.js"],
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-extension"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/packages/vscode-extension/dist/*.js"
+      ],
       "sourceMaps": true,
       "preLaunchTask": "Build VS Code Extension"
     }

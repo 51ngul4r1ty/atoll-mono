@@ -6,6 +6,7 @@ export const PROJECT_RESOURCE_NAME = "projects";
 export const USER_RESOURCE_NAME = "users";
 export const SPRINT_BACKLOG_ITEM_PART_RESOURCE_NAME = "parts";
 export const SPRINT_RESOURCE_NAME = "sprints";
+export const MILESTONE_RESOURCE_NAME = "milestones";
 
 // resource name aliases
 export const SPRINT_BACKLOG_PART_CHILD_RESOURCE_NAME = BACKLOG_ITEM_PART_RESOURCE_NAME;

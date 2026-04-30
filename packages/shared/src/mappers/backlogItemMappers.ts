@@ -1,10 +1,11 @@
 // interfaces/types
-import type { EditableBacklogItem } from "../reducers/backlogItems/backlogItemsReducerTypes";
-import type { ApiBacklogItem, ApiBacklogItemInSprint } from "../types/apiModelTypes";
+import type { EditableBacklogItem, EditableProductBacklogItem } from "../reducers/backlogItems/backlogItemsReducerTypes";
+import type { ApiBacklogItem, ApiBacklogItemInSprint, ApiMilestone } from "../types/apiModelTypes";
 import type { BacklogItem, BacklogItemInSprint } from "../types/backlogItemTypes";
 
 // utils
 import { dateToIsoDateString, isoDateStringToDate } from "../utils/apiPayloadConverters";
+import { getUniquePropertyValues, objArrayToKeyedObj } from "../utils/arrayUtils";
 import { mapApiStatusToBacklogItem, mapBacklogItemStatusToApi } from "./statusMappers";
 
 export const mapApiItemToBacklogItem = (apiItem: ApiBacklogItem): BacklogItem => ({
@@ -36,6 +37,15 @@ export const mapApiItemToBacklogItem = (apiItem: ApiBacklogItem): BacklogItem =>
 
 export const mapApiItemToEditableBacklogItem = (apiItem: ApiBacklogItem): EditableBacklogItem => ({
     ...mapApiItemToBacklogItem(apiItem),
+    saving: false
+});
+
+export const mapApiItemToEditableProductBacklogItem = (
+    apiItem: ApiBacklogItem,
+    milestoneApiItem: ApiMilestone | undefined
+): EditableProductBacklogItem => ({
+    ...mapApiItemToBacklogItem(apiItem),
+    milestoneText: milestoneApiItem?.milestone?.name,
     saving: false
 });
 
@@ -104,6 +114,17 @@ export const mapApiItemsToBacklogItems = (apiItems: ApiBacklogItem[]): BacklogIt
 
 export const mapApiItemsToEditableBacklogItems = (apiItems: ApiBacklogItem[]): EditableBacklogItem[] => {
     return apiItems.map((item) => mapApiItemToEditableBacklogItem(item));
+};
+
+export const mapApiItemsToEditableProductBacklogItems = (
+    apiBacklogItems: ApiBacklogItem[],
+    apiMilestones: ApiMilestone[]
+): EditableBacklogItem[] => {
+    const milestonesByBacklogItemId = objArrayToKeyedObj(apiMilestones, "backlogitemId");
+    return apiBacklogItems.map((backlogItem) => {
+        const milestone = milestonesByBacklogItemId[backlogItem.id];
+        return mapApiItemToEditableProductBacklogItem(backlogItem, milestone);
+    });
 };
 
 export const mapApiItemsToSprintBacklogItems = (apiItems: ApiBacklogItemInSprint[]): BacklogItemInSprint[] | null => {

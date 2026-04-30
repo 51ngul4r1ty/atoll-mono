@@ -16,7 +16,7 @@ import { RestApiCollectionResult, RestApiErrorResult } from "../../utils/respons
 
 // utils
 import { buildResponseFromCatchError, buildResponseWithItem, buildResponseWithItems } from "../../utils/responseBuilder";
-import { buildLink, buildSelfLink, buildSimpleLink } from "../../../utils/linkBuilder";
+import { buildSelfLink, buildSimpleLink } from "../../../utils/linkBuilder";
 import { mapDbToApiProject } from "../../../dataaccess/mappers/dataAccessToApiMappers";
 
 export type ProjectItemsResult = RestApiCollectionResult<ApiProject>;

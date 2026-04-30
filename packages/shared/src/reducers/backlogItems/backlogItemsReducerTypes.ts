@@ -26,7 +26,7 @@ export type BacklogItemsState = Readonly<{
     addedItems: SaveableBacklogItem[];
     pushedItems: WebsocketPushNotificationData<any>[];
     items: EditableBacklogItem[];
-    allItems: BacklogItemWithSource[];
+    allItems: ProductBacklogItemWithSource[];
     selectedItemIds: SelectedBacklogItems;
     currentItem: SaveableBacklogItem;
     currentItemPartsAndSprints: BacklogItemPartAndSprintWithUiState[];
@@ -41,8 +41,16 @@ export interface EditableBacklogItem extends BacklogItem {
     saving: boolean;
 }
 
+export interface EditableProductBacklogItem extends EditableBacklogItem {
+    milestoneText?: string;
+}
+
 export interface SaveableBacklogItem extends EditableBacklogItem {
     saved?: boolean;
+}
+
+export interface SaveableProductBacklogItem extends SaveableBacklogItem {
+    milestoneText?: string | null;
 }
 
 export interface SaveableBacklogItemInSprint extends BacklogItemInSprint, SaveableBacklogItem {}
@@ -52,14 +60,8 @@ export interface ItemWithSource {
     pushState?: PushState;
 }
 
-export interface BacklogItemWithSource extends SaveableBacklogItem, ItemWithSource {
-    /* from ItemWithSource */
-    source: Source;
-    pushState?: PushState;
-}
+export interface BacklogItemWithSource extends SaveableBacklogItem, ItemWithSource {}
 
-export interface BacklogItemInSprintWithSource extends SaveableBacklogItemInSprint, ItemWithSource {
-    /* from ItemWithSource */
-    source: Source;
-    pushState?: PushState;
-}
+export interface ProductBacklogItemWithSource extends SaveableProductBacklogItem, ItemWithSource {}
+
+export interface BacklogItemInSprintWithSource extends SaveableBacklogItemInSprint, ItemWithSource {}

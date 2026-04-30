@@ -18,13 +18,21 @@ import type { NoDataApiAction, ApiActionMetaDataRequestMeta } from "../middlewar
 import { buildActionTypes } from "./utils/apiActionUtils";
 
 // interfaces/types
-import { ApiBacklogItem, ApiBacklogItemInSprint, ApiProject, ApiSprint, ApiUserSettings } from "../types/apiModelTypes";
+import {
+    ApiBacklogItem,
+    ApiBacklogItemInSprint,
+    ApiMilestone,
+    ApiProject,
+    ApiSprint,
+    ApiUserSettings
+} from "../types/apiModelTypes";
 
 export interface ApiGetBffViewsPlanResponsePayload {
     response: {
         status: number;
         data: {
             backlogItems: ApiBacklogItem[];
+            milestones: ApiMilestone[];
             sprints: ApiSprint[];
             sprintBacklogItems: ApiBacklogItemInSprint[] | undefined;
             userPreferences: ApiUserSettings;

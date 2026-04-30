@@ -196,6 +196,22 @@ storiesOf("Molecules/Cards/BacklogItemCard", module)
             />
         </div>
     ))
+    .add("BacklogItemCard (milestone)", () => (
+        <div className="all-devices">
+            <BacklogItemCard
+                itemId={text("itemId", "456")}
+                itemType={select(
+                    "itemType",
+                    { Story: BacklogItemTypeEnum.Story, Bug: BacklogItemTypeEnum.Bug },
+                    BacklogItemTypeEnum.Bug
+                )}
+                titleText={text("titleText", "Example bug")}
+                estimate={number("estimate", null)}
+                milestonePillText={text("milestonePillText", "A Test")}
+                hasDetails
+            />
+        </div>
+    ))
     .add("BacklogItemCard Mobile (draggable)", () => (
         <div className="all-devices mobile">
             <BacklogItemCard

@@ -9,9 +9,10 @@ import css from "./BacklogItemCard.module.css";
 import { Checkbox } from "../../atoms/inputs/Checkbox";
 import { DragIcon } from "../../atoms/icons/DragIcon";
 import { IssueIcon } from "../../atoms/icons/IssueIcon";
-import { StoryIcon } from "../../atoms/icons/StoryIcon";
 import { ItemDetailButton } from "../buttons/ItemDetailButton";
+import { Pill } from "../../atoms/info/Pill";
 import { StatusAcceptedIcon, StatusDoneIcon, StatusInProgressIcon, StatusReleasedIcon } from "../../atoms/icons";
+import { StoryIcon } from "../../atoms/icons/StoryIcon";
 
 // utils
 import { buildClassName } from "../../../utils/classNameBuilder";
@@ -130,6 +131,7 @@ export interface BacklogItemCardStateProps {
     status?: BacklogItemStatus;
     storyEstimate?: number | null;
     titleText: string;
+    milestonePillText?: string | null;
     totalParts?: number;
     unallocatedParts?: number;
     width?: any;
@@ -261,6 +263,7 @@ export const InnerBacklogItemCard: React.FC<InnerBacklogItemCardProps> = (props)
         css.backlogItemEstimate,
         isSplitBacklogItem && props.partIndex === 1 ? css.splitPartOne : null
     );
+    const milestonePillElts = props.milestonePillText ? <Pill className={css.milestonePill}>{props.milestonePillText}</Pill> : null;
     return (
         <div className={css.backlogItemCardOuter} data-class="backlogitem" data-id={props.internalId} style={styleToUse}>
             <div className={classNameToUse} style={{ width: props.width }} tabIndex={0}>
@@ -283,6 +286,7 @@ export const InnerBacklogItemCard: React.FC<InnerBacklogItemCardProps> = (props)
                             <DragIcon invertColors />
                         </div>
                     ) : null}
+                    {!props.isDraggable && props.renderMobile ? milestonePillElts : null}
                 </div>
                 {!props.renderMobile ? checkboxToSelect : null}
                 <div className={css.backlogItemText}>
@@ -295,6 +299,7 @@ export const InnerBacklogItemCard: React.FC<InnerBacklogItemCardProps> = (props)
                         </div>
                         {props.renderMobile ? statusIconElts : null}
                         {props.renderMobile ? editDetailButton : null}
+                        {props.renderMobile ? null : milestonePillElts}
                     </div>
                     {isSplitBacklogItem ? splitTextElts : null}
                 </div>
