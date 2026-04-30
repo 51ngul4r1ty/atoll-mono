@@ -1,11 +1,11 @@
 /*
 insert into "milestone"
-		(id, name, targetdate, archived, "createdAt", "updatedAt")
+		(id, "projectId", name, targetdate, archived, "createdAt", "updatedAt")
 	values
-		('8faff24a165d4f46b14ec27826b2c959', 'Beta Release', null, 'N', now(), now())
+		('9500a98f7fc841319e3a317f4312f40b', '69a9288264964568beb5dd243dc29008', 'Test Milestone', null, 'N', now(), now())
 
 insert into "backlogitemmilestone"
 		("id", "backlogitemId", "milestoneId")
 	values
-		('115f2e48255e45deb8c860d917c0ecbe', '9f9c46a349ef47678ab6cceda8f356a3', '8faff24a165d4f46b14ec27826b2c959');
+		('987a535feb6049f5a7614be6a945a30b', '7442798891a149e29bd5392ea38b3a95', '9500a98f7fc841319e3a317f4312f40b');
 */
