@@ -111,6 +111,7 @@ export const fetchBacklogItems = async (projectId: string | undefined): Promise<
         const params = { projectId };
         const options = buildOptionsFromParams(params);
         const dbProductBacklogItems = await ProductBacklogItemDataModel.findAll(options);
+
         const productBacklogItemsByProjectId: { [projectId: string]: ApiProductBacklogItem[] } = {};
         if (dbProductBacklogItems.length) {
             const productBacklogItemsMapped = dbProductBacklogItems.map((item) => mapDbToApiProductBacklogItem(item));
