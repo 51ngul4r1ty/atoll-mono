@@ -72,6 +72,7 @@ import { mapApiItemToSprint } from "../../mappers";
 import { handleReorderBacklogItem } from "./helpers/reorderBacklogItemHandler";
 import { rebuildAllItems } from "./helpers/allBacklogItemsRebuilder";
 import { handleGetBffViewsPlanSuccess } from "./helpers/getBffViewsPlanSuccessHandler";
+import { objArrayToKeyedObj } from "../../utils/arrayUtils";
 
 export const backlogItemsReducerInitialState = Object.freeze<BacklogItemsState>({
     addedItems: [],
@@ -152,10 +153,20 @@ export const backlogItemsReducer = (
             case ActionTypes.API_GET_BACKLOG_ITEMS_SUCCESS: {
                 const actionTyped = action as ApiGetBacklogItemsSuccessAction;
                 const { payload } = actionTyped;
+                const itemsWithMilestoneText = draft.allItems.filter((item) => !!item.milestoneText);
+                const priorBacklogItemsWithMilestones = itemsWithMilestoneText.map((item) => ({
+                    backlogItemId: item.id,
+                    milestoneText: item.milestoneText
+                }));
+                const milestonesByBacklogItemId = objArrayToKeyedObj(priorBacklogItemsWithMilestones, "backlogItemId");
                 draft.items = mapApiItemsToEditableBacklogItems(payload.response.data.items);
                 draft.pushedItems = [];
                 draft.addedItems = [];
-                return rebuildAllItems(draft);
+                rebuildAllItems(draft);
+                draft.allItems.forEach((item) => {
+                    item.milestoneText = item.milestoneText ?? milestonesByBacklogItemId[item.id]?.milestoneText;
+                });
+                return;
             }
             case ActionTypes.API_GET_BFF_VIEWS_PLAN_SUCCESS: {
                 return handleGetBffViewsPlanSuccess(action, draft);
