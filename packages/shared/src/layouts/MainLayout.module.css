@@ -1,4 +1,7 @@
 .fullPage {
     color: var(--normal-pen-color, black);
     background-color: var(--normal-page-color, white);
+    flex: 1; /* Take all available space */
+    min-height: 0; /* CRITICAL: Allow the div to be smaller than its content */
+    overflow-y: auto; /* Enable scrollbar */
 }

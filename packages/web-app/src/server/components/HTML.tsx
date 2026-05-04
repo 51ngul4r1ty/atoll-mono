@@ -44,9 +44,13 @@ const HTML = (props: Props) => {
                     }}
                 />
             </head>
-            <body>
+            <body style={{ height: "100vh" }}>
                 {/* eslint-disable-next-line react/no-danger */}
-                <div id="app" dangerouslySetInnerHTML={{ __html: props.children }} />
+                <div
+                    id="app"
+                    style={{ display: "flex", flexDirection: "column", height: "100%" }}
+                    dangerouslySetInnerHTML={{ __html: props.children }}
+                />
                 {props.scripts.filter(Boolean).map((src) => (
                     <script key={src} src={src} />
                 ))}
