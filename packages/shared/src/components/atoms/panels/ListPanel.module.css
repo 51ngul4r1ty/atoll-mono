@@ -1,0 +1,51 @@
+.panel {
+    position: relative;
+    overflow-y: auto;
+    max-height: 12rem;
+    background-color: var(--normal-input-page-color, white);
+}
+
+.panel > label {
+    display: block;
+    padding: 0.2rem 0.4rem 0.1rem 0.4rem;
+    font-size: 0.5833rem; /* 7pt */
+    opacity: 0.6;
+    text-transform: uppercase;
+    color: var(--normal-pen-color, black);
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.item {
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+    color: var(--normal-pen-color, black);
+    background-color: var(--normal-input-page-color, white);
+    user-select: none;
+}
+
+.item:hover {
+    background-color: var(--normal-focus-page-color, #eee);
+}
+
+.item.selected {
+    background-color: var(--normal-component-page-color, #ccc);
+    font-weight: bold;
+}
+
+.panel.disabled {
+    pointer-events: none;
+}
+
+.panel.disabled > label {
+    color: var(--normal-pen-disabled-color, #999);
+}
+
+.panel.disabled .item {
+    background-color: var(--normal-input-page-disabled-color, #e0e0e0);
+    color: var(--normal-pen-disabled-color, #999);
+}
