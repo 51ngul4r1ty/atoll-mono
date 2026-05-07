@@ -18,6 +18,19 @@
     font-size: var(--font-size-base);
 }
 
+:global(a:link) {
+    color: var(--normal-link-color, #46d);
+    text-decoration: none;
+}
+
+:global(a:visited) {
+    color: var(--normal-link-visted-color, #57b);
+}
+
+:global(a:hover) {
+    text-decoration: underline;
+}
+
 .app {
     display: flex;
     flex-direction: column;

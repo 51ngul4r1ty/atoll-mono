@@ -90,6 +90,8 @@ export interface Theme {
     "--normal-focus-page-color": string;
     "--normal-hover-shadow": string;
     "--normal-hover-shadow-size": string;
+    "--normal-link-color": string;
+    "--normal-link-visited-color": string;
     "--inverted-page-color": string;
     "--inverted-pen-color": string;
     "--inverted-active-page-color": string;
@@ -135,6 +137,8 @@ export const defaultTheme: Theme = {
     "--normal-focus-page-color": "#eee",
     "--normal-hover-shadow": "rgba(0, 0, 0, 0.4)",
     "--normal-hover-shadow-size": "0.6rem",
+    "--normal-link-color": "#46d",
+    "--normal-link-visited-color": "#57b",
     "--inverted-page-color": "black",
     "--inverted-page-alt1-color": "#777",
     "--inverted-pen-color": "white",
@@ -180,6 +184,8 @@ export const darkTheme: Theme = {
     "--normal-focus-page-color": "#444",
     "--normal-hover-shadow": "rgba(255, 255, 255, 1.0)",
     "--normal-hover-shadow-size": "1.0rem",
+    "--normal-link-color": "#46d",
+    "--normal-link-visited-color": "#57b",
     "--inverted-page-color": "#444",
     "--inverted-page-alt1-color": "#777",
     "--inverted-pen-color": "#ddd",
