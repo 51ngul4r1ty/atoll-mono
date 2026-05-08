@@ -23,6 +23,7 @@ import {
     ProjectPickerMenu,
     RefreshButton,
     RemoveButton,
+    SelectionField,
     SimpleButton,
     SmartSpinner,
     SpinnerAction,
@@ -474,3 +475,27 @@ storiesOf("Molecules/Menus/ProjectPickerMenu", module).add("ProjectPickerMenu", 
         />
     </div>
 ));
+
+storiesOf("Molecules/Anchors/SelectionField", module)
+    .add("SelectionField (closed)", () => (
+        <div className="storybook-form-background" style={{ width: "220px" }}>
+            <SelectionField
+                labelText="Select an item"
+                selectedText={text("selectedText", "Backlog Item 2")}
+                opened={false}
+                disabled={boolean("disabled", false)}
+                onTriggerClick={action("trigger clicked")}
+            />
+        </div>
+    ))
+    .add("SelectionField (opened)", () => (
+        <div className="storybook-form-background" style={{ width: "220px" }}>
+            <SelectionField
+                labelText="Select an item"
+                selectedText={text("selectedText", "Backlog Item 2")}
+                opened={true}
+                disabled={boolean("disabled", false)}
+                onTriggerClick={action("trigger clicked")}
+            />
+        </div>
+    ));

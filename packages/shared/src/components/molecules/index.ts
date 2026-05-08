@@ -1,3 +1,4 @@
+export * from "./anchors";
 export * from "./buttons";
 export * from "./cards";
 export * from "./menus";
