@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import { CancelButton } from "../../molecules/buttons/CancelButton";
 import { DoneButton } from "../../molecules/buttons/DoneButton";
 import { StandardInput } from "../../atoms/inputs/StandardInput";
+import { DropDownList } from "../../molecules/dropdowns/DropDownList";
 
 // style
 import commonCss from "./common/common.module.css";
@@ -173,6 +174,22 @@ export class BacklogItemDetailForm extends Component<BacklogItemDetailFormProps>
                 }}
             />
         );
+        const milestoneDropDownList = (
+            <div className={css.milestoneContainer}>
+                <DropDownList
+                    opened={false}
+                    labelText="Milestone"
+                    listItems={[
+                        { id: "test1", value: "Test 1" },
+                        { id: "test2", value: "Test 2" },
+                        { id: "--add--", value: "<Add Milestone>" },
+                        { id: null, value: "<No Milestone>" }
+                    ]}
+                    selectedId="test1"
+                    selectedValue="Test 1"
+                />
+            </div>
+        );
         const externalIdInput = (
             <StandardInput
                 inputId="userStoryExternalId"
@@ -231,6 +248,7 @@ export class BacklogItemDetailForm extends Component<BacklogItemDetailFormProps>
                         {estimateInput}
                         {friendlyIdInput}
                         {externalIdInput}
+                        {milestoneDropDownList}
                     </div>
                     <div className={actionButtonPanelContainerClassName}>{actionButtonPanel}</div>
                 </div>
@@ -246,6 +264,7 @@ export class BacklogItemDetailForm extends Component<BacklogItemDetailFormProps>
                     {estimateInput}
                     {friendlyIdInput}
                     {externalIdInput}
+                    {milestoneDropDownList}
                     {actionButtonPanel}
                 </div>
             </>

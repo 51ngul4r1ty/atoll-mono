@@ -1,5 +1,6 @@
 // externals
-import React, { forwardRef, RefObject, Ref, useState, useEffect } from "react";
+import React, { forwardRef, RefObject, Ref, useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 
 // style
 import css from "./DropDownList.module.css";
@@ -48,6 +49,15 @@ interface DropDownListInnerStateProps {
 
 export const InnerDropDownList: React.FC<DropDownListProps & DropDownListInnerStateProps> = (props) => {
     const [opened, setOpened] = useState(props.opened ?? false);
+    const [listStyle, setListStyle] = useState<React.CSSProperties>({});
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    const setRefs = (el: HTMLDivElement | null) => {
+        (containerRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+        if (props.innerRef) {
+            (props.innerRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+        }
+    };
 
     const prevProps = usePrevious({ opened: props.opened });
     useEffect(() => {
@@ -57,6 +67,31 @@ export const InnerDropDownList: React.FC<DropDownListProps & DropDownListInnerSt
             }
         }
     }, [props.opened, opened]);
+
+    const updateListPosition = () => {
+        if (containerRef.current) {
+            const rect = containerRef.current.getBoundingClientRect();
+            setListStyle({
+                position: "fixed",
+                top: rect.bottom,
+                left: rect.left,
+                width: rect.width,
+                zIndex: 9999
+            });
+        }
+    };
+
+    useEffect(() => {
+        if (opened) {
+            updateListPosition();
+            window.addEventListener("scroll", updateListPosition, true);
+            window.addEventListener("resize", updateListPosition);
+            return () => {
+                window.removeEventListener("scroll", updateListPosition, true);
+                window.removeEventListener("resize", updateListPosition);
+            };
+        }
+    }, [opened]);
 
     const handleTriggerClick = () => {
         if (props.disabled) {
@@ -86,8 +121,23 @@ export const InnerDropDownList: React.FC<DropDownListProps & DropDownListInnerSt
 
     const classToUse = buildClassName(css.container, props.className);
 
+    const listPanel = opened
+        ? createPortal(
+              <div style={listStyle} className={css.listContainer}>
+                  <ListPanel
+                      items={listItems}
+                      labelText=""
+                      selectedItemId={props.selectedId ?? null}
+                      disabled={props.disabled}
+                      onItemSelect={handleItemSelect}
+                  />
+              </div>,
+              document.body
+          )
+        : null;
+
     return (
-        <div className={classToUse} ref={props.innerRef}>
+        <div className={classToUse} ref={setRefs}>
             <SelectionField
                 disabled={props.disabled}
                 labelText={props.labelText}
@@ -95,17 +145,7 @@ export const InnerDropDownList: React.FC<DropDownListProps & DropDownListInnerSt
                 selectedText={props.selectedValue ?? null}
                 onTriggerClick={handleTriggerClick}
             />
-            {opened && (
-                <div className={css.listContainer}>
-                    <ListPanel
-                        items={listItems}
-                        labelText=""
-                        selectedItemId={props.selectedId ?? null}
-                        disabled={props.disabled}
-                        onItemSelect={handleItemSelect}
-                    />
-                </div>
-            )}
+            {listPanel}
         </div>
     );
 };
