@@ -16,6 +16,7 @@ import {
     DateInput,
     DateInputPickerMode,
     DateOnly,
+    DropDownList,
     EditButton,
     EditMode,
     HomeButton,
@@ -499,3 +500,24 @@ storiesOf("Molecules/Anchors/SelectionField", module)
             />
         </div>
     ));
+
+storiesOf("Molecules/Dropdowns/DropDownList", module).add("DropDownList", () => (
+    <div className="storybook-form-background" style={{ width: "220px", position: "relative" }}>
+        <DropDownList
+            labelText="Select an item"
+            listItems={[
+                { id: "item-1", value: "Backlog Item 1" },
+                { id: "item-2", value: "Backlog Item 2" },
+                { id: "item-3", value: "Backlog Item 3" },
+                { id: "item-4", value: "Backlog Item 4" },
+                { id: "item-5", value: "Backlog Item 5" }
+            ]}
+            selectedId={text("selectedId", "item-2")}
+            selectedValue={text("selectedValue", "Backlog Item 2")}
+            opened={boolean("opened", false)}
+            disabled={boolean("disabled", false)}
+            onItemSelect={action("item selected")}
+            onOpenedChange={action("opened changed")}
+        />
+    </div>
+));
