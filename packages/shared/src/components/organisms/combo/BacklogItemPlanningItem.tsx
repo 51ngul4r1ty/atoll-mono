@@ -26,7 +26,7 @@ import {
 
 // components
 import { SimpleDivider } from "../../atoms/dividers/SimpleDivider";
-import { BacklogItemDetailForm } from "../forms/BacklogItemDetailForm";
+import { BacklogItemDetailForm, BacklogItemDetailFormMilestonesProp } from "../forms/BacklogItemDetailForm";
 import { BacklogItemCard, BacklogItemCardType, BacklogItemTypeEnum } from "../../molecules/cards/BacklogItemCard";
 
 // style
@@ -49,6 +49,8 @@ export interface BacklogItemPlanningItemStateProps extends ProductBacklogItemWit
     showDetailMenu: boolean;
     strictMode: boolean;
     suppressTopPadding: boolean;
+    milestones: BacklogItemDetailFormMilestonesProp;
+    selectedMilestoneId: string;
 }
 
 export interface BacklogItemPlanningItemDispatchProps {}
@@ -89,6 +91,8 @@ const InternalBacklogItemPlanningItem: React.FC<BacklogItemPlanningItemProps> = 
                     type={props.type}
                     status={props.status}
                     saving={props.saving}
+                    milestones={props.milestones}
+                    selectedMilestoneId={props.selectedMilestoneId}
                     onDataUpdate={(fields) => {
                         dispatch(updateBacklogItemFields(fields));
                     }}

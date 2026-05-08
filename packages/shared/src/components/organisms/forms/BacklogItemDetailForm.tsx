@@ -21,6 +21,19 @@ import { BacklogItemType } from "../../../types/backlogItemTypes";
 import { BacklogItemInstanceEditableFields } from "./backlogItemFormTypes";
 import { BacklogItemStatus } from "../../../types/backlogItemEnums";
 
+export const MILESTONE_ID_ADD_NEW = "__ADD_NEW__";
+export const MILESTONE_VALUE_ADD_NEW = "<Add Milestone>";
+
+export const MILESTONE_ID_REMOVE = null;
+export const MILESTONE_VALUE_REMOVE = "<No Milestone>";
+
+export type BacklogItemDetailFormMilestonesPropItem = {
+    id: string | null;
+    name: string;
+};
+
+export type BacklogItemDetailFormMilestonesProp = BacklogItemDetailFormMilestonesPropItem[];
+
 export type BacklogItemDetailFormStateProps = BacklogItemInstanceEditableFields & {
     /* from BacklogItemInstanceEditableFields */
     rolePhrase: string | null;
@@ -45,6 +58,8 @@ export type BacklogItemDetailFormStateProps = BacklogItemInstanceEditableFields 
     renderMobile?: boolean;
     status: BacklogItemStatus;
     saving: boolean;
+    milestones: BacklogItemDetailFormMilestonesProp;
+    selectedMilestoneId: string;
 };
 
 export interface BacklogItemDetailFormDispatchProps {
@@ -174,19 +189,28 @@ export class BacklogItemDetailForm extends Component<BacklogItemDetailFormProps>
                 }}
             />
         );
+        const milestoneListItems = [
+            ...this.props.milestones.map((item) => ({ id: item.id, value: item.name })),
+            {
+                id: MILESTONE_ID_ADD_NEW,
+                value: MILESTONE_VALUE_ADD_NEW
+            },
+            {
+                id: MILESTONE_ID_REMOVE,
+                value: MILESTONE_VALUE_REMOVE
+            }
+        ];
+        const selectedMilestone = milestoneListItems.filter((item) => this.props.selectedMilestoneId === item.id);
+        const milestoneSelectedValue = selectedMilestone[0]?.value;
         const milestoneDropDownList = (
             <div className={css.milestoneContainer}>
                 <DropDownList
                     opened={false}
                     labelText="Milestone"
-                    listItems={[
-                        { id: "test1", value: "Test 1" },
-                        { id: "test2", value: "Test 2" },
-                        { id: "--add--", value: "<Add Milestone>" },
-                        { id: null, value: "<No Milestone>" }
-                    ]}
-                    selectedId="test1"
-                    selectedValue="Test 1"
+                    listItems={milestoneListItems}
+                    selectedId={this.props.selectedMilestoneId}
+                    selectedValue={milestoneSelectedValue}
+                    onItemSelect={(itemId: string) => {}}
                 />
             </div>
         );

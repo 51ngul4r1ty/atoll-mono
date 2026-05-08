@@ -33,6 +33,20 @@ const store = mockStore({});
 
 const bugStoryPhrase = "Filter seems to be taking longer & longer (investigate)";
 
+const MILESTONE_ID_1 = "test-milestone-1";
+const MILESTONE_ID_2 = "test-milestone-2";
+
+const MILESTONES = [
+    {
+        id: MILESTONE_ID_1,
+        name: "Test Milestone 1"
+    },
+    {
+        id: MILESTONE_ID_2,
+        name: "Test Milestone 2"
+    }
+];
+
 storiesOf("Organisms/Forms/BacklogItemDetailForm", module)
     .add("BacklogItemDetailForm (issue)", () => (
         <div>
@@ -47,6 +61,8 @@ storiesOf("Organisms/Forms/BacklogItemDetailForm", module)
                 reasonPhrase={text("reasonPhrase", null)}
                 editing={boolean("editing", false)}
                 instanceId={number("instanceId", 1)}
+                milestones={MILESTONES}
+                selectedMilestoneId={MILESTONE_ID_1}
             />
         </div>
     ))
@@ -63,6 +79,8 @@ storiesOf("Organisms/Forms/BacklogItemDetailForm", module)
                 reasonPhrase={text("reasonPhrase", "to allow for automation or a customized experience")}
                 editing={boolean("editing", false)}
                 instanceId={number("instanceId", 2)}
+                milestones={MILESTONES}
+                selectedMilestoneId={MILESTONE_ID_1}
             />
         </div>
     ))
@@ -80,6 +98,8 @@ storiesOf("Organisms/Forms/BacklogItemDetailForm", module)
                 editing={boolean("editing", false)}
                 instanceId={number("instanceId", 2)}
                 renderMobile
+                milestones={MILESTONES}
+                selectedMilestoneId={MILESTONE_ID_1}
             />
         </div>
     ));

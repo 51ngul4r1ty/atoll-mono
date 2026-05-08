@@ -156,7 +156,8 @@ export const backlogItemsReducer = (
                 const itemsWithMilestoneText = draft.allItems.filter((item) => !!item.milestoneText);
                 const priorBacklogItemsWithMilestones = itemsWithMilestoneText.map((item) => ({
                     backlogItemId: item.id,
-                    milestoneText: item.milestoneText
+                    milestoneText: item.milestoneText,
+                    milestoneId: item.milestoneId
                 }));
                 const milestonesByBacklogItemId = objArrayToKeyedObj(priorBacklogItemsWithMilestones, "backlogItemId");
                 draft.items = mapApiItemsToEditableBacklogItems(payload.response.data.items);
@@ -165,6 +166,7 @@ export const backlogItemsReducer = (
                 rebuildAllItems(draft);
                 draft.allItems.forEach((item) => {
                     item.milestoneText = item.milestoneText ?? milestonesByBacklogItemId[item.id]?.milestoneText;
+                    item.milestoneId = item.milestoneId ?? milestonesByBacklogItemId[item.id]?.milestoneId;
                 });
                 return;
             }

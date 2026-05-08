@@ -42,6 +42,7 @@ export interface EditableBacklogItem extends BacklogItem {
 }
 
 export interface EditableProductBacklogItem extends EditableBacklogItem {
+    milestoneId?: string;
     milestoneText?: string;
 }
 
@@ -50,6 +51,7 @@ export interface SaveableBacklogItem extends EditableBacklogItem {
 }
 
 export interface SaveableProductBacklogItem extends SaveableBacklogItem {
+    milestoneId?: string | null;
     milestoneText?: string | null;
 }
 

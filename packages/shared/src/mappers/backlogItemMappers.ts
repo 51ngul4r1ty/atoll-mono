@@ -45,6 +45,7 @@ export const mapApiItemToEditableProductBacklogItem = (
     milestoneApiItem: ApiMilestone | undefined
 ): EditableProductBacklogItem => ({
     ...mapApiItemToBacklogItem(apiItem),
+    milestoneId: milestoneApiItem?.milestone?.id,
     milestoneText: milestoneApiItem?.milestone?.name,
     saving: false
 });
