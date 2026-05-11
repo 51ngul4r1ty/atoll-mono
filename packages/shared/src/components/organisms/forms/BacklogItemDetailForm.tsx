@@ -22,7 +22,8 @@ import { BacklogItemInstanceEditableFields } from "./backlogItemFormTypes";
 import { BacklogItemStatus } from "../../../types/backlogItemEnums";
 
 export const MILESTONE_ID_ADD_NEW = "__ADD_NEW__";
-export const MILESTONE_VALUE_ADD_NEW = "<Add Milestone>";
+// NOTE: This will be added in a follow up story
+// export const MILESTONE_VALUE_ADD_NEW = "<Add Milestone>";
 
 export const MILESTONE_ID_REMOVE = null;
 export const MILESTONE_VALUE_REMOVE = "<No Milestone>";
@@ -63,6 +64,7 @@ export type BacklogItemDetailFormStateProps = BacklogItemInstanceEditableFields 
 };
 
 export interface BacklogItemDetailFormDispatchProps {
+    onMilestoneChanged?: { (id: string, name: string) };
     onDoneClick?: { (id: string, instanceId: number) };
     onCancelClick?: { (id: string, instanceId: number) };
     onDataUpdate?: { (props: BacklogItemInstanceEditableFields) };
@@ -111,6 +113,11 @@ export class BacklogItemDetailForm extends Component<BacklogItemDetailFormProps>
     handleCancelClick = () => {
         if (this.props.onCancelClick) {
             this.props.onCancelClick(this.props.id, this.props.instanceId);
+        }
+    };
+    handleMilestoneChanged = (id: string, name: string) => {
+        if (this.props.onMilestoneChanged) {
+            this.props.onMilestoneChanged(id, name);
         }
     };
     render() {
@@ -192,17 +199,13 @@ export class BacklogItemDetailForm extends Component<BacklogItemDetailFormProps>
         const milestoneListItems = [
             ...this.props.milestones.map((item) => ({ id: item.id, value: item.name })),
             {
-                id: MILESTONE_ID_ADD_NEW,
-                value: MILESTONE_VALUE_ADD_NEW
-            },
-            {
                 id: MILESTONE_ID_REMOVE,
                 value: MILESTONE_VALUE_REMOVE
             }
         ];
         const selectedMilestone = milestoneListItems.filter((item) => this.props.selectedMilestoneId === item.id);
         const milestoneSelectedValue = selectedMilestone[0]?.value;
-        const milestoneDropDownList = (
+        const milestoneDropDownList = this.props.id ? (
             <div className={css.milestoneContainer}>
                 <DropDownList
                     opened={false}
@@ -210,10 +213,12 @@ export class BacklogItemDetailForm extends Component<BacklogItemDetailFormProps>
                     listItems={milestoneListItems}
                     selectedId={this.props.selectedMilestoneId}
                     selectedValue={milestoneSelectedValue}
-                    onItemSelect={(itemId: string) => {}}
+                    onItemSelect={(itemId: string, itemText: string) => {
+                        this.handleMilestoneChanged(itemId, itemText);
+                    }}
                 />
             </div>
-        );
+        ) : null;
         const externalIdInput = (
             <StandardInput
                 inputId="userStoryExternalId"

@@ -13,6 +13,8 @@ export * from "./models/SprintBacklogItemPartDataModel";
 export * from "./models/UserSettingsDataModel";
 
 export * from "./mappers/apiToDataAccessMappers";
+export * from "./mappers/dataAccessToApiMappers";
+export * from "./mappers/apiToApiMappers";
 
 // data access
 import { sequelize } from "./connection";

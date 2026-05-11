@@ -15,7 +15,8 @@ import {
     SPRINT_BACKLOG_PARENT_RESOURCE_NAME,
     SPRINT_BACKLOG_PART_CHILD_RESOURCE_NAME,
     SPRINT_RESOURCE_NAME,
-    USER_RESOURCE_NAME
+    USER_RESOURCE_NAME,
+    MILESTONE_RESOURCE_NAME
 } from "../resourceNames";
 
 // utils
@@ -63,12 +64,21 @@ import {
     projectsGetHandler
 } from "./handlers/projects";
 import { backlogItemPartGetHandler, backlogItemPartPatchHandler } from "./handlers/backlogItemParts";
+import {
+    milestonesGetHandler,
+    milestonePostHandler,
+    milestoneDeleteHandler,
+    milestonePutHandler,
+    backlogItemMilestonesGetHandler,
+    backlogItemMilestonesPutHandler
+} from "./handlers/milestones";
 
 export const router = express.Router();
 
 // this is a local mapping to make the URLs easier to read
 const USERS = USER_RESOURCE_NAME;
 const PROJECTS = PROJECT_RESOURCE_NAME;
+const MILESTONES = MILESTONE_RESOURCE_NAME;
 
 router.options("/*", (req, res, next) => {
     res.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -91,6 +101,16 @@ setupRoutes(router, `/${PROJECTS}/:projectId`, {
     get: projectGetHandler,
     patch: projectPatchHandler,
     delete: projectDeleteHandler
+});
+
+setupRoutes(router, `/${MILESTONES}/:milestoneId`, {
+    delete: milestoneDeleteHandler,
+    put: milestonePutHandler
+});
+
+setupRoutes(router, `/${PROJECTS}/:projectId/${MILESTONES}`, {
+    get: milestonesGetHandler,
+    post: milestonePostHandler
 });
 
 {
@@ -154,6 +174,11 @@ setupRoutes(router, `/${PROJECTS}/:projectId`, {
 
     setupRoutes(router, `/${BACKLOG_ITEMS}/:itemId/join-unallocated-parts`, {
         post: backlogItemJoinUnallocatedPartsPostHandler
+    });
+
+    setupRoutes(router, `/${BACKLOG_ITEMS}/:backlogItemId/${MILESTONES}`, {
+        get: backlogItemMilestonesGetHandler,
+        put: backlogItemMilestonesPutHandler
     });
 }
 

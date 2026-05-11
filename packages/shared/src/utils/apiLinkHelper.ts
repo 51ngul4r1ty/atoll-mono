@@ -9,9 +9,6 @@ const urlParse = require("url-parse");
 import type { Link } from "../types/apiModelTypes";
 import { ApiActionMetaDataRequestBody } from "../middleware/apiTypes";
 
-export const LINK_REL_SELF = "self";
-export const LINK_REL_NEXT = "next-item";
-
 export const getLinkByRel = (links: Link[], rel: string): Link | null => {
     if (!links) {
         throw new Error(`Unexpected condition: there were no links provided to getLinkByRel for rel="${rel}"`);

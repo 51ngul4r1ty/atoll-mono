@@ -23,9 +23,9 @@ export type BacklogItemPartAndSprintWithUiState = BacklogItemPartAndSprint & {
 };
 
 export type BacklogItemsState = Readonly<{
-    addedItems: SaveableBacklogItem[];
+    addedItems: SaveableProductBacklogItem[];
     pushedItems: WebsocketPushNotificationData<any>[];
-    items: EditableBacklogItem[];
+    items: EditableProductBacklogItem[]; // TODO: this type doesn't include milestoneText and milestoneId but it does have the values, need to change type
     allItems: ProductBacklogItemWithSource[];
     selectedItemIds: SelectedBacklogItems;
     currentItem: SaveableBacklogItem;

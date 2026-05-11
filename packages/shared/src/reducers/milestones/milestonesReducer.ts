@@ -21,7 +21,7 @@ export const milestonesReducer = (state: MilestonesState = milestonesReducerInit
                 const actionTyped = action as ApiGetBffViewsPlanSuccessAction;
                 const { payload } = actionTyped;
                 draft.items = payload.response.data.milestones.map((apiMilestone) => ({
-                    id: apiMilestone.milestoneId,
+                    id: apiMilestone.id,
                     name: apiMilestone.milestone.name
                 }));
             }

@@ -33,6 +33,8 @@ export const PUT_BACKLOG_ITEM = "update-backlog-item";
 export const DELETE_BACKLOG_ITEM = "delete-backlog-item";
 export const PATCH_BACKLOG_ITEM = "patch-backlog-item";
 
+export const PUT_BACKLOG_ITEM_MILESTONES = "update-backlog-item-milestones";
+
 export const GET_BFF_VIEWS_PLAN = "get-bff-views-plan";
 
 export const GET_BFF_VIEWS_BACKLOG_ITEM = "get-bff-views-backlog-item";

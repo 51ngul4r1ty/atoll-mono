@@ -69,7 +69,7 @@ import {
 import { LastPartRemovalOptions, removeUnallocatedBacklogItemPart } from "./deleters/backlogItemPartDeleter";
 import { fetchSprint } from "./fetchers/sprintFetcher";
 import { buildSprintStatsFromApiSprint } from "./helpers/sprintStatsHelper";
-import { buildChldSelfLink } from "../../utils/linkBuilder";
+import { buildChildSelfLink } from "../../utils/linkBuilder";
 import { isRestApiErrorResult, isRestApiItemResult } from "../utils/responseBuilder";
 
 export const sprintBacklogItemsGetHandler = async (req: Request, res: Response) => {
@@ -226,7 +226,7 @@ export const sprintBacklogItemPostHandler = async (req: Request, res: Response) 
                 `/${SPRINT_BACKLOG_CHILD_RESOURCE_NAME}`;
             const addedSprintBacklogItem = {
                 ...addedItemWithoutLinks,
-                links: [buildChldSelfLink(backlogitemId, resourceBasePath)]
+                links: [buildChildSelfLink(backlogitemId, resourceBasePath)]
             };
             if (joinSplitParts) {
                 // nothing was added, so 200 status is appropriate

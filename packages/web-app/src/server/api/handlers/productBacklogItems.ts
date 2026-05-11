@@ -9,15 +9,13 @@ import { ApiProductBacklogItem } from "@atoll/shared";
 // data access
 import { ProductBacklogItemDataModel } from "../../dataaccess";
 
-// consts/enums
-import { PRODUCT_BACKLOG_ITEM_RESOURCE_NAME } from "../../resourceNames";
-
 // utils
 import { buildSelfLink } from "../../utils/linkBuilder";
 import { respondWithNotFound } from "../utils/responder";
 import { mapDbToApiProductBacklogItem } from "../../dataaccess/mappers/dataAccessToApiMappers";
 import { buildResponseFromCatchError, buildResponseWithItems } from "../utils/responseBuilder";
 import { logError } from "./utils/serverLogger";
+import { buildCurrentVersionProductBacklogItemBasePath } from "../../utils/baseLinkBuilder";
 
 export const productBacklogItemsGetHandler = async (req: Request, res: Response) => {
     try {
@@ -25,9 +23,10 @@ export const productBacklogItemsGetHandler = async (req: Request, res: Response)
         const productBacklogItems = await ProductBacklogItemDataModel.findAll({});
         productBacklogItems.forEach((item) => {
             const productBacklogItem = mapDbToApiProductBacklogItem(item);
+            const selfLink = buildSelfLink(productBacklogItem, buildCurrentVersionProductBacklogItemBasePath());
             const result: ApiProductBacklogItem = {
                 ...productBacklogItem,
-                links: [buildSelfLink(productBacklogItem, `/api/v1/${PRODUCT_BACKLOG_ITEM_RESOURCE_NAME}/`)]
+                links: [selfLink]
             };
             items.push(result);
         });

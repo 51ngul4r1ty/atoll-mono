@@ -1,6 +1,12 @@
 // interfaces/types
 import type { EditableBacklogItem, EditableProductBacklogItem } from "../reducers/backlogItems/backlogItemsReducerTypes";
-import type { ApiBacklogItem, ApiBacklogItemInSprint, ApiMilestone } from "../types/apiModelTypes";
+import type {
+    ApiBacklogItem,
+    ApiBacklogItemInSprint,
+    ApiBacklogItemMilestone,
+    ApiMilestone,
+    ApiMilestoneBacklogItems
+} from "../types/apiModelTypes";
 import type { BacklogItem, BacklogItemInSprint } from "../types/backlogItemTypes";
 
 // utils
@@ -42,11 +48,11 @@ export const mapApiItemToEditableBacklogItem = (apiItem: ApiBacklogItem): Editab
 
 export const mapApiItemToEditableProductBacklogItem = (
     apiItem: ApiBacklogItem,
-    milestoneApiItem: ApiMilestone | undefined
+    apiMilestoneBacklogItems: ApiMilestoneBacklogItems[]
 ): EditableProductBacklogItem => ({
     ...mapApiItemToBacklogItem(apiItem),
-    milestoneId: milestoneApiItem?.milestone?.id,
-    milestoneText: milestoneApiItem?.milestone?.name,
+    milestoneId: apiMilestoneBacklogItems[0]?.id, // NOTE: Only supports one - picks the first one
+    milestoneText: apiMilestoneBacklogItems.map((item) => item.name).join(", "),
     saving: false
 });
 
@@ -117,14 +123,36 @@ export const mapApiItemsToEditableBacklogItems = (apiItems: ApiBacklogItem[]): E
     return apiItems.map((item) => mapApiItemToEditableBacklogItem(item));
 };
 
+export type MilestonesByBacklogItemId = Record<string, Record<string, ApiMilestoneBacklogItems>>;
+
+export const buildMilestonesByBacklogItemId = (apiMilestoneBacklogItems: ApiMilestoneBacklogItems[]): MilestonesByBacklogItemId => {
+    const result: MilestonesByBacklogItemId = {};
+    apiMilestoneBacklogItems.forEach((apiMilestoneBacklogItem) => {
+        const currentMilestoneId = apiMilestoneBacklogItem.id;
+        apiMilestoneBacklogItem.backlogItems.forEach((backlogItem) => {
+            if (!result[backlogItem.id]) {
+                result[backlogItem.id] = {};
+            }
+            const currentBacklogItem = result[backlogItem.id];
+            if (!currentBacklogItem[currentMilestoneId]) {
+                currentBacklogItem[currentMilestoneId] = apiMilestoneBacklogItem;
+            }
+        });
+    });
+    return result;
+};
+
 export const mapApiItemsToEditableProductBacklogItems = (
     apiBacklogItems: ApiBacklogItem[],
-    apiMilestones: ApiMilestone[]
+    apiMilestones: ApiMilestoneBacklogItems[]
 ): EditableBacklogItem[] => {
-    const milestonesByBacklogItemId = objArrayToKeyedObj(apiMilestones, "backlogitemId");
+    const milestonesByBacklogItemId = buildMilestonesByBacklogItemId(apiMilestones);
     return apiBacklogItems.map((backlogItem) => {
-        const milestone = milestonesByBacklogItemId[backlogItem.id];
-        return mapApiItemToEditableProductBacklogItem(backlogItem, milestone);
+        const backlogItemMilestoneById = milestonesByBacklogItemId[backlogItem.id];
+        const backlogItemMilestones = !backlogItemMilestoneById
+            ? []
+            : Object.entries(backlogItemMilestoneById).map(([id, data]) => data);
+        return mapApiItemToEditableProductBacklogItem(backlogItem, backlogItemMilestones);
     });
 };
 

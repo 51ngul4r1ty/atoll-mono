@@ -29,7 +29,7 @@ export interface ListPanelStateProps {
 }
 
 export interface ListPanelDispatchProps {
-    onItemSelect?: { (itemId: string): void };
+    onItemSelect?: { (itemId: string, itemLabel: string): void };
 }
 
 export type ListPanelProps = ListPanelStateProps & ListPanelDispatchProps;
@@ -51,13 +51,13 @@ export const InnerListPanel: React.FC<ListPanelProps & ListPanelInnerStateProps>
         }
     }, [props.selectedItemId, selectedItemId]);
 
-    const handleItemClick = (itemId: string) => {
+    const handleItemClick = (itemId: string, itemLabel: string) => {
         if (props.disabled) {
             return;
         }
         setSelectedItemId(itemId);
         if (props.onItemSelect) {
-            props.onItemSelect(itemId);
+            props.onItemSelect(itemId, itemLabel);
         }
     };
 
@@ -72,7 +72,7 @@ export const InnerListPanel: React.FC<ListPanelProps & ListPanelInnerStateProps>
                         key={item.id}
                         className={buildClassName(css.item, item.id === selectedItemId ? css.selected : null)}
                         onClick={() => {
-                            handleItemClick(item.id);
+                            handleItemClick(item.id, item.label);
                         }}
                     >
                         {item.label}

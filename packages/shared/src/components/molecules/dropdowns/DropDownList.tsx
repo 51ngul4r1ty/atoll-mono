@@ -36,13 +36,16 @@ export interface DropDownListStateProps {
 }
 
 export interface DropDownListDispatchProps {
-    onItemSelect?: { (itemId: string): void };
+    onItemSelect?: { (itemId: string, itemLabel?: string): void };
     onOpenedChange?: { (opened: boolean): void };
 }
 
 export type DropDownListProps = DropDownListStateProps & DropDownListDispatchProps;
 
-// NOTE: Keep this private so that it isn't referenced outside this component
+/**
+ * @remarks
+ * Keep this private so that it isn't referenced outside this component
+ */
 interface DropDownListInnerStateProps {
     innerRef: RefObject<DropDownListRefType>;
 }
@@ -104,13 +107,13 @@ export const InnerDropDownList: React.FC<DropDownListProps & DropDownListInnerSt
         }
     };
 
-    const handleItemSelect = (itemId: string) => {
+    const handleItemSelect = (itemId: string, itemLabel: string) => {
         setOpened(false);
         if (props.onOpenedChange) {
             props.onOpenedChange(false);
         }
         if (props.onItemSelect) {
-            props.onItemSelect(itemId);
+            props.onItemSelect(itemId, itemLabel);
         }
     };
 

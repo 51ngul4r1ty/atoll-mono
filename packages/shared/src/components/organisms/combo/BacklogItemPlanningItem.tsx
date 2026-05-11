@@ -21,7 +21,8 @@ import {
     updateBacklogItem,
     selectProductBacklogItem,
     unselectProductBacklogItem,
-    backlogItemIdClick
+    backlogItemIdClick,
+    updateBacklogItemMilestone
 } from "../../../actions/backlogItemActions";
 
 // components
@@ -37,6 +38,7 @@ import { buildClassName } from "../../../utils/classNameBuilder";
 import { buildBacklogDisplayId } from "../../../utils/backlogItemHelper";
 import { productBacklogItemMenuBuilder } from "../../common/itemMenuBuilders";
 import { computeProductBacklogItemEstimate } from "../panels/productPlanning/productPlanningPanelUtils";
+import { productBacklogItemEditDoneClick } from "../../../actionFlows/updateBacklogItemActionFlow";
 
 export interface BacklogItemPlanningItemStateProps extends ProductBacklogItemWithSource {
     busyJoiningUnallocatedParts: boolean;
@@ -96,12 +98,13 @@ const InternalBacklogItemPlanningItem: React.FC<BacklogItemPlanningItemProps> = 
                     onDataUpdate={(fields) => {
                         dispatch(updateBacklogItemFields(fields));
                     }}
+                    onMilestoneChanged={(milestoneId: string, milestoneName: string) => {
+                        dispatch(
+                            updateBacklogItemMilestone(props.id, props.instanceId, milestoneId, milestoneId ? milestoneName : "")
+                        );
+                    }}
                     onDoneClick={(id, instanceId) => {
-                        if (id) {
-                            dispatch(updateBacklogItem(id));
-                        } else {
-                            dispatch(saveNewBacklogItem(instanceId));
-                        }
+                        dispatch(productBacklogItemEditDoneClick(id, instanceId));
                     }}
                     onCancelClick={(id, instanceId) => {
                         if (id) {

@@ -182,6 +182,7 @@ export const CANCEL_UNSAVED_BACKLOG_ITEM = "app/cancel-unsaved:backlog-item";
 export const CANCEL_EDIT_BACKLOG_ITEM = "app/cancel-edit:backlog-item";
 
 export const UPDATE_BACKLOG_ITEM_FIELDS = "app/update:backlog-item-fields";
+export const UPDATE_BACKLOG_ITEM_MILESTONE = "app/update:backlog-item-milestone";
 
 export const UPDATE_CURRENT_BACKLOG_ITEM_FIELDS = "app/update:current-backlog-item-fields";
 export const RESET_CURRENT_BACKLOG_ITEM = "app/reset:current-backlog-item";
@@ -267,3 +268,5 @@ export const PROJECT_PICKER_CLOSED = "app/closed:project-picker";
 export const SWITCH_PROJECT = "app/select:project";
 
 export const SET_CURRENT_PROJECT_ID = "app/set-prefs:current-project-id";
+
+export const BACKLOG_ITEM_EDIT_DONE_CLICK = "app/click:product-backlogitem-edit-done";

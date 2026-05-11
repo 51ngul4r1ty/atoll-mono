@@ -11,12 +11,12 @@ import { BacklogItemDataModel } from "../../../dataaccess/models/BacklogItemData
 import { ProductBacklogItemDataModel } from "../../../dataaccess/models/ProductBacklogItemDataModel";
 
 // consts/enums
-import { BACKLOG_ITEM_RESOURCE_NAME } from "../../../resourceNames";
+import { BACKLOG_ITEM_RESOURCE_NAME, MILESTONE_RESOURCE_NAME } from "../../../resourceNames";
 
 // utils
 import { mapDbToApiBacklogItem, mapDbToApiProductBacklogItem } from "../../../dataaccess/mappers/dataAccessToApiMappers";
 import { buildOptionsFromParams } from "../../utils/sequelizeHelper";
-import { buildSelfLink } from "../../../utils/linkBuilder";
+import { buildSelfLink, buildSimpleLink, combinePaths } from "../../../utils/linkBuilder";
 import {
     buildBacklogItemFindOptionsIncludeForNested,
     computeUnallocatedParts,
@@ -41,9 +41,11 @@ const buildApiItemFromDbItemWithParts = (dbItemWithParts: BacklogItemDataModel):
     const dbBacklogItemParts = dbItemWithParts[DB_INCLUDE_ALIAS_BACKLOGITEMPARTS];
     backlogItem.unallocatedParts = computeUnallocatedParts(dbBacklogItemParts);
     backlogItem.unallocatedPoints = computeUnallocatedPointsUsingDbObjs(dbItemWithParts, dbBacklogItemParts);
+    const selfLink = buildSelfLink(backlogItem, `/api/v1/${BACKLOG_ITEM_RESOURCE_NAME}/`);
+    const milestonesLink = buildSimpleLink(combinePaths(selfLink.uri, MILESTONE_RESOURCE_NAME), "related:milestones");
     const result: ApiBacklogItem = {
         ...backlogItem,
-        links: [buildSelfLink(backlogItem, `/api/v1/${BACKLOG_ITEM_RESOURCE_NAME}/`)]
+        links: [selfLink, milestonesLink]
     };
     return result;
 };

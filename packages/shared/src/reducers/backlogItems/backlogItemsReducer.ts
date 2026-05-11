@@ -28,7 +28,8 @@ import type {
     RemoveProductBacklogItemAction,
     SelectProductBacklogItemAction,
     ToggleBacklogItemDetailAction,
-    UpdateBacklogItemFieldsAction
+    UpdateBacklogItemFieldsAction,
+    UpdateBacklogItemMilestoneAction
 } from "../../actions/backlogItemActions";
 import type { AppClickAction, AppKeyUpAction } from "../../actions/appActions";
 import type { BacklogItemsState, SaveableBacklogItem } from "./backlogItemsReducerTypes";
@@ -58,6 +59,7 @@ import {
     turnOffEditModeForBacklogItemPart,
     updateBacklogItemFields,
     updateBacklogItemFieldsInItemsAndAddedItems,
+    updateBacklogItemMilestoneInItemsAndAddedItems,
     updateCurrentItemPartById,
     updateItemById,
     updateItemByInstanceId
@@ -283,6 +285,11 @@ export const backlogItemsReducer = (
                 const actionTyped = action as UpdateBacklogItemFieldsAction;
                 const payload = actionTyped.payload;
                 return updateBacklogItemFieldsInItemsAndAddedItems(draft, payload);
+            }
+            case ActionTypes.UPDATE_BACKLOG_ITEM_MILESTONE: {
+                const actionTyped = action as UpdateBacklogItemMilestoneAction;
+                const payload = actionTyped.payload;
+                return updateBacklogItemMilestoneInItemsAndAddedItems(draft, payload);
             }
             case ActionTypes.RECEIVE_PUSHED_BACKLOG_ITEM: {
                 const actionTyped = action as ReceivePushedBacklogItemAction;

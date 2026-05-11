@@ -17,6 +17,7 @@ export const getParamFromRequest = (req: Request, paramKey: string): string => {
 };
 
 export interface ParamsFromRequest {
+    milestoneId?: string;
     projectId?: string;
     sprintId?: string;
     backlogItemId?: string;
@@ -30,6 +31,10 @@ export const getParamsFromRequest = (req: Request): ParamsFromRequest => {
     const sprintId = getParamFromRequest(req, "sprintId");
     if (sprintId) {
         result.sprintId = sprintId;
+    }
+    const milestoneId = getParamFromRequest(req, "milestoneId");
+    if (milestoneId) {
+        result.milestoneId = milestoneId;
     }
     const projectId = getParamFromRequest(req, "projectId");
     if (projectId) {
