@@ -55,7 +55,9 @@ export const InnerSelectionField: React.FC<SelectionFieldProps & SelectionFieldI
         <div className={classToUse} ref={props.innerRef}>
             <label>{props.labelText}</label>
             <div className={css.valueRow}>
-                <span className={css.valueText}>{props.selectedText ?? ""}</span>
+                <span className={css.valueText} onClick={handleTriggerClick}>
+                    {props.selectedText ?? ""}
+                </span>
                 <button
                     type="button"
                     className={css.trigger}
