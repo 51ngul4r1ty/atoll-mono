@@ -2,7 +2,10 @@
 import * as ActionTypes from "./actionTypes";
 
 // interfaces/types
-import type { BacklogItemInstanceEditableFields } from "../components/organisms/forms/backlogItemFormTypes";
+import type {
+    BacklogItemInstanceEditableFields,
+    BacklogItemMilestonePayload
+} from "../components/organisms/forms/backlogItemFormTypes";
 import type { BacklogItemType } from "../types/backlogItemTypes";
 import type { BacklogItemWithSource } from "../reducers/backlogItems/backlogItemsReducerTypes";
 import type { WebsocketPushNotificationData } from "../types/pushTypes";
@@ -95,6 +98,25 @@ export interface UpdateBacklogItemFieldsAction {
 export const updateBacklogItemFields = (fields: BacklogItemInstanceEditableFields): UpdateBacklogItemFieldsAction => ({
     type: ActionTypes.UPDATE_BACKLOG_ITEM_FIELDS,
     payload: fields
+});
+
+export interface UpdateBacklogItemMilestoneAction {
+    type: typeof ActionTypes.UPDATE_BACKLOG_ITEM_MILESTONE;
+    payload: BacklogItemMilestonePayload;
+}
+export const updateBacklogItemMilestone = (
+    backlogItemId: string,
+    backlogInstanceId: number | undefined,
+    milestoneId: string,
+    milestoneName: string
+): UpdateBacklogItemMilestoneAction => ({
+    type: ActionTypes.UPDATE_BACKLOG_ITEM_MILESTONE,
+    payload: {
+        backlogItemId,
+        backlogInstanceId,
+        milestoneId,
+        milestoneName
+    }
 });
 
 export interface ReceivePushedBacklogItemAction<T = any> {

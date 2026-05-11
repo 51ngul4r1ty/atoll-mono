@@ -1,6 +1,6 @@
 // interfaces/types
 import type { BacklogItem, BacklogItemType } from "../types/backlogItemTypes";
-import type { BacklogItemsState } from "../reducers/backlogItems/backlogItemsReducerTypes";
+import type { BacklogItemsState, ProductBacklogItemWithSource } from "../reducers/backlogItems/backlogItemsReducerTypes";
 import type { StateTree } from "../reducers/rootReducer";
 
 // utils
@@ -19,7 +19,7 @@ export const getBacklogItemByInstanceId = (state: StateTree, instanceId: number)
     }
 };
 
-export const selectBacklogItemById = (state: StateTree, itemId: string): BacklogItem | null =>
+export const selectBacklogItemById = (state: StateTree, itemId: string): ProductBacklogItemWithSource | null =>
     backlogItemsSliceSelectors.sliceSelectBacklogItemById(state.backlogItems, itemId);
 
 export const getCurrentBacklogItem = (state: StateTree): BacklogItem | null => {

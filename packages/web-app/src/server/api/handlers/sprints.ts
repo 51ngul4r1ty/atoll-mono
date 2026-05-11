@@ -1,7 +1,7 @@
 // externals
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { Op } from "sequelize";
+import { Op, Transaction } from "sequelize";
 
 // libraries
 import { ApiSprint, DateOnly, determineSprintStatus, logger, SprintStatus } from "@atoll/shared";
@@ -22,7 +22,6 @@ import { mapApiToDbSprint, ApiToDataAccessMapOptions } from "../../dataaccess/ma
 import { mapDbToApiSprint } from "../../dataaccess/mappers/dataAccessToApiMappers";
 import { respondedWithMismatchedItemIds } from "../utils/validationResponders";
 import { getInvalidPatchMessage, getPatchedItem } from "../utils/patcher";
-import { Transaction } from "sequelize";
 import {
     beginSerializableTransaction,
     commitWithOkResponseIfNotAborted,

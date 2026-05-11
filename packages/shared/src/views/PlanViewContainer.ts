@@ -40,6 +40,7 @@ import * as sprintSelectors from "../selectors/sprintSelectors";
 import * as backlogItemSelectors from "../selectors/backlogItemSelectors";
 import * as appSelectors from "../selectors/appSelectors";
 import * as sprintBacklogSelectors from "../selectors/sprintBacklogSelectors";
+import * as milestoneSelectors from "../selectors/milestoneSelectors";
 
 // utils
 import { isPlatformWindows } from "../utils";
@@ -64,6 +65,7 @@ const mapStateToProps = (state: StateTree): PlanViewStateProps => {
         errorMessage: appSelectors.isPlanViewError(state)
             ? "An error occurred while loading this view - please refresh browser to retry or contact a support person to assist"
             : null,
+        milestones: milestoneSelectors.getMilestones(state),
         openedDetailMenuBacklogItemId: backlogItemSelectors.getProductBacklogOpenedDetailMenuItemId(state),
         openedDetailMenuSprintBacklogInfo: sprintBacklogSelectors.getSprintBacklogOpenedDetailMenuInfo(state),
         openingDetailMenuSprintBacklogInfo: sprintBacklogSelectors.getSprintBacklogOpeningDetailMenuInfo(state),

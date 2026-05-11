@@ -13,7 +13,9 @@ import {
     ApiUserSettings,
     ApiBacklogItemWithParts,
     cloneWithNested,
-    ApiMilestone
+    ApiMilestone,
+    ApiBacklogItemMilestone,
+    ApiMilestoneBacklogItems
 } from "@atoll/shared";
 
 // utils
@@ -264,7 +266,7 @@ export const mapDbToApiMilestone = (dbItem: any): ApiMilestone => {
     };
 };
 
-export const mapDbToApiBacklogItemMilestone = (dbItem: any): ApiMilestone => {
+export const mapDbToApiBacklogItemMilestone = (dbItem: any): ApiBacklogItemMilestone => {
     if (!dbItem) {
         return dbItem;
     }
@@ -279,4 +281,33 @@ export const mapDbToApiBacklogItemMilestone = (dbItem: any): ApiMilestone => {
         },
         milestone: milestoneItemOnly
     };
+};
+
+export const mapDbMilestonesToApiBacklogItemMilestones = (dbItems: any): ApiMilestoneBacklogItems[] => {
+    const result: ApiMilestoneBacklogItems[] = [];
+    const itemsById: Record<string, ApiMilestoneBacklogItems> = {};
+    let currentItem: ApiMilestoneBacklogItems | undefined = undefined;
+    dbItems.forEach((dbItem) => {
+        const milestoneItemOnly = mapDbToApiMilestone(dbItem);
+        if (!itemsById[milestoneItemOnly.id]) {
+            currentItem = {
+                id: milestoneItemOnly.id,
+                name: milestoneItemOnly.name,
+                milestone: milestoneItemOnly,
+                backlogItems: []
+            };
+            itemsById[milestoneItemOnly.id] = currentItem;
+            result.push(currentItem);
+        }
+        const dbNestedBacklogItems = dbItem.dataValues?.backlogitemmilestones || [];
+        dbNestedBacklogItems.forEach((dbNestedBacklogItem) => {
+            const dbBacklogItem = dbNestedBacklogItem.backlogitem;
+            currentItem.backlogItems.push({
+                id: dbBacklogItem.id,
+                externalId: dbBacklogItem.externalId,
+                friendlyId: dbBacklogItem.friendlyId
+            });
+        });
+    });
+    return result;
 };

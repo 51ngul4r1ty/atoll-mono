@@ -539,6 +539,8 @@ export const InnerProductPlanningPanel: React.FC<ProductPlanningPanelProps> = (p
                     showDetailMenu={showDetailMenu}
                     strictMode={props.strictMode}
                     suppressTopPadding={suppressTopPadding || lastItemWasUnsaved}
+                    milestones={props.milestones}
+                    selectedMilestoneId={item.milestoneId}
                 />
             );
         }

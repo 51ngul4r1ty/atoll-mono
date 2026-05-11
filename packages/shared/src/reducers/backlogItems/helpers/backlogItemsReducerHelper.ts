@@ -11,7 +11,8 @@ import type {
 import type { BacklogItem } from "../../../types/backlogItemTypes";
 import type {
     BacklogItemEditableFields,
-    BacklogItemInstanceEditableFields
+    BacklogItemInstanceEditableFields,
+    BacklogItemMilestonePayload
 } from "../../../components/organisms/forms/backlogItemFormTypes";
 import type { BacklogItemPart } from "../../../types/backlogItemPartTypes";
 
@@ -131,6 +132,41 @@ export const updateBacklogItemFieldsInItemsAndAddedItems = (
         }
     });
     updateItemFieldsInAllItems(draft, payload);
+};
+
+export interface WithIdAndInstanceId {
+    id: string;
+    instanceId?: number;
+}
+
+export const idsMatchForMilestone = (item1: WithIdAndInstanceId, item2: WithIdAndInstanceId): boolean => {
+    const instanceIdMatch = !!item1.instanceId && item1.instanceId === item2.instanceId;
+    const idMatch = !!item1.id && item1.id === item2.id;
+    return instanceIdMatch || idMatch;
+};
+
+export const updateBacklogItemMilestoneInItemsAndAddedItems = (
+    draft: Draft<BacklogItemsState>,
+    payload: BacklogItemMilestonePayload
+): void => {
+    const payloadMatchItem = { id: payload.backlogItemId, instanceId: payload.backlogInstanceId };
+    draft.addedItems.forEach((addedItem) => {
+        if (idsMatchForMilestone(addedItem, payloadMatchItem)) {
+            addedItem.milestoneId = payload.milestoneId;
+            addedItem.milestoneText = payload.milestoneName;
+        }
+    });
+    draft.items.forEach((item) => {
+        if (idsMatchForMilestone(item, payloadMatchItem)) {
+            item.milestoneId = payload.milestoneId;
+            item.milestoneText = payload.milestoneName;
+        }
+    });
+    const item = draft.allItems.filter((item) => idsMatchForMilestone(item, payloadMatchItem));
+    if (item.length === 1) {
+        item[0].milestoneId = payload.milestoneId;
+        item[0].milestoneText = payload.milestoneName;
+    }
 };
 
 export const turnOffEditModeForBacklogItemPart = (draft: Draft<BacklogItemsState>, id: string): void => {

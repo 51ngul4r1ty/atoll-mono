@@ -21,12 +21,13 @@ import {
     updateBacklogItem,
     selectProductBacklogItem,
     unselectProductBacklogItem,
-    backlogItemIdClick
+    backlogItemIdClick,
+    updateBacklogItemMilestone
 } from "../../../actions/backlogItemActions";
 
 // components
 import { SimpleDivider } from "../../atoms/dividers/SimpleDivider";
-import { BacklogItemDetailForm } from "../forms/BacklogItemDetailForm";
+import { BacklogItemDetailForm, BacklogItemDetailFormMilestonesProp } from "../forms/BacklogItemDetailForm";
 import { BacklogItemCard, BacklogItemCardType, BacklogItemTypeEnum } from "../../molecules/cards/BacklogItemCard";
 
 // style
@@ -37,6 +38,7 @@ import { buildClassName } from "../../../utils/classNameBuilder";
 import { buildBacklogDisplayId } from "../../../utils/backlogItemHelper";
 import { productBacklogItemMenuBuilder } from "../../common/itemMenuBuilders";
 import { computeProductBacklogItemEstimate } from "../panels/productPlanning/productPlanningPanelUtils";
+import { productBacklogItemEditDoneClick } from "../../../actionFlows/updateBacklogItemActionFlow";
 
 export interface BacklogItemPlanningItemStateProps extends ProductBacklogItemWithSource {
     busyJoiningUnallocatedParts: boolean;
@@ -49,6 +51,8 @@ export interface BacklogItemPlanningItemStateProps extends ProductBacklogItemWit
     showDetailMenu: boolean;
     strictMode: boolean;
     suppressTopPadding: boolean;
+    milestones: BacklogItemDetailFormMilestonesProp;
+    selectedMilestoneId: string;
 }
 
 export interface BacklogItemPlanningItemDispatchProps {}
@@ -89,15 +93,18 @@ const InternalBacklogItemPlanningItem: React.FC<BacklogItemPlanningItemProps> = 
                     type={props.type}
                     status={props.status}
                     saving={props.saving}
+                    milestones={props.milestones}
+                    selectedMilestoneId={props.selectedMilestoneId}
                     onDataUpdate={(fields) => {
                         dispatch(updateBacklogItemFields(fields));
                     }}
+                    onMilestoneChanged={(milestoneId: string, milestoneName: string) => {
+                        dispatch(
+                            updateBacklogItemMilestone(props.id, props.instanceId, milestoneId, milestoneId ? milestoneName : "")
+                        );
+                    }}
                     onDoneClick={(id, instanceId) => {
-                        if (id) {
-                            dispatch(updateBacklogItem(id));
-                        } else {
-                            dispatch(saveNewBacklogItem(instanceId));
-                        }
+                        dispatch(productBacklogItemEditDoneClick(id, instanceId));
                     }}
                     onCancelClick={(id, instanceId) => {
                         if (id) {

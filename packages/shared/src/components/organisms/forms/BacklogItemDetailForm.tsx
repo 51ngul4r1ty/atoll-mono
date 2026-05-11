@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import { CancelButton } from "../../molecules/buttons/CancelButton";
 import { DoneButton } from "../../molecules/buttons/DoneButton";
 import { StandardInput } from "../../atoms/inputs/StandardInput";
+import { DropDownList } from "../../molecules/dropdowns/DropDownList";
 
 // style
 import commonCss from "./common/common.module.css";
@@ -19,6 +20,20 @@ import { getStoryPhrases, isStoryPaste } from "./pasteFormatUtils";
 import { BacklogItemType } from "../../../types/backlogItemTypes";
 import { BacklogItemInstanceEditableFields } from "./backlogItemFormTypes";
 import { BacklogItemStatus } from "../../../types/backlogItemEnums";
+
+export const MILESTONE_ID_ADD_NEW = "__ADD_NEW__";
+// NOTE: This will be added in a follow up story
+// export const MILESTONE_VALUE_ADD_NEW = "<Add Milestone>";
+
+export const MILESTONE_ID_REMOVE = null;
+export const MILESTONE_VALUE_REMOVE = "<No Milestone>";
+
+export type BacklogItemDetailFormMilestonesPropItem = {
+    id: string | null;
+    name: string;
+};
+
+export type BacklogItemDetailFormMilestonesProp = BacklogItemDetailFormMilestonesPropItem[];
 
 export type BacklogItemDetailFormStateProps = BacklogItemInstanceEditableFields & {
     /* from BacklogItemInstanceEditableFields */
@@ -44,9 +59,12 @@ export type BacklogItemDetailFormStateProps = BacklogItemInstanceEditableFields 
     renderMobile?: boolean;
     status: BacklogItemStatus;
     saving: boolean;
+    milestones: BacklogItemDetailFormMilestonesProp;
+    selectedMilestoneId: string;
 };
 
 export interface BacklogItemDetailFormDispatchProps {
+    onMilestoneChanged?: { (id: string, name: string) };
     onDoneClick?: { (id: string, instanceId: number) };
     onCancelClick?: { (id: string, instanceId: number) };
     onDataUpdate?: { (props: BacklogItemInstanceEditableFields) };
@@ -95,6 +113,11 @@ export class BacklogItemDetailForm extends Component<BacklogItemDetailFormProps>
     handleCancelClick = () => {
         if (this.props.onCancelClick) {
             this.props.onCancelClick(this.props.id, this.props.instanceId);
+        }
+    };
+    handleMilestoneChanged = (id: string, name: string) => {
+        if (this.props.onMilestoneChanged) {
+            this.props.onMilestoneChanged(id, name);
         }
     };
     render() {
@@ -173,6 +196,29 @@ export class BacklogItemDetailForm extends Component<BacklogItemDetailFormProps>
                 }}
             />
         );
+        const milestoneListItems = [
+            ...this.props.milestones.map((item) => ({ id: item.id, value: item.name })),
+            {
+                id: MILESTONE_ID_REMOVE,
+                value: MILESTONE_VALUE_REMOVE
+            }
+        ];
+        const selectedMilestone = milestoneListItems.filter((item) => this.props.selectedMilestoneId === item.id);
+        const milestoneSelectedValue = selectedMilestone[0]?.value;
+        const milestoneDropDownList = this.props.id ? (
+            <div className={css.milestoneContainer}>
+                <DropDownList
+                    opened={false}
+                    labelText="Milestone"
+                    listItems={milestoneListItems}
+                    selectedId={this.props.selectedMilestoneId}
+                    selectedValue={milestoneSelectedValue}
+                    onItemSelect={(itemId: string, itemText: string) => {
+                        this.handleMilestoneChanged(itemId, itemText);
+                    }}
+                />
+            </div>
+        ) : null;
         const externalIdInput = (
             <StandardInput
                 inputId="userStoryExternalId"
@@ -231,6 +277,7 @@ export class BacklogItemDetailForm extends Component<BacklogItemDetailFormProps>
                         {estimateInput}
                         {friendlyIdInput}
                         {externalIdInput}
+                        {milestoneDropDownList}
                     </div>
                     <div className={actionButtonPanelContainerClassName}>{actionButtonPanel}</div>
                 </div>
@@ -246,6 +293,7 @@ export class BacklogItemDetailForm extends Component<BacklogItemDetailFormProps>
                     {estimateInput}
                     {friendlyIdInput}
                     {externalIdInput}
+                    {milestoneDropDownList}
                     {actionButtonPanel}
                 </div>
             </>

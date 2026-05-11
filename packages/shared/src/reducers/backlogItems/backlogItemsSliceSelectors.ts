@@ -1,7 +1,10 @@
 // interfaces/types
-import type { BacklogItemsState, BacklogItemWithSource } from "./backlogItemsReducerTypes";
+import type { BacklogItemsState, BacklogItemWithSource, ProductBacklogItemWithSource } from "./backlogItemsReducerTypes";
 
-export const sliceSelectBacklogItemById = (backlogItems: BacklogItemsState, itemId: string): BacklogItemWithSource | null => {
+export const sliceSelectBacklogItemById = (
+    backlogItems: BacklogItemsState,
+    itemId: string
+): ProductBacklogItemWithSource | null => {
     const matchingItems = backlogItems.allItems.filter((item) => item.id === itemId);
     if (matchingItems.length === 1) {
         const matchingItem = matchingItems[0];

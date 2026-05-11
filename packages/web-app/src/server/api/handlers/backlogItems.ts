@@ -54,6 +54,9 @@ import { buildOptionsWithTransaction } from "../utils/sequelizeHelper";
 import { calcNewPartIndex } from "../utils/partIndexUtils";
 import { mapApiToDbBacklogItem, mapApiToDbBacklogItemPart } from "../../dataaccess/mappers/apiToDataAccessMappers";
 
+// consts/enums
+import { MILESTONE_RESOURCE_NAME } from "../../resourceNames";
+
 // interfaces/types
 import type { BacklogItemsResult } from "./fetchers/backlogItemFetcher";
 import type { RestApiStatusAndMessageOnly } from "../utils/responseBuilder";
@@ -67,6 +70,8 @@ import {
 } from "./utils/handlerContext";
 import { fetchBacklogItemParts } from "./fetchers/backlogItemPartFetcher";
 import { ApiBacklogItemPartWithSprintId, fetchAllocatedAndUnallocatedBacklogItemParts } from "./helpers/sprintBacklogItemHelper";
+import { buildSelfLink, buildSimpleLink, combinePaths } from "../../utils/linkBuilder";
+import { buildCurrentVersionBacklogItemBasePath } from "../../utils/baseLinkBuilder";
 
 export const backlogItemsGetHandler = async (req: Request, res: Response) => {
     const params = getParamsFromRequest(req);
@@ -380,6 +385,13 @@ export const backlogItemPutHandler = async (req: Request, res: Response) => {
             const responseApiBacklogItem = mapDbToApiBacklogItem(backlogItem);
             responseApiBacklogItem.storyEstimate = responseApiBacklogItem.estimate; // just updated the story estimate
             responseApiBacklogItem.unallocatedPoints = responseApiBacklogItem.estimate; // all are in backlog
+            const backlogItemsResourceBaseUrl = buildCurrentVersionBacklogItemBasePath();
+            const selfLink = buildSelfLink(responseApiBacklogItem, backlogItemsResourceBaseUrl);
+            const associatedMilestonesLink = buildSimpleLink(
+                combinePaths(selfLink.uri, MILESTONE_RESOURCE_NAME),
+                "related:milestones"
+            );
+            responseApiBacklogItem.links = [selfLink, associatedMilestonesLink];
             await handleResponseAndCommit(originalApiBacklogItem, responseApiBacklogItem, res, transaction);
         }
     } catch (err) {

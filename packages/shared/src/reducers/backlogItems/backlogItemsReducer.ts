@@ -28,7 +28,8 @@ import type {
     RemoveProductBacklogItemAction,
     SelectProductBacklogItemAction,
     ToggleBacklogItemDetailAction,
-    UpdateBacklogItemFieldsAction
+    UpdateBacklogItemFieldsAction,
+    UpdateBacklogItemMilestoneAction
 } from "../../actions/backlogItemActions";
 import type { AppClickAction, AppKeyUpAction } from "../../actions/appActions";
 import type { BacklogItemsState, SaveableBacklogItem } from "./backlogItemsReducerTypes";
@@ -58,6 +59,7 @@ import {
     turnOffEditModeForBacklogItemPart,
     updateBacklogItemFields,
     updateBacklogItemFieldsInItemsAndAddedItems,
+    updateBacklogItemMilestoneInItemsAndAddedItems,
     updateCurrentItemPartById,
     updateItemById,
     updateItemByInstanceId
@@ -156,7 +158,8 @@ export const backlogItemsReducer = (
                 const itemsWithMilestoneText = draft.allItems.filter((item) => !!item.milestoneText);
                 const priorBacklogItemsWithMilestones = itemsWithMilestoneText.map((item) => ({
                     backlogItemId: item.id,
-                    milestoneText: item.milestoneText
+                    milestoneText: item.milestoneText,
+                    milestoneId: item.milestoneId
                 }));
                 const milestonesByBacklogItemId = objArrayToKeyedObj(priorBacklogItemsWithMilestones, "backlogItemId");
                 draft.items = mapApiItemsToEditableBacklogItems(payload.response.data.items);
@@ -165,6 +168,7 @@ export const backlogItemsReducer = (
                 rebuildAllItems(draft);
                 draft.allItems.forEach((item) => {
                     item.milestoneText = item.milestoneText ?? milestonesByBacklogItemId[item.id]?.milestoneText;
+                    item.milestoneId = item.milestoneId ?? milestonesByBacklogItemId[item.id]?.milestoneId;
                 });
                 return;
             }
@@ -281,6 +285,11 @@ export const backlogItemsReducer = (
                 const actionTyped = action as UpdateBacklogItemFieldsAction;
                 const payload = actionTyped.payload;
                 return updateBacklogItemFieldsInItemsAndAddedItems(draft, payload);
+            }
+            case ActionTypes.UPDATE_BACKLOG_ITEM_MILESTONE: {
+                const actionTyped = action as UpdateBacklogItemMilestoneAction;
+                const payload = actionTyped.payload;
+                return updateBacklogItemMilestoneInItemsAndAddedItems(draft, payload);
             }
             case ActionTypes.RECEIVE_PUSHED_BACKLOG_ITEM: {
                 const actionTyped = action as ReceivePushedBacklogItemAction;

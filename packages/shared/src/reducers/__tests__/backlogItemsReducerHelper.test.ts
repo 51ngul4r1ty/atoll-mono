@@ -5,7 +5,7 @@ import "jest";
 import produce from "immer";
 
 // code under test
-import { rebuildAllItems } from "../backlogItems/helpers/backlogItemsReducerHelper";
+import { rebuildAllItems } from "../backlogItems/helpers/allBacklogItemsRebuilder";
 
 // interfaces/types
 import type { BacklogItemWithSource, SaveableBacklogItem } from "../backlogItems/backlogItemsReducerTypes";

@@ -29,9 +29,10 @@ import type { ApiBacklogItemInSprint } from "../types/apiModelTypes";
 import type { StoreTyped } from "../types/reduxHelperTypes";
 
 // utils
-import { buildFullUri, getLinkByRel, LINK_REL_NEXT } from "../utils/apiLinkHelper";
+import { buildFullUri, getLinkByRel } from "../utils/apiLinkHelper";
 
 // consts/enums
+import { LINK_REL_NEXT } from "../constants/links";
 import {
     ITEM_DETAIL_CLICK_STEP_1_NAME,
     ITEM_DETAIL_CLICK_STEP_2_NAME,

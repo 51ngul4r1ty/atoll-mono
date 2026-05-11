@@ -20,7 +20,7 @@
 
 .userStoryExtraFields {
     display: grid;
-    grid-template-columns: 3.5rem 5.5rem 5.5rem auto;
+    grid-template-columns: 3.5rem 5.5rem 5.5rem auto max-content;
     grid-column-gap: 0.7rem;
 }
 
@@ -77,4 +77,9 @@
     display: grid;
     grid-template-columns: auto auto auto;
     grid-column-gap: 0.7rem;
+}
+
+.milestoneContainer {
+    padding-left: 2vw;
+    padding-right: 2vw;
 }

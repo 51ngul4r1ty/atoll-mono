@@ -32,3 +32,10 @@ export interface BacklogItemEditableFields extends StoryPhrases {
 export interface BacklogItemInstanceEditableFields extends BacklogItemEditableFields {
     instanceId: number;
 }
+
+export interface BacklogItemMilestonePayload {
+    backlogItemId: string;
+    backlogInstanceId: number;
+    milestoneId: string;
+    milestoneName: string;
+}

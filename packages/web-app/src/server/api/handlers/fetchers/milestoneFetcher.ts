@@ -11,29 +11,79 @@ import { MilestoneDataModel } from "../../../dataaccess/models/MilestoneDataMode
 // consts/enums
 import { MILESTONE_RESOURCE_NAME } from "../../../resourceNames";
 
-// interfaces/types
-import { RestApiCollectionResult, RestApiErrorResult } from "../../utils/responseBuilder";
-
 // utils
-import { buildResponseFromCatchError, buildResponseWithItem, buildResponseWithItems } from "../../utils/responseBuilder";
-// import { buildSelfLink } from "../../../utils/linkBuilder";
-import { mapDbToApiBacklogItemMilestone } from "../../../dataaccess/mappers/dataAccessToApiMappers";
-import { BacklogItemDataModel, BacklogItemMilestoneDataModel } from "server/dataaccess";
+import { buildResponseFromCatchError, buildResponseWithItems } from "../../utils/responseBuilder";
+import { buildSelfLink } from "../../../utils/linkBuilder";
+import {
+    mapDbMilestonesToApiBacklogItemMilestones,
+    mapDbToApiBacklogItemMilestone,
+    mapDbToApiMilestone
+} from "../../../dataaccess/mappers/dataAccessToApiMappers";
+import { mapApiBacklogItemMilestoneToApiMilestone } from "../../../dataaccess/mappers/apiToApiMappers";
+import { buildOptionsFromParams } from "../../utils/sequelizeHelper";
+import { BacklogItemMilestoneDataModel } from "../../../dataaccess/models/BacklogItemMilestoneDataModel";
+import { BacklogItemDataModel } from "../../../dataaccess/models/BacklogItemDataModel";
 
-// This will be added when a milestone endpoint exists
-// export const buildMilestoneLinks = (milestone: ApiMilestone) => [buildSelfLink(milestone, `/api/v1/${MILESTONE_RESOURCE_NAME}/`)];
+export const buildMilestoneLinks = (milestone: ApiMilestone) => [buildSelfLink(milestone, `/api/v1/${MILESTONE_RESOURCE_NAME}/`)];
 
 export const fetchMilestonesWithBacklogItems = async (projectId: string) => {
     try {
+        const dbMilestones = await MilestoneDataModel.findAll({
+            where: { projectId },
+            include: [
+                {
+                    model: BacklogItemMilestoneDataModel,
+                    required: false, // left outer join
+                    include: [
+                        {
+                            model: BacklogItemDataModel,
+                            required: false // left outer join
+                        }
+                    ]
+                }
+            ]
+        });
+
+        const items = mapDbMilestonesToApiBacklogItemMilestones(dbMilestones);
+        return buildResponseWithItems(items);
+    } catch (error) {
+        return buildResponseFromCatchError(error);
+    }
+};
+
+export const fetchMilestones = async (projectId: string) => {
+    const options = buildOptionsFromParams({ projectId });
+    try {
+        const dbMilestones = await MilestoneDataModel.findAll({
+            ...options,
+            order: [["name", "ASC"]]
+        });
+        const items = dbMilestones.map((item) => {
+            const milestone = mapDbToApiMilestone(item);
+            const result: ApiMilestone = {
+                ...milestone,
+                links: buildMilestoneLinks(milestone)
+            };
+            return result;
+        });
+        return buildResponseWithItems(items);
+    } catch (error) {
+        return buildResponseFromCatchError(error);
+    }
+};
+
+export const fetchMilestonesByBacklogItemId = async (backlogItemId: string) => {
+    try {
         const dbMilestones = await BacklogItemMilestoneDataModel.findAll({
-            include: [{ model: BacklogItemDataModel }, { model: MilestoneDataModel, where: { projectId } }]
+            include: [{ model: MilestoneDataModel }, { model: BacklogItemDataModel, where: { id: backlogItemId } }]
         });
         const items = dbMilestones.map((item) => {
             console.log(JSON.stringify(item, null, 2));
-            const milestone = mapDbToApiBacklogItemMilestone(item);
+            const milestoneWithBacklogItem = mapDbToApiBacklogItemMilestone(item);
+            const milestone = mapApiBacklogItemMilestoneToApiMilestone(milestoneWithBacklogItem);
             const result: ApiMilestone = {
                 ...milestone,
-                links: [] // in future we'll have: buildMilestoneLinks(milestone)
+                links: buildMilestoneLinks(milestone)
             };
             return result;
         });

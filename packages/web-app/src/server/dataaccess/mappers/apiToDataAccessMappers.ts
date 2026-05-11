@@ -1,5 +1,5 @@
 // libraries
-import { ApiProject, ApiSprint, ApiBacklogItemPart, ApiBacklogItem, cloneWithoutNested } from "@atoll/shared";
+import { ApiProject, ApiSprint, ApiBacklogItemPart, ApiBacklogItem, cloneWithoutNested, ApiMilestone } from "@atoll/shared";
 
 // utils
 import { convertBooleanToDbChar, convertApiDateToDate, convertFloatToDbNumber } from "../conversionUtils";
@@ -25,6 +25,16 @@ export const mapApiToDbSprint = (sprint: ApiSprint, mapOptions?: ApiToDataAccess
     } else {
         return { ...sprint };
     }
+};
+
+/**
+ * Map a Milestone API object to the field values that need to be persisted in a database.
+ * @param milestone object passed into REST API call as-is
+ * @param mapOptions optional parameter to determine whether to preserve structure or not, patching requires leaving out fields that
+ *        aren't provided in the input.
+ */
+export const mapApiToDbMilestone = (milestone: ApiMilestone, mapOptions?: ApiToDataAccessMapOptions) => {
+    return { ...milestone };
 };
 
 /**

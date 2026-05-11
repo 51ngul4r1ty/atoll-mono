@@ -21,7 +21,8 @@ import { buildActionTypes } from "./utils/apiActionUtils";
 import {
     ApiBacklogItem,
     ApiBacklogItemInSprint,
-    ApiMilestone,
+    ApiBacklogItemMilestone,
+    ApiMilestoneBacklogItems,
     ApiProject,
     ApiSprint,
     ApiUserSettings
@@ -32,7 +33,7 @@ export interface ApiGetBffViewsPlanResponsePayload {
         status: number;
         data: {
             backlogItems: ApiBacklogItem[];
-            milestones: ApiMilestone[];
+            milestones: ApiMilestoneBacklogItems[];
             sprints: ApiSprint[];
             sprintBacklogItems: ApiBacklogItemInSprint[] | undefined;
             userPreferences: ApiUserSettings;

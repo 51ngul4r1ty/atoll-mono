@@ -93,7 +93,7 @@ export type ApiBacklogItem = StandardItem &
         type: BacklogItemType;
     };
 
-export type ApiMilestone = StandardItem & {
+export type ApiBacklogItemMilestone = StandardItem & {
     backlogitemId: string;
     milestoneId: string;
     milestone: StandardItem & {
@@ -109,6 +109,31 @@ export type ApiMilestone = StandardItem & {
     };
     name: string;
     backlogItemIds: string[];
+};
+
+export type ApiMilestoneBacklogItem = {
+    id: string;
+    externalId: string | null;
+    friendlyId: string;
+};
+
+export type ApiMilestoneBacklogItems = StandardItem & {
+    name: string;
+    milestone: StandardItem & {
+        archived: string; // Y/N
+        id: string; // same as milestoneId
+        name: string;
+        projectId: string;
+        targetdate: ISODateString;
+    };
+    backlogItems: ApiMilestoneBacklogItem[];
+};
+
+export type ApiMilestone = StandardItem & {
+    projectId: string;
+    name: string;
+    targetdate: ISODateString | null;
+    archived: string; // Y/N
 };
 
 export type ApiBacklogItemWithParts = ApiBacklogItem & {

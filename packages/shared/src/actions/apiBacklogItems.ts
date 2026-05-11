@@ -168,7 +168,8 @@ export type ApiPutBacklogItemRequestAction = {
 
 export enum PutBacklogItemCallReason {
     None = 0,
-    SaveCurrentBacklogItem = 1
+    SaveCurrentBacklogItem = 1,
+    SaveBacklogItemDetailForm = 2
 }
 
 export type ApiPutBacklogItemMetaPassthrough = {
@@ -181,9 +182,14 @@ export type ApiPutBacklogItemSuccessAction = {
     meta: ApiActionMetaDataRequestMeta<{}, undefined, undefined, ApiPutBacklogItemMetaPassthrough>;
 };
 
+export type ApiPutBacklogItemOptions = {
+    passthroughData?: ApiPutBacklogItemMetaPassthrough;
+    payloadOverride: ApiPayloadBase;
+};
+
 export const apiPutBacklogItem = (
     backlogItem: BacklogItemModel,
-    payloadOverride: ApiPayloadBase = {},
+    options: ApiPutBacklogItemOptions,
     apiCallReason: PutBacklogItemCallReason = PutBacklogItemCallReason.None
 ): ApiAction<ApiPutBacklogItemPayload> => {
     let result: ApiAction<ApiPutBacklogItemPayload, {}, ApiPutBacklogItemMetaPassthrough> = {
@@ -196,7 +202,7 @@ export const apiPutBacklogItem = (
                 headers: { "Content-Type": APPLICATION_JSON, Accept: APPLICATION_JSON },
                 types: buildActionTypes(ApiActionNames.PUT_BACKLOG_ITEM)
             },
-            ...payloadOverride
+            ...options.payloadOverride
         }
     };
     if (apiCallReason !== PutBacklogItemCallReason.None) {
@@ -209,6 +215,50 @@ export const apiPutBacklogItem = (
             }
         };
     }
+    return result;
+};
+
+export type ApiPutBacklogItemMilestoneMetaPassthrough = {};
+
+export type ApiPutBacklogItemMilestoneSuccessAction = {
+    type: typeof ActionTypes.API_PUT_BACKLOG_ITEM_SUCCESS;
+    payload: ApiActionSuccessPayloadForItem<ApiBacklogItem>;
+    meta: ApiActionMetaDataRequestMeta<{}, undefined, undefined, ApiPutBacklogItemMilestoneMetaPassthrough>;
+};
+
+export type ApiPutBacklogItemMilestoneOptions = {
+    passthroughData?: ApiPutBacklogItemMilestoneMetaPassthrough;
+    payloadOverride: ApiPayloadBase;
+};
+
+export type ApiPutBacklogItemMilestonePayloadItem = {
+    milestoneId: string;
+};
+
+export type ApiPutBacklogItemMilestonePayload = ApiPutBacklogItemMilestonePayloadItem[];
+
+export type ApiPutBacklogItemMilestonesModel = {
+    backlogItemId: string;
+    milestoneIds: string[];
+};
+
+export const apiPutBacklogItemMilestones = (
+    backlogItemMilestones: ApiPutBacklogItemMilestonesModel,
+    options: ApiPutBacklogItemMilestoneOptions
+): ApiAction<ApiPutBacklogItemMilestonePayload> => {
+    let result: ApiAction<ApiPutBacklogItemMilestonePayload, {}, ApiPutBacklogItemMilestoneMetaPassthrough> = {
+        type: API,
+        payload: {
+            ...{
+                endpoint: `${getApiBaseUrl()}api/v1/backlog-items/${backlogItemMilestones.backlogItemId}/milestones`,
+                method: "PUT",
+                data: backlogItemMilestones.milestoneIds.map((milestoneId) => ({ milestoneId })),
+                headers: { "Content-Type": APPLICATION_JSON, Accept: APPLICATION_JSON },
+                types: buildActionTypes(ApiActionNames.PUT_BACKLOG_ITEM_MILESTONES)
+            },
+            ...options.payloadOverride
+        }
+    };
     return result;
 };
 

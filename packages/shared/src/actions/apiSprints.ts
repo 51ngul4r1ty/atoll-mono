@@ -81,6 +81,8 @@ export type ApiGetSprintFailureAction = Action<typeof ActionTypes.API_GET_SPRINT
 };
 export type ApiGetSprintOptions = {
     passthroughData?: ApiGetSprintSuccessActionMetaPassthrough;
+
+    /** @deprecated this pattern has been replaced by payloadOverride of ApiPayloadBase type */
     endpointOverride?: string;
 };
 export type ApiGetSprintResult = NoDataApiAction<any, ApiGetSprintSuccessActionMetaPassthrough>;

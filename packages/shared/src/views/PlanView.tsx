@@ -30,6 +30,7 @@ import type { BacklogItemType } from "../types/backlogItemTypes";
 import type { SprintCardSprint } from "../components/molecules/cards/sprintCard/sprintCardTypes";
 import type { OpenedOrOpeningDetailMenuInfo } from "../selectors/sprintBacklogSelectors";
 import type { SprintOpenedDatePickerInfo } from "../reducers/sprints/sprintsReducerTypes";
+import { BacklogItemDetailFormMilestonesProp } from "../components/organisms/forms/BacklogItemDetailForm";
 
 // images
 // TODO: Fix this issue - getting "Image is not defined" for SSR webpack build
@@ -60,6 +61,7 @@ export interface PlanViewStateProps {
     sprints: SprintCardSprint[];
     sprintsToDisableAddItemAction: string[];
     strictMode: boolean;
+    milestones: BacklogItemDetailFormMilestonesProp;
 }
 
 export interface PlanViewDispatchProps {
@@ -108,6 +110,7 @@ export class PlanView extends React.Component<PlanViewProps, {}> {
                     openedDetailMenuBacklogItemId={this.props.openedDetailMenuBacklogItemId}
                     renderMobile={this.context.state?.isMobile}
                     strictMode={this.props.strictMode}
+                    milestones={this.props.milestones}
                     onAddNewBacklogItemForm={(type: BacklogItemType) => {
                         this.props.onAddNewBacklogItemForm(type, this.props.projectId);
                     }}

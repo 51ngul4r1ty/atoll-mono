@@ -1,6 +1,6 @@
 {
   "name": "atoll-mono",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Atoll's Monorepo using NPM workspaces",
   "main": "index.ts",
   "homepage": "https://github.com/51ngul4r1ty/atoll-mono#readme",

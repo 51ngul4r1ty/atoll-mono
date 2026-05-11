@@ -32,6 +32,9 @@ import { router } from "./api/routes";
 import { init } from "./dataaccess";
 import { PushNotification, PushNotificationType } from "@atoll/shared";
 
+// consts/enums
+import { API_CURRENT_VERSION } from "./api/consts";
+
 Object.assign(global, {
     WebSocket: Ws,
     // Not needed in node 11
@@ -74,8 +77,8 @@ const setKeepaliveLogTimeout = () => {
 // set up to run at start up and the setTimeout will ensure it keeps running every 30 seconds (same as client)
 setKeepaliveLogTimeout();
 
-ws.app.ws("/ws", function(ws2, req) {
-    ws2.on("message", function(rawMsg: any) {
+ws.app.ws("/ws", function (ws2, req) {
+    ws2.on("message", function (rawMsg: any) {
         if (typeof rawMsg !== "string") {
             console.warn(`message was not a string`);
             return;
@@ -152,7 +155,7 @@ app.use(
     })
 );
 
-app.use("/api/v1", router);
+app.use(`/api/v${API_CURRENT_VERSION}`, router);
 
 app.use(serverRenderer());
 

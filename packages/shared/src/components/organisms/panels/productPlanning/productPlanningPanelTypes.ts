@@ -8,6 +8,7 @@ import type { StoryPhrases } from "../../../../types/storyTypes";
 // consts/enums
 import { BacklogItemType } from "../../../../types/backlogItemTypes";
 import { EditMode } from "../../../common/componentEnums";
+import { BacklogItemDetailFormMilestonesProp } from "../../forms/BacklogItemDetailForm";
 
 export interface PlanningPanelBacklogItem extends StoryPhrases {
     estimate: number | null;
@@ -28,6 +29,7 @@ export interface BacklogItemPlanningPanelStateProps {
     openedDetailMenuBacklogItemId: string | null;
     renderMobile?: boolean;
     strictMode: boolean;
+    milestones: BacklogItemDetailFormMilestonesProp;
 }
 
 export interface OnAddedNewBacklogItemForm {

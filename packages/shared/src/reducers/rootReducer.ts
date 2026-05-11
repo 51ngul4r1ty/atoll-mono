@@ -13,12 +13,14 @@ import {
     ProductBacklogItemsState
 } from "./productBacklogItemsReducer";
 import { backlogItemsReducer, backlogItemsReducerInitialState } from "./backlogItems/backlogItemsReducer";
+import { milestonesReducer, milestonesReducerInitialState } from "./milestones/milestonesReducer";
 import { featureTogglesReducer, featureTogglesReducerInitialState, FeatureTogglesState } from "./featureTogglesReducer";
 import { sprintBacklogReducer, sprintBacklogReducerInitialState, SprintBacklogState } from "./sprintBacklog/sprintBacklogReducer";
 import { sprintsReducer, sprintsReducerInitialState, SprintsState } from "./sprints/sprintsReducer";
 import { userReducer, userReducerInitialState, UserState } from "./userReducer";
 import { BacklogItemsState } from "./backlogItems/backlogItemsReducerTypes";
 import { projectReducer, projectReducerInitialState, ProjectState } from "./project/projectReducer";
+import { MilestonesState } from "./milestones/milestonesReducerTypes";
 
 export interface StateTree {
     apiBatch: ApiBatchState;
@@ -28,6 +30,7 @@ export interface StateTree {
     electronClient: boolean;
     executingOnClient: boolean;
     featureToggles: FeatureTogglesState;
+    milestones: MilestonesState;
     productBacklogItems: ProductBacklogItemsState;
     project: ProjectState;
     router: RouterState<LocationState>;
@@ -42,6 +45,7 @@ export const rootReducerInitialState = {
     app: appReducerInitialState,
     backlogItems: backlogItemsReducerInitialState,
     featureToggles: featureTogglesReducerInitialState,
+    milestones: milestonesReducerInitialState,
     productBacklogItems: productBacklogItemsReducerInitialState,
     project: projectReducerInitialState,
     sprintBacklog: sprintBacklogReducerInitialState,
@@ -57,6 +61,7 @@ const createRootReducer = (history: any) => {
         app: appReducer,
         backlogItems: backlogItemsReducer,
         featureToggles: featureTogglesReducer,
+        milestones: milestonesReducer,
         productBacklogItems: productBacklogItemsReducer,
         project: projectReducer,
         router,

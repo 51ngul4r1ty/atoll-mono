@@ -32,5 +32,20 @@ export const buildItemLink = (item: ItemWithId, basePath: string) => buildLink(i
 
 export const buildSelfLink = (item: ItemWithId, basePath: string) => buildLink(item, basePath, "self");
 
-export const buildChldSelfLink = (childItemId: string, parentBasePath: string) =>
+export const buildChildSelfLink = (childItemId: string, parentBasePath: string) =>
     buildLink({ id: childItemId }, parentBasePath, "self");
+
+export const buildApiRootPath = (versionNumber: number) => `/api/v${versionNumber}`;
+
+export type BuildBasePathOptions = {
+    suppressFinalSlash: boolean;
+};
+
+export const buildBasePath = (
+    resourceName: string,
+    versionNumber: number,
+    options: BuildBasePathOptions = { suppressFinalSlash: false }
+) =>
+    options.suppressFinalSlash
+        ? `${buildApiRootPath(versionNumber)}/${resourceName}`
+        : `${buildApiRootPath(versionNumber)}/${resourceName}/`;

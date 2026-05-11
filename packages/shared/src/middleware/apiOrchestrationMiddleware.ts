@@ -86,12 +86,19 @@ import {
 import { buildBacklogDisplayId } from "../utils/backlogItemHelper";
 import { convertToBacklogItemModel, convertToSprintModel } from "../utils/apiPayloadHelper";
 import { encodeForUrl } from "../utils/urlUtils";
+import {
+    handleBacklogItemDetailFormApiPutSuccess,
+    handleProductBacklogItemEditDoneClick,
+    handleUpdateBacklogItem,
+    ProductBacklogItemEditDoneClickAction
+} from "../actionFlows/updateBacklogItemActionFlow";
 
 export const apiOrchestrationMiddleware: Middleware<{}, StateTree> = (store: StoreTyped) => (next) => (action: Action) => {
     next(action);
     const state = store.getState();
     switch (action.type) {
         case ActionTypes.SAVE_NEW_BACKLOG_ITEM: {
+            debugger;
             const actionTyped = action as SaveNewBacklogItemAction;
             const instanceId = actionTyped.payload.instanceId;
             const backlogItem = backlogItemSelectors.getBacklogItemByInstanceId(state, instanceId);
@@ -181,20 +188,7 @@ export const apiOrchestrationMiddleware: Middleware<{}, StateTree> = (store: Sto
             break;
         }
         case ActionTypes.UPDATE_BACKLOG_ITEM: {
-            const actionTyped = action as UpdateBacklogItemAction;
-            const itemId = actionTyped.payload.id;
-
-            const backlogItem = backlogItemSelectors.selectBacklogItemById(state, itemId);
-            if (backlogItem) {
-                const backlogItemModel = convertToBacklogItemModel(backlogItem);
-                const payloadOverride = apiSelectors.buildApiPayloadBaseForResource(
-                    state,
-                    ResourceTypes.BACKLOG_ITEM,
-                    "item",
-                    itemId
-                );
-                store.dispatch(apiPutBacklogItem(backlogItemModel, payloadOverride));
-            }
+            handleUpdateBacklogItem(store, action as UpdateBacklogItemAction);
             break;
         }
         case ActionTypes.UPDATE_BACKLOG_ITEM_PART: {
@@ -229,14 +223,22 @@ export const apiOrchestrationMiddleware: Middleware<{}, StateTree> = (store: Sto
                     "item",
                     backlogItem.id
                 );
-                store.dispatch(apiPutBacklogItem(model, payloadOverride, apiCallReason));
+                const options = { payloadOverride };
+                store.dispatch(apiPutBacklogItem(model, options, apiCallReason));
             }
             break;
         }
         case ActionTypes.API_PUT_BACKLOG_ITEM_SUCCESS: {
             const actionTyped = action as ApiPutBacklogItemSuccessAction;
-            if (actionTyped.meta.passthrough.apiCallReason === PutBacklogItemCallReason.SaveCurrentBacklogItem) {
-                store.dispatch(setEditMode(EditMode.View));
+            switch (actionTyped.meta.passthrough.apiCallReason) {
+                case PutBacklogItemCallReason.SaveCurrentBacklogItem: {
+                    store.dispatch(setEditMode(EditMode.View));
+                    break;
+                }
+                case PutBacklogItemCallReason.SaveBacklogItemDetailForm: {
+                    handleBacklogItemDetailFormApiPutSuccess(store, actionTyped);
+                    break;
+                }
             }
             break;
         }
@@ -403,6 +405,10 @@ export const apiOrchestrationMiddleware: Middleware<{}, StateTree> = (store: Sto
         }
         case ActionTypes.API_POST_ACTION_RETRY_TOKEN_FAILURE: {
             store.dispatch(routeLoginPage());
+            break;
+        }
+        case ActionTypes.BACKLOG_ITEM_EDIT_DONE_CLICK: {
+            handleProductBacklogItemEditDoneClick(store, action as ProductBacklogItemEditDoneClickAction);
             break;
         }
     }
