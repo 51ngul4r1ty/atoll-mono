@@ -1,4 +1,5 @@
 dist/
+dist-vsix/
 out/
 .vscode-test/
 .DS_Store

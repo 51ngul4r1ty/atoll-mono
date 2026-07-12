@@ -34,3 +34,26 @@ Release Notes
 -------------
 
 (still under development)
+
+Contributing
+------------
+
+### Getting Started
+
+* `npm install -g @vscode/vsce`
+
+### Managing Monorepo Dependency Versions
+
+* If you are not seeing changes you've made related to `@atoll/client-sdk`
+  appearing in the VS Code extension then the problem may be the version of the
+  dependency in the package.json file for the extension.  Working in this
+  monorepo requires you to update the version to match exactly.
+
+### Troubleshooting Build Issues
+
+#### "npm error code ELSPROBLEMS"
+
+This error is related to the "Managing Monorepo Dependency Versions" topic
+above.  To get more information use `npm list --production` in the
+vscode-extension folder.  Usually the issue is just a mismatching version
+number.
