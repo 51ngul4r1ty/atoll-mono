@@ -58,12 +58,12 @@ export class AtollClient {
     };
     private onAuthFailureNotification = async (refreshTokenUri: string): Promise<void> => {
         if (this.notificationHandler) {
-            await this.notificationHandler("Re-connecting to Atoll Server...", "info");
+            await this.notificationHandler("Re-connecting to Atoll Server...", "debug"); // changed to debug to prevent toast
         }
     };
     private onRefreshTokenSuccessNotification = async (newAuthToken: string, newRefreshToken: string): Promise<void> => {
         if (this.notificationHandler) {
-            await this.notificationHandler("Re-connected to Atoll Server", "info");
+            await this.notificationHandler("Re-connected to Atoll Server", "debug"); // changed to debug to prevent toast
         }
     };
     private onRefreshTokenFailureNotification = async (oldRefreshToken: string | null): Promise<void> => {
