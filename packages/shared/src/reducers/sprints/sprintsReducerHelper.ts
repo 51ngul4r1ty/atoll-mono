@@ -98,7 +98,7 @@ export const markBacklogItemsLoaded = (draft: Draft<SprintsState>, sprintId: str
 export const updateSprintById = (draft: Draft<SprintsState>, sprintId: string, updateItem: { (item: SaveableSprint) }) => {
     const addedItemIdx = draft.addedItems.findIndex((item) => item.id === sprintId);
     if (addedItemIdx >= 0) {
-        updateItem(draft.items[addedItemIdx] as SaveableSprint);
+        updateItem(draft.addedItems[addedItemIdx] as SaveableSprint);
     }
     const idx = draft.items.findIndex((item) => item.id === sprintId);
     if (idx >= 0) {
