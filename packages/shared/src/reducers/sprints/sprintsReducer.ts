@@ -132,6 +132,7 @@ export const sprintsReducer = (state: SprintsState = sprintsReducerInitialState,
                 });
                 draft.items = sprints;
                 markBacklogItemsLoaded(draft, expandedSprintId);
+                draft.addedItems = [];
                 rebuildAllItems(draft);
                 return;
             }
