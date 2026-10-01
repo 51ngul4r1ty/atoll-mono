@@ -128,6 +128,11 @@ export const validateSprintOverlap = async (
         where: {
             [Op.and]: [
                 {
+                    projectId: {
+                        [Op.eq]: newDataItem.projectId
+                    }
+                },
+                {
                     startdate: {
                         [Op.lte]: date
                     }

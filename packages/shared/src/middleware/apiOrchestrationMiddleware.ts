@@ -98,7 +98,6 @@ export const apiOrchestrationMiddleware: Middleware<{}, StateTree> = (store: Sto
     const state = store.getState();
     switch (action.type) {
         case ActionTypes.SAVE_NEW_BACKLOG_ITEM: {
-            debugger;
             const actionTyped = action as SaveNewBacklogItemAction;
             const instanceId = actionTyped.payload.instanceId;
             const backlogItem = backlogItemSelectors.getBacklogItemByInstanceId(state, instanceId);
